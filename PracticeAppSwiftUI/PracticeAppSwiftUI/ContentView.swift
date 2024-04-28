@@ -19,6 +19,7 @@ struct ContentView: View {
                 Text("РЕГИСТРАЦИЯ")
                     .font(.custom("AmericanTypewriter", size: 32))
                     .padding()
+                InputFieldView(title: "email", placeholder: "book@gmail.com", text: "")
             }
             .foregroundColor(Color("PrimaryColor"))
             .font(.custom("AmericanTypewriter", size: 36))
