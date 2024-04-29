@@ -28,14 +28,14 @@ struct PasswordFieldView: View {
                            .frame(width: 302, height: 40)
                        if isSecured && isPasswordHidden {
                            SecureField(placeholder, text: $text)
-                               .foregroundColor(Color("InactiveColor"))
+                               .foregroundColor(Color(.white))
                                .font(.custom("AmericanTypewriter", size: 16)) // need to fix a font
                                .padding(EdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20))
                                .textFieldStyle(PlainTextFieldStyle())
                                .frame(width: 302, height: 40)
                        } else {
                            TextField(placeholder, text:  $text)
-                               .foregroundColor(Color("InactiveColor"))
+                               .foregroundColor(Color(.white))
                                .font(.custom("AmericanTypewriter", size: 16)) // need to fix a font
                                .padding(EdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20))
                                .textFieldStyle(PlainTextFieldStyle())
@@ -45,7 +45,7 @@ struct PasswordFieldView: View {
                    Button(action: {
                        isPasswordHidden.toggle()
                    }) {
-                       Image(self.isPasswordHidden ? "EyeSlashIcon" : "EyeIcon")
+                       Image(self.isPasswordHidden ? "eyeInactive" : "eyeActive")
                            .accentColor(Color("PrimaryColor"))
                    }
                    .padding(.trailing, 5)
