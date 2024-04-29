@@ -14,7 +14,7 @@ struct InputFieldView: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text(title)
-                .foregroundColor(Color(.white))
+                .foregroundColor(Color(""))
                 .font(.custom("AmericanTypewriter", size: 20))
             ZStack {
                 Group {
