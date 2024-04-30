@@ -19,11 +19,14 @@ struct InputFieldView: View {
             ZStack {
                 Group {
                     Capsule()
-                        .stroke(Color(.black), lineWidth: 1) //black for test stroke
-                        .background(Color.clear)
-                        .frame(width: 302, height: 40)
-                    TextField(placeholder, text: $text)
+                        .stroke(Color(.white), lineWidth: 1) // black for test
                         .foregroundColor(Color(.white))
+                        .frame(width: 302, height: 40)
+                        .cornerRadius(16)
+                        .multilineTextAlignment(.leading)
+                    TextField(placeholder, text: $text)
+                        .multilineTextAlignment(.leading)
+                        .foregroundColor(Color(.black))
                         .font(.custom("AmericanTypewriter", size: 16))
                         .padding(EdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20))
                         .textFieldStyle(PlainTextFieldStyle())

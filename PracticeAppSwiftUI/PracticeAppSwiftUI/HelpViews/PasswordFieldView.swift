@@ -21,23 +21,26 @@ struct PasswordFieldView: View {
                ZStack(alignment: .trailing) {
                    Group {
                        Capsule()
-                           .stroke(Color(.black), lineWidth: 1) // black for test
-                           .background(Color.clear)
+                           .stroke(Color(.white), lineWidth: 1) // black for test
+                           .background(Color.white)
+                           .cornerRadius(16)
                            .frame(width: 302, height: 40)
                        if isPasswordHidden {
                            SecureField(placeholder, text: $text)
-                               .foregroundColor(Color(.white))
+                               .foregroundColor(Color(.black))
                                .font(.custom("AmericanTypewriter", size: 16))
                                .padding(EdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20))
                                .textFieldStyle(PlainTextFieldStyle())
                                .frame(width: 302, height: 40)
+                               .multilineTextAlignment(.leading)
                        } else {
                            TextField(placeholder, text:  $text)
-                               .foregroundColor(Color(.white))
+                               .foregroundColor(Color(.black))
                                .font(.custom("AmericanTypewriter", size: 16)) 
                                .padding(EdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20))
                                .textFieldStyle(PlainTextFieldStyle())
                                .frame(width: 302, height: 40)
+                               .multilineTextAlignment(.leading)
                        }
                    }
                    Button(action: {
