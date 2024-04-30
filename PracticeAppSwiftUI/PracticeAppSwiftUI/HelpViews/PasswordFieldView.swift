@@ -14,7 +14,6 @@ struct PasswordFieldView: View {
        @State private var isPasswordHidden = true
        @State var text: String
 
-       
        var body: some View {
            VStack(alignment: .leading) {
                Text(title)
@@ -23,20 +22,20 @@ struct PasswordFieldView: View {
                ZStack(alignment: .trailing) {
                    Group {
                        Capsule()
-                           .stroke(Color(.white), lineWidth: 1)
+                           .stroke(Color(.black), lineWidth: 1) // black for test
                            .background(Color.clear)
                            .frame(width: 302, height: 40)
                        if isSecured && isPasswordHidden {
                            SecureField(placeholder, text: $text)
                                .foregroundColor(Color(.white))
-                               .font(.custom("AmericanTypewriter", size: 16)) // need to fix a font
+                               .font(.custom("AmericanTypewriter", size: 16))
                                .padding(EdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20))
                                .textFieldStyle(PlainTextFieldStyle())
                                .frame(width: 302, height: 40)
                        } else {
                            TextField(placeholder, text:  $text)
                                .foregroundColor(Color(.white))
-                               .font(.custom("AmericanTypewriter", size: 16)) // need to fix a font
+                               .font(.custom("AmericanTypewriter", size: 16)) 
                                .padding(EdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20))
                                .textFieldStyle(PlainTextFieldStyle())
                                .frame(width: 302, height: 40)
@@ -46,7 +45,7 @@ struct PasswordFieldView: View {
                        isPasswordHidden.toggle()
                    }) {
                        Image(self.isPasswordHidden ? "eyeInactive" : "eyeActive")
-                           .accentColor(Color("PrimaryColor"))
+                           .accentColor(Color("MainColor"))
                    }
                    .padding(.trailing, 5)
                    .opacity(isSecured ? 1: 0)
@@ -59,5 +58,5 @@ struct PasswordFieldView: View {
     PasswordFieldView(title: "Пароль",
                    placeholder: "*******",
                            isSecured: true, text: ""
-                           )
+                    )
 }

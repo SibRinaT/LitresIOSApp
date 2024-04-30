@@ -19,10 +19,14 @@ struct ContentView: View {
                 Text("РЕГИСТРАЦИЯ")
                     .font(.custom("AmericanTypewriter", size: 32))
                     .padding()
+                    .padding(.bottom, 20)
                 InputFieldView(title: "email", placeholder: "book@gmail.com", text: "")
+                    .padding(-20)
                 PasswordFieldView(title: "пароль", placeholder: "book123", text: "")
+                PasswordFieldView(title: "повторите пароль", placeholder: "book123", text: "")
+                    .padding(-20)
             }
-            .foregroundColor(Color("PrimaryColor"))
+                        .foregroundColor(Color("MainColor"))
             .font(.custom("AmericanTypewriter", size: 36))
             .multilineTextAlignment(.center)
         }
