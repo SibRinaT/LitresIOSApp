@@ -10,7 +10,6 @@ import SwiftUI
 struct PasswordFieldView: View {
     let title: String
        let placeholder: String
-       @State var isSecured = false
        @State private var isPasswordHidden = true
        @State var text: String
 
@@ -25,7 +24,7 @@ struct PasswordFieldView: View {
                            .stroke(Color(.black), lineWidth: 1) // black for test
                            .background(Color.clear)
                            .frame(width: 302, height: 40)
-                       if isSecured && isPasswordHidden {
+                       if isPasswordHidden {
                            SecureField(placeholder, text: $text)
                                .foregroundColor(Color(.white))
                                .font(.custom("AmericanTypewriter", size: 16))
@@ -48,7 +47,6 @@ struct PasswordFieldView: View {
                            .accentColor(Color("MainColor"))
                    }
                    .padding(.trailing, 5)
-                   .opacity(isSecured ? 1: 0)
                }
            }
            .padding(.bottom)
@@ -57,6 +55,6 @@ struct PasswordFieldView: View {
 #Preview {
     PasswordFieldView(title: "Пароль",
                    placeholder: "*******",
-                           isSecured: true, text: ""
+                    text: ""
                     )
 }

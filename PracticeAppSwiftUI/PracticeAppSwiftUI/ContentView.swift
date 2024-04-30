@@ -21,6 +21,7 @@ struct ContentView: View {
                     .padding()
                     .padding(.bottom, 20)
                 InputFieldView(title: "email", placeholder: "book@gmail.com", text: "")
+                InputFieldView(title: "логин", placeholder: "user", text: "")
                     .padding(-20)
                 PasswordFieldView(title: "пароль", placeholder: "book123", text: "")
                 PasswordFieldView(title: "повторите пароль", placeholder: "book123", text: "")
