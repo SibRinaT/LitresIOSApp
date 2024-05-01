@@ -14,6 +14,7 @@
 		2E6F0EC32BDEC9E7003312F5 /* InputFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6F0EC22BDEC9E7003312F5 /* InputFieldView.swift */; };
 		2E77583C2BE03AF10079EFFE /* PasswordFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E77583B2BE03AF10079EFFE /* PasswordFieldView.swift */; };
 		2E86C87C2BE231440093D70D /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E86C87B2BE231440093D70D /* LogInView.swift */; };
+		2E86C87E2BE261510093D70D /* OTPVerificactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E86C87D2BE261510093D70D /* OTPVerificactionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		2E6F0EC22BDEC9E7003312F5 /* InputFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputFieldView.swift; sourceTree = "<group>"; };
 		2E77583B2BE03AF10079EFFE /* PasswordFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordFieldView.swift; sourceTree = "<group>"; };
 		2E86C87B2BE231440093D70D /* LogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
+		2E86C87D2BE261510093D70D /* OTPVerificactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPVerificactionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 				2E38F2A72BDE77AE00D76A03 /* PracticeAppSwiftUIApp.swift */,
 				2E38F2A92BDE77AE00D76A03 /* ContentView.swift */,
 				2E86C87B2BE231440093D70D /* LogInView.swift */,
+				2E86C87D2BE261510093D70D /* OTPVerificactionView.swift */,
 				2E38F2B52BDE7ABE00D76A03 /* Info.plist */,
 				2E38F2AB2BDE77B100D76A03 /* Assets.xcassets */,
 				2E38F2AD2BDE77B100D76A03 /* Preview Content */,
@@ -161,6 +164,7 @@
 				2E38F2AA2BDE77AE00D76A03 /* ContentView.swift in Sources */,
 				2E38F2A82BDE77AE00D76A03 /* PracticeAppSwiftUIApp.swift in Sources */,
 				2E6F0EC32BDEC9E7003312F5 /* InputFieldView.swift in Sources */,
+				2E86C87E2BE261510093D70D /* OTPVerificactionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
