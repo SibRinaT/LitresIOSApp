@@ -12,6 +12,9 @@
 		2E38F2AC2BDE77B100D76A03 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E38F2AB2BDE77B100D76A03 /* Assets.xcassets */; };
 		2E38F2AF2BDE77B100D76A03 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E38F2AE2BDE77B100D76A03 /* Preview Assets.xcassets */; };
 		2E3D19882BE269430005CD68 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3D19872BE269430005CD68 /* MainView.swift */; };
+		2E3D198B2BE26C9A0005CD68 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3D198A2BE26C9A0005CD68 /* Book.swift */; };
+		2E3D198D2BE26CC40005CD68 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3D198C2BE26CC40005CD68 /* Tag.swift */; };
+		2E3D198F2BE26D700005CD68 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3D198E2BE26D700005CD68 /* Review.swift */; };
 		2E6F0EC32BDEC9E7003312F5 /* InputFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6F0EC22BDEC9E7003312F5 /* InputFieldView.swift */; };
 		2E77583C2BE03AF10079EFFE /* PasswordFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E77583B2BE03AF10079EFFE /* PasswordFieldView.swift */; };
 		2E86C87C2BE231440093D70D /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E86C87B2BE231440093D70D /* LogInView.swift */; };
@@ -26,6 +29,9 @@
 		2E38F2AE2BDE77B100D76A03 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2E38F2B52BDE7ABE00D76A03 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		2E3D19872BE269430005CD68 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		2E3D198A2BE26C9A0005CD68 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
+		2E3D198C2BE26CC40005CD68 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
+		2E3D198E2BE26D700005CD68 /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
 		2E6F0EC22BDEC9E7003312F5 /* InputFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputFieldView.swift; sourceTree = "<group>"; };
 		2E77583B2BE03AF10079EFFE /* PasswordFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordFieldView.swift; sourceTree = "<group>"; };
 		2E86C87B2BE231440093D70D /* LogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
@@ -62,12 +68,10 @@
 		2E38F2A62BDE77AE00D76A03 /* PracticeAppSwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				2E3D19912BE26E430005CD68 /* MainViews */,
+				2E3D19902BE26DFB0005CD68 /* AuthentificationViews */,
+				2E3D19892BE26C880005CD68 /* Models */,
 				2E6F0EC12BDEC9CE003312F5 /* HelpViews */,
-				2E38F2A72BDE77AE00D76A03 /* PracticeAppSwiftUIApp.swift */,
-				2E38F2A92BDE77AE00D76A03 /* SignUpView.swift */,
-				2E86C87B2BE231440093D70D /* LogInView.swift */,
-				2E86C87D2BE261510093D70D /* OTPVerificactionView.swift */,
-				2E3D19872BE269430005CD68 /* MainView.swift */,
 				2E38F2B52BDE7ABE00D76A03 /* Info.plist */,
 				2E38F2AB2BDE77B100D76A03 /* Assets.xcassets */,
 				2E38F2AD2BDE77B100D76A03 /* Preview Content */,
@@ -81,6 +85,35 @@
 				2E38F2AE2BDE77B100D76A03 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		2E3D19892BE26C880005CD68 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2E3D198A2BE26C9A0005CD68 /* Book.swift */,
+				2E3D198C2BE26CC40005CD68 /* Tag.swift */,
+				2E3D198E2BE26D700005CD68 /* Review.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		2E3D19902BE26DFB0005CD68 /* AuthentificationViews */ = {
+			isa = PBXGroup;
+			children = (
+				2E38F2A92BDE77AE00D76A03 /* SignUpView.swift */,
+				2E86C87B2BE231440093D70D /* LogInView.swift */,
+				2E86C87D2BE261510093D70D /* OTPVerificactionView.swift */,
+			);
+			path = AuthentificationViews;
+			sourceTree = "<group>";
+		};
+		2E3D19912BE26E430005CD68 /* MainViews */ = {
+			isa = PBXGroup;
+			children = (
+				2E38F2A72BDE77AE00D76A03 /* PracticeAppSwiftUIApp.swift */,
+				2E3D19872BE269430005CD68 /* MainView.swift */,
+			);
+			path = MainViews;
 			sourceTree = "<group>";
 		};
 		2E6F0EC12BDEC9CE003312F5 /* HelpViews */ = {
@@ -162,12 +195,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E3D198B2BE26C9A0005CD68 /* Book.swift in Sources */,
 				2E86C87C2BE231440093D70D /* LogInView.swift in Sources */,
 				2E3D19882BE269430005CD68 /* MainView.swift in Sources */,
 				2E77583C2BE03AF10079EFFE /* PasswordFieldView.swift in Sources */,
 				2E38F2AA2BDE77AE00D76A03 /* SignUpView.swift in Sources */,
+				2E3D198F2BE26D700005CD68 /* Review.swift in Sources */,
 				2E38F2A82BDE77AE00D76A03 /* PracticeAppSwiftUIApp.swift in Sources */,
 				2E6F0EC32BDEC9E7003312F5 /* InputFieldView.swift in Sources */,
+				2E3D198D2BE26CC40005CD68 /* Tag.swift in Sources */,
 				2E86C87E2BE261510093D70D /* OTPVerificactionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
