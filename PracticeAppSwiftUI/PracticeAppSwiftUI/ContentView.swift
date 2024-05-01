@@ -26,8 +26,18 @@ struct ContentView: View {
                 PasswordFieldView(title: "пароль", placeholder: "book123", text: "")
                 PasswordFieldView(title: "повторите пароль", placeholder: "book123", text: "")
                     .padding(-20)
+                VStack {
+                    Text("Уже есть аккаунт?")
+                        .foregroundColor(.white)
+                    NavigationLink(destination: LogInView()) {
+                        Text("Читайте в нём!")
+                            .foregroundColor(Color("MainColor"))
+                    }
+                }
+                .font(.custom("AmericanTypewriter", size: 14))
+                .multilineTextAlignment(.center)
             }
-                        .foregroundColor(Color("MainColor"))
+            .foregroundColor(Color("MainColor"))
             .font(.custom("AmericanTypewriter", size: 36))
             .multilineTextAlignment(.center)
         }
