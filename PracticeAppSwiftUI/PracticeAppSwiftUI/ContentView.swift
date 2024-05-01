@@ -26,7 +26,6 @@ struct ContentView: View {
                 PasswordFieldView(title: "пароль", placeholder: "book123", text: "")
                 PasswordFieldView(title: "повторите пароль", placeholder: "book123", text: "")
                     .padding(-20)
-                
             }
                         .foregroundColor(Color("MainColor"))
             .font(.custom("AmericanTypewriter", size: 36))

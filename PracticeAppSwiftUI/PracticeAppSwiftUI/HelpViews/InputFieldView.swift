@@ -20,10 +20,9 @@ struct InputFieldView: View {
                 Group {
                     Capsule()
                         .stroke(Color(.white), lineWidth: 1) // black for test
-                        .foregroundColor(Color(.white))
-                        .frame(width: 302, height: 40)
+                        .background(Color.white)
                         .cornerRadius(16)
-                        .multilineTextAlignment(.leading)
+                        .frame(width: 302, height: 40)
                     TextField(placeholder, text: $text)
                         .multilineTextAlignment(.leading)
                         .foregroundColor(Color(.black))
