@@ -36,7 +36,7 @@ struct BookDetailsHeader: View {
                             Text(String(format: "%.1f", book.rating))
                             Text("\(book.reviews.count)")
                                 .font(.system(size: 14))
-                                .foregroundColor(.capsuleGray)
+                                .foregroundColor(Color("MainColor"))
                         }
                         .font(.callout)
 
@@ -54,7 +54,7 @@ struct BookDetailsHeader: View {
                                     .foregroundColor(.white)
                                 Text(textBookContent)
                                     .font(.callout)
-                                    .foregroundColor(.capsuleGray)
+                                    .foregroundColor(Color("MainColor"))
 
                             }
                         }
@@ -67,7 +67,7 @@ struct BookDetailsHeader: View {
                             switch book.bookType {
                             case .text:
                                 Capsule()
-                                    .foregroundColor(.capsuleBlue)
+                                    .foregroundColor(Color("MainColor"))
                                     .frame(width: 70 , height: 30)
                                     .overlay {
                                         Text("Текст")
@@ -75,7 +75,7 @@ struct BookDetailsHeader: View {
                                     }
                             case .audio:
                                 Capsule()
-                                    .foregroundColor(.capsuleBlue)
+                                    .foregroundColor(Color("MainColor"))
                                     .frame(width: 70 , height: 30)
                                     .overlay {
                                         Text("Аудио")
@@ -90,9 +90,9 @@ struct BookDetailsHeader: View {
                                 
                             }) {
                                 Text(book.author.name)
-                                    .foregroundColor(.capsuleGray)
+                                    .foregroundColor(Color("MainColor"))
                                 Image(systemName: "chevron.right")
-                                    .foregroundColor(.capsuleGray)
+                                    .foregroundColor(Color("MainColor"))
                             }
                             .font(.callout)
                         }
@@ -108,7 +108,7 @@ struct BookDetailsHeader: View {
                                         Text(authorName)
                                         Image(systemName: "chevron.right")
                                     }
-                                    .foregroundColor(.capsuleGray)
+                                    .foregroundColor(Color("MainColor"))
                                     .foregroundColor(.white)
                                 }
                                 .font(.callout)
