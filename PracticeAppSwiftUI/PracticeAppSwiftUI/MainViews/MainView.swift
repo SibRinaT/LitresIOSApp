@@ -9,8 +9,14 @@ import SwiftUI
 
 struct MainView: View {
     var body: some View {
-        VStack {
-            
+        TabView {
+            NavigationView {
+                BooksPageView()
+            }
+            .tabItem {
+                Image(systemName: "book.circle.fill")
+                Text("Книги")
+            }
         }
     }
 }

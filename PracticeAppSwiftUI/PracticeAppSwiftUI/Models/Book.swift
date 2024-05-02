@@ -8,11 +8,11 @@
 import Foundation
 
 enum Shelf: String, CaseIterable {
-    case popular
-    case recommended
-    case newRelease
-    case hits
-    case editorsChoice
+    case Популярное
+    case Рекомендация
+    case Релизы
+    case Хиты
+    case ВыборСоздателей
 }
 
 enum BookType: String, CaseIterable {
