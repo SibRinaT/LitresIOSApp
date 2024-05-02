@@ -14,8 +14,23 @@ struct MainView: View {
                 BooksPageView()
             }
             .tabItem {
+                Image(systemName: "trophy.circle.fill")
+                Text("Подписка")
+            }
+            NavigationView {
+                BooksPageView()
+            }
+            .tabItem {
                 Image(systemName: "book.circle.fill")
+                    .foregroundColor(Color("MainColor"))
                 Text("Книги")
+            }
+            NavigationView {
+                BooksPageView()
+            }
+            .tabItem {
+                Image(systemName: "person.crop.circle.fill")
+                Text("Профиль")
             }
         }
     }

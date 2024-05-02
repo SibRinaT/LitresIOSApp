@@ -44,7 +44,7 @@
 		2E38F2A92BDE77AE00D76A03 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		2E38F2AB2BDE77B100D76A03 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2E38F2AE2BDE77B100D76A03 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		2E38F2B52BDE7ABE00D76A03 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		2E38F2B52BDE7ABE00D76A03 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2E3D19872BE269430005CD68 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		2E3D198A2BE26C9A0005CD68 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		2E3D198C2BE26CC40005CD68 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
@@ -106,8 +106,6 @@
 				2E3D19902BE26DFB0005CD68 /* AuthentificationViews */,
 				2E3D19892BE26C880005CD68 /* Models */,
 				2E6F0EC12BDEC9CE003312F5 /* HelpViews */,
-				2E38F2B52BDE7ABE00D76A03 /* Info.plist */,
-				2E38F2AB2BDE77B100D76A03 /* Assets.xcassets */,
 				2E38F2AD2BDE77B100D76A03 /* Preview Content */,
 			);
 			path = PracticeAppSwiftUI;
@@ -116,7 +114,9 @@
 		2E38F2AD2BDE77B100D76A03 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
+				2E38F2AB2BDE77B100D76A03 /* Assets.xcassets */,
 				2E38F2AE2BDE77B100D76A03 /* Preview Assets.xcassets */,
+				2E38F2B52BDE7ABE00D76A03 /* Info.plist */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
