@@ -6,8 +6,11 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct SignUpView: View {
+    @State private var email = ""
+    @State private var password = ""
     var body: some View {
         NavigationView {
             ZStack {
@@ -46,6 +49,8 @@ struct SignUpView: View {
                     
                     .font(.custom("AmericanTypewriter", size: 14))
                     .multilineTextAlignment(.center)
+          
+                        
                     NavigationLink(destination: OTPVerificactionView()) {
                         Rectangle()
                             .frame(width: 224, height: 50)
@@ -64,7 +69,19 @@ struct SignUpView: View {
             }
         }
     }
+    func register() { //registr Firebase
+        Auth.auth().createUser(withEmail: email, password: password) { result, error in
+            if let result = result {
+                print(result)
+            }
+            if error != nil {
+                print(error?.localizedDescription)
+                return
+            }
+        }
+    }
 }
+
 
 #Preview {
     SignUpView()
