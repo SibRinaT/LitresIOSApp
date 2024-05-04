@@ -10,7 +10,7 @@ import SwiftUI
 struct InputFieldView: View {
     let title: String
     let placeholder: String
-    @State var text: String
+    @State var text: String = ""
     var body: some View {
         VStack(alignment: .leading) {
             Text(title)
