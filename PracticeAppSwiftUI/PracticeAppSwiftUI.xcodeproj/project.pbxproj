@@ -35,12 +35,13 @@
 		2E6F0EC32BDEC9E7003312F5 /* InputFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6F0EC22BDEC9E7003312F5 /* InputFieldView.swift */; };
 		2E77583C2BE03AF10079EFFE /* PasswordFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E77583B2BE03AF10079EFFE /* PasswordFieldView.swift */; };
 		2E86C87C2BE231440093D70D /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E86C87B2BE231440093D70D /* LogInView.swift */; };
-		2E86C87E2BE261510093D70D /* OTPVerificactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E86C87D2BE261510093D70D /* OTPVerificactionView.swift */; };
-		2E8A616E2BE4DB310013BD1F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2E8A616D2BE4DB310013BD1F /* GoogleService-Info.plist */; };
+		2E86C87E2BE261510093D70D /* OTPVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E86C87D2BE261510093D70D /* OTPVerificationView.swift */; };
 		2E8A61712BE4DC200013BD1F /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 2E8A61702BE4DC200013BD1F /* FirebaseAuth */; };
 		2E8A61732BE4DC200013BD1F /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 2E8A61722BE4DC200013BD1F /* FirebaseDatabase */; };
 		2E8A61752BE4DC200013BD1F /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 2E8A61742BE4DC200013BD1F /* FirebaseDatabaseSwift */; };
 		2E8A61772BE4DC200013BD1F /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 2E8A61762BE4DC200013BD1F /* FirebaseFirestore */; };
+		2E8A61792BE5F6640013BD1F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2E8A61782BE5F6640013BD1F /* GoogleService-Info.plist */; };
+		2E8A617C2BE5F71E0013BD1F /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8A617B2BE5F71E0013BD1F /* AuthService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,8 +75,9 @@
 		2E6F0EC22BDEC9E7003312F5 /* InputFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputFieldView.swift; sourceTree = "<group>"; };
 		2E77583B2BE03AF10079EFFE /* PasswordFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordFieldView.swift; sourceTree = "<group>"; };
 		2E86C87B2BE231440093D70D /* LogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
-		2E86C87D2BE261510093D70D /* OTPVerificactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPVerificactionView.swift; sourceTree = "<group>"; };
-		2E8A616D2BE4DB310013BD1F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		2E86C87D2BE261510093D70D /* OTPVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPVerificationView.swift; sourceTree = "<group>"; };
+		2E8A61782BE5F6640013BD1F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		2E8A617B2BE5F71E0013BD1F /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 				2E3D19892BE26C880005CD68 /* Models */,
 				2E6F0EC12BDEC9CE003312F5 /* HelpViews */,
 				2E38F2B52BDE7ABE00D76A03 /* Info.plist */,
+				2E8A61782BE5F6640013BD1F /* GoogleService-Info.plist */,
 				2E38F2AD2BDE77B100D76A03 /* Preview Content */,
 			);
 			path = PracticeAppSwiftUI;
@@ -126,7 +129,6 @@
 		2E38F2AD2BDE77B100D76A03 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
-				2E8A616D2BE4DB310013BD1F /* GoogleService-Info.plist */,
 				2E38F2AB2BDE77B100D76A03 /* Assets.xcassets */,
 				2E38F2AE2BDE77B100D76A03 /* Preview Assets.xcassets */,
 			);
@@ -149,9 +151,10 @@
 		2E3D19902BE26DFB0005CD68 /* AuthentificationViews */ = {
 			isa = PBXGroup;
 			children = (
+				2E8A617A2BE5F7080013BD1F /* AuthService  */,
 				2E38F2A92BDE77AE00D76A03 /* SignUpView.swift */,
 				2E86C87B2BE231440093D70D /* LogInView.swift */,
-				2E86C87D2BE261510093D70D /* OTPVerificactionView.swift */,
+				2E86C87D2BE261510093D70D /* OTPVerificationView.swift */,
 			);
 			path = AuthentificationViews;
 			sourceTree = "<group>";
@@ -227,6 +230,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		2E8A617A2BE5F7080013BD1F /* AuthService  */ = {
+			isa = PBXGroup;
+			children = (
+				2E8A617B2BE5F71E0013BD1F /* AuthService.swift */,
+			);
+			path = "AuthService ";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -295,7 +306,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2E38F2AF2BDE77B100D76A03 /* Preview Assets.xcassets in Resources */,
-				2E8A616E2BE4DB310013BD1F /* GoogleService-Info.plist in Resources */,
+				2E8A61792BE5F6640013BD1F /* GoogleService-Info.plist in Resources */,
 				2E38F2AC2BDE77B100D76A03 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -317,6 +328,7 @@
 				2E38F2AA2BDE77AE00D76A03 /* SignUpView.swift in Sources */,
 				2E3D198F2BE26D700005CD68 /* Review.swift in Sources */,
 				2E3D19A42BE353A60005CD68 /* BookReview.swift in Sources */,
+				2E8A617C2BE5F71E0013BD1F /* AuthService.swift in Sources */,
 				2E3D19AD2BE3552E0005CD68 /* SearchView.swift in Sources */,
 				2E38F2A82BDE77AE00D76A03 /* PracticeAppSwiftUIApp.swift in Sources */,
 				2E3D19B12BE355770005CD68 /* AsyncContentView.swift in Sources */,
@@ -330,7 +342,7 @@
 				2E3D19B32BE355A20005CD68 /* LoadingErrorView.swift in Sources */,
 				2E3D19B92BE36C140005CD68 /* Types.swift in Sources */,
 				2E3D19A62BE354770005CD68 /* TagsViewModel.swift in Sources */,
-				2E86C87E2BE261510093D70D /* OTPVerificactionView.swift in Sources */,
+				2E86C87E2BE261510093D70D /* OTPVerificationView.swift in Sources */,
 				2E3D199C2BE3517A0005CD68 /* BookDetails.swift in Sources */,
 				2E3D19BB2BE36E240005CD68 /* BooksPageView.swift in Sources */,
 				2E3D19A02BE351950005CD68 /* BookDetailsBody.swift in Sources */,
