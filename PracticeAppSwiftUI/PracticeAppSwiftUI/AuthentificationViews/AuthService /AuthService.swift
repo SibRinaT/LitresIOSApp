@@ -9,21 +9,20 @@ import SwiftUI
 import Firebase
 
 final class AuthService {
-    @State var email = ""
-    @State var password = "" 
-    
     private let auth = Auth.auth()
     
-    func register() {
-        auth.createUser(withEmail: email, password: password) { result, error in
-            if let result = result {
-                print(result)
-            }
-            if error != nil {
-                print(error?.localizedDescription)
-                return
-            }
-        }
+    static let shared = AuthService()
+    
+    private init() {}
+    
+    func registerWithEmail(email: String, password: String) async throws {
+        let result = try await auth.createUser(withEmail: email, password: password)
+        print(result)
+    }
+    
+    func signInWithEmail(email: String, password: String) async throws {
+        let result = try await auth.signIn(withEmail: email, password: password)
+        print(result)
     }
     
     
