@@ -11,6 +11,7 @@ import FirebaseAuth
 struct SignUpView: View {
     @State var email = ""
     @State var password = ""
+    @State var login = ""
     @State var isRegistered = false
     @State private var isPasswordHidden = true
 
@@ -18,6 +19,8 @@ struct SignUpView: View {
     let placeholderEmail: String = "book@gmail.com"
     let titlePassword: String = "Password"
     let placeholderPassword: String = "Qwe1234"
+    let titleLogin: String = "Login"
+    let placeholderLogin: String = "login"
 
     var body: some View {
             NavigationView {
@@ -61,9 +64,33 @@ struct SignUpView: View {
                                 .textFieldStyle(.roundedBorder)
                         }
                         .padding(.bottom)
-                        
-                        InputFieldView(title: "логин", placeholder: "user", text: "")
-                            .padding(-20)
+        
+                        VStack(alignment: .leading) {
+                            Text(titleLogin)
+                                .foregroundColor(Color(.white))
+                                .font(.custom("AmericanTypewriter", size: 20))
+                            ZStack {
+                                Group {
+                                    Capsule()
+                                        .stroke(Color(.white), lineWidth: 1) // black for test
+                                        .background(Color.white)
+                                        .cornerRadius(16)
+                                        .frame(width: 302, height: 40)
+                                    TextField(placeholderLogin, text: $login)
+                                        .multilineTextAlignment(.leading)
+                                        .foregroundColor(Color(.black))
+                                        .font(.custom("AmericanTypewriter", size: 16))
+                                        .padding(EdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20))
+                                        .textFieldStyle(PlainTextFieldStyle())
+                                        .autocapitalization(.none)
+                                        .frame(width: 302, height: 40)
+                                        .foregroundColor(Color(.white))
+                                }
+                            }
+                                .font(.caption2)
+                                .textFieldStyle(.roundedBorder)
+                        }
+                        .padding(.bottom)
                         
                         VStack(alignment: .leading) {
                             Text(titlePassword)
@@ -104,9 +131,6 @@ struct SignUpView: View {
                             }
                         }
                         .padding(.bottom)
-                        
-                        PasswordFieldView(title: "повторите пароль", placeholder: "book123", text: "")
-                            .padding(-20)
                         
                         VStack {
                             Text("Уже есть аккаунт?")
