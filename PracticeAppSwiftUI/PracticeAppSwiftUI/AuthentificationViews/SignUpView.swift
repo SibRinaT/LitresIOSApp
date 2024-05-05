@@ -14,7 +14,7 @@ struct SignUpView: View {
     @State var login = ""
     @State var isRegistered = false
     @State private var isPasswordHidden = true
-    
+    @State private var showingAlert = false
     let titleEmail: String = "Email"
     let placeholderEmail: String = "book@gmail.com"
     let titlePassword: String = "Password"
@@ -131,7 +131,11 @@ struct SignUpView: View {
                         }
                     }
                     .padding(.bottom)
-                    
+                    if isRegistered {
+                        NavigationLink(destination: MainView(), isActive: $isRegistered) {
+                            EmptyView()
+                        }
+                    }
                     VStack {
                         Text("Уже есть аккаунт?")
                             .foregroundColor(.white)
@@ -156,6 +160,10 @@ struct SignUpView: View {
                                                                .font(.custom("AmericanTypewriter", size: 20))
                                                        )
                     }
+
+                    if isRegistered {
+                        
+                    }
 //                    .disableWithOpacity()
                     //                        NavigationLink(destination: OTPVerificationView()) {
                     //                            Rectangle()
@@ -174,13 +182,18 @@ struct SignUpView: View {
                 .multilineTextAlignment(.center)
             }
         }
+        .sheet(isPresented: $isRegistered) {
+            MainView()
+        }
     }
     func signInWithEmail() {
         Task {
             do {
                 let user = try await Auth.auth().createUser(withEmail: email, password: password)
+                isRegistered = true
                  } catch {
                     print(error)
+                     isRegistered = false
                  }
         }
     }

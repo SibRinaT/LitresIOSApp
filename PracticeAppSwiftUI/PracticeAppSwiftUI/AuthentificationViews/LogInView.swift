@@ -31,15 +31,15 @@ struct LogInView: View {
                     PasswordFieldView(title: "пароль", placeholder: "book123", text: "")
                         .padding(-20)
                     
-//                    VStack {
-//                        Text("У вас нет аккаунта?")
-//                            .foregroundColor(.white)
-//                        NavigationLink(destination: SignUpView()) {
-//                            Text("Начните чтение!")
-//                                .foregroundColor(Color("MainColor"))
-//                        }
-//                    }
-//                    .padding(3)
+                    VStack {
+                        Text("У вас нет аккаунта?")
+                            .foregroundColor(.white)
+                        NavigationLink(destination: SignUpView()) {
+                            Text("Начните чтение!")
+                                .foregroundColor(Color("MainColor"))
+                        }
+                    }
+                    .padding(3)
                     
                     .font(.custom("AmericanTypewriter", size: 14))
                     .multilineTextAlignment(.center)

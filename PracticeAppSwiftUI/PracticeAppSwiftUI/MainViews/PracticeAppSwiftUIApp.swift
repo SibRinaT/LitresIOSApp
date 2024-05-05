@@ -13,9 +13,16 @@ struct PracticeAppSwiftUIApp: App {
     init() {
         FirebaseApp.configure()
     }
+    
+    @AppStorage("log_status") var logStatus: Bool = false
+    
     var body: some Scene {
         WindowGroup {
-            SignUpView()
+            if logStatus {
+                MainView()
+            }else{
+                LogInView()
+            }
         }
     }
 }
