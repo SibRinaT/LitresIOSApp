@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Firebase
+import FirebaseAuth
 
 final class AuthService {
     private let auth = Auth.auth()

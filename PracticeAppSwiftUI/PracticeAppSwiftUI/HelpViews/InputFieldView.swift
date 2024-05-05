@@ -10,7 +10,7 @@ import SwiftUI
 struct InputFieldView: View {
     let title: String
     let placeholder: String
-    @State var text: String = ""
+    @Binding var text: String
     var body: some View {
         VStack(alignment: .leading) {
             Text(title)
@@ -43,6 +43,6 @@ struct InputFieldView: View {
 
 #Preview {
     InputFieldView(title: "Email",
-                   placeholder: "Book@gmail.com", text: ""
+                   placeholder: "Book@gmail.com", text: .constant("")
                 )
 }

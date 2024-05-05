@@ -44,6 +44,9 @@ struct SignUpView: View {
                         Text(titleEmail)
                             .foregroundColor(Color(.white))
                             .font(.custom("AmericanTypewriter", size: 20))
+                        InputFieldView(title: "Email", placeholder: "email123", text: $email)
+                        
+                        
                         ZStack {
                             Group {
                                 Capsule()

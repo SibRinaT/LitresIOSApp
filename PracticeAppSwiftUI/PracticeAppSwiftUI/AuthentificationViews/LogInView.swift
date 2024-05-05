@@ -28,7 +28,7 @@ struct LogInView: View {
                         .padding()
                         .padding(.bottom, 20)
                     
-                    InputFieldView(title: "email", placeholder: "book@gmail.com", text: email)
+                    InputFieldView(title: "email", placeholder: "book@gmail.com", text: $email)
                     
                     PasswordFieldView(title: "пароль", placeholder: "book123", text: password)
                         .padding(-20)
