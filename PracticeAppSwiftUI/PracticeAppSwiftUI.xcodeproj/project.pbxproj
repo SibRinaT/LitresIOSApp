@@ -45,6 +45,8 @@
 		2E8A61802BE6105D0013BD1F /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8A617F2BE6105D0013BD1F /* SignUpViewModel.swift */; };
 		2E8A61822BE6140A0013BD1F /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 2E8A61812BE6140A0013BD1F /* FirebaseFirestoreSwift */; };
 		2E8A61842BE6140A0013BD1F /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 2E8A61832BE6140A0013BD1F /* FirebaseStorage */; };
+		ACB46AC32BE7680B009A7ABA /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB46AC22BE7680B009A7ABA /* ProfileView.swift */; };
+		ACB46AC52BE769B1009A7ABA /* AppRootManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB46AC42BE769B1009A7ABA /* AppRootManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -82,6 +84,8 @@
 		2E8A61782BE5F6640013BD1F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2E8A617B2BE5F71E0013BD1F /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		2E8A617F2BE6105D0013BD1F /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
+		ACB46AC22BE7680B009A7ABA /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		ACB46AC42BE769B1009A7ABA /* AppRootManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRootManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +125,7 @@
 		2E38F2A62BDE77AE00D76A03 /* PracticeAppSwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				ACB46AC42BE769B1009A7ABA /* AppRootManager.swift */,
 				2E3D19912BE26E430005CD68 /* MainViews */,
 				2E3D19902BE26DFB0005CD68 /* AuthentificationViews */,
 				2E3D19892BE26C880005CD68 /* Models */,
@@ -171,6 +176,7 @@
 			children = (
 				2E38F2A72BDE77AE00D76A03 /* PracticeAppSwiftUIApp.swift */,
 				2E3D19872BE269430005CD68 /* MainView.swift */,
+				ACB46AC22BE7680B009A7ABA /* ProfileView.swift */,
 				2E3D19942BE34FA10005CD68 /* BookView.swift */,
 				2E3D19962BE34FB00005CD68 /* ShelfView.swift */,
 				2E3D19BA2BE36E240005CD68 /* BooksPageView.swift */,
@@ -354,6 +360,7 @@
 				2E3D198F2BE26D700005CD68 /* Review.swift in Sources */,
 				2E3D19A42BE353A60005CD68 /* BookReview.swift in Sources */,
 				2E8A617C2BE5F71E0013BD1F /* AuthService.swift in Sources */,
+				ACB46AC52BE769B1009A7ABA /* AppRootManager.swift in Sources */,
 				2E3D19AD2BE3552E0005CD68 /* SearchView.swift in Sources */,
 				2E38F2A82BDE77AE00D76A03 /* PracticeAppSwiftUIApp.swift in Sources */,
 				2E3D19B12BE355770005CD68 /* AsyncContentView.swift in Sources */,
@@ -365,6 +372,7 @@
 				2E3D19AF2BE355410005CD68 /* SearchBookView.swift in Sources */,
 				2E3D19952BE34FA10005CD68 /* BookView.swift in Sources */,
 				2E3D19B72BE36BEA0005CD68 /* Loader.swift in Sources */,
+				ACB46AC32BE7680B009A7ABA /* ProfileView.swift in Sources */,
 				2E3D19B32BE355A20005CD68 /* LoadingErrorView.swift in Sources */,
 				2E3D19B92BE36C140005CD68 /* Types.swift in Sources */,
 				2E3D19A62BE354770005CD68 /* TagsViewModel.swift in Sources */,

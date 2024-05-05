@@ -9,18 +9,20 @@ import SwiftUI
 import FirebaseAuth
 
 struct SignUpView: View {
+    @EnvironmentObject private var appRootManager: AppRootManager
+    
     @State var email = ""
     @State var password = ""
     @State var login = ""
     @State var isRegistered = false
     @State private var isPasswordHidden = true
     
-    let titleEmail: String = "Email"
-    let placeholderEmail: String = "book@gmail.com"
-    let titlePassword: String = "Password"
-    let placeholderPassword: String = "Qwe1234"
-    let titleLogin: String = "Login"
-    let placeholderLogin: String = "login"
+    let titleEmail = "Email"
+    let placeholderEmail = "book@gmail.com"
+    let titlePassword = "Password"
+    let placeholderPassword = "Qwe1234"
+    let titleLogin = "Login"
+    let placeholderLogin = "login"
     
     var body: some View {
         NavigationView {
@@ -103,23 +105,20 @@ struct SignUpView: View {
                                     .background(Color.white)
                                     .cornerRadius(16)
                                     .frame(width: 302, height: 40)
-                                if isPasswordHidden {
-                                    SecureField(placeholderPassword, text: $password)
-                                        .foregroundColor(Color(.black))
-                                        .font(.custom("AmericanTypewriter", size: 16))
-                                        .padding(EdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20))
-                                        .textFieldStyle(PlainTextFieldStyle())
-                                        .frame(width: 302, height: 40)
-                                        .multilineTextAlignment(.leading)
-                                } else {
-                                    TextField(placeholderPassword, text:  $password)
-                                        .foregroundColor(Color(.black))
-                                        .font(.custom("AmericanTypewriter", size: 16))
-                                        .padding(EdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20))
-                                        .textFieldStyle(PlainTextFieldStyle())
-                                        .frame(width: 302, height: 40)
-                                        .multilineTextAlignment(.leading)
+                                Group {
+                                    if isPasswordHidden {
+                                        SecureField(placeholderPassword, text: $password)
+                                    } else {
+                                        TextField(placeholderPassword, text:  $password)
+                                    }
                                 }
+                                .foregroundColor(Color(.black))
+                                .font(.custom("AmericanTypewriter", size: 16))
+                                .padding(EdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20))
+                                .textFieldStyle(PlainTextFieldStyle())
+                                .frame(width: 302, height: 40)
+                                .multilineTextAlignment(.leading)
+                                
                             }
                             Button(action: {
                                 isPasswordHidden.toggle()
@@ -132,31 +131,34 @@ struct SignUpView: View {
                     }
                     .padding(.bottom)
                     
+                    
                     VStack {
-                        Text("Уже есть аккаунт?")
-                            .foregroundColor(.white)
-                        NavigationLink(destination: LogInView()) {
+                        Button(action: {
+                                appRootManager.currentRoot = .signIn
+                        }) {
+                            Text("Уже есть аккаунт?")
+                                .foregroundColor(.white)
                             Text("Читайте в нём!")
                                 .foregroundColor(Color("MainColor"))
                         }
                     }
-                    .padding(3)
-                    
+                    .padding(10)
                     .font(.custom("AmericanTypewriter", size: 14))
                     .multilineTextAlignment(.center)
+
                     
-                    Button(action: {signInWithEmail()}) {
+                    Button(action: { signUpWithEmail()} ) {
                         Rectangle()
-                                                       .frame(width: 224, height: 50)
-                                                       .cornerRadius(16)
-                                                       .foregroundColor(Color("MainColor"))
-                                                       .overlay(
-                                                           Text("Регистрация")
-                                                               .foregroundColor(.white)
-                                                               .font(.custom("AmericanTypewriter", size: 20))
-                                                       )
+                            .frame(width: 224, height: 50)
+                            .cornerRadius(16)
+                            .foregroundColor(Color("MainColor"))
+                            .overlay(
+                                Text("Регистрация")
+                                    .foregroundColor(.white)
+                                    .font(.custom("AmericanTypewriter", size: 20))
+                            )
                     }
-//                    .disableWithOpacity()
+                    //                    .disableWithOpacity()
                     //                        NavigationLink(destination: OTPVerificationView()) {
                     //                            Rectangle()
                     //                                .frame(width: 224, height: 50)
@@ -175,13 +177,14 @@ struct SignUpView: View {
             }
         }
     }
-    func signInWithEmail() {
+    func signUpWithEmail() {
         Task {
             do {
-                let user = try await Auth.auth().createUser(withEmail: email, password: password)
-                 } catch {
-                    print(error)
-                 }
+                _ = try await Auth.auth().createUser(withEmail: email, password: password)
+                appRootManager.currentRoot = .main
+            } catch {
+                print(error)
+            }
         }
     }
     

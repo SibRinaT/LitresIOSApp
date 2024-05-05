@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct MainView: View {
+
     var body: some View {
         TabView {
             NavigationView {
@@ -26,7 +27,7 @@ struct MainView: View {
                 Text("Книги")
             }
             NavigationView {
-                BooksPageView()
+                ProfileView()
             }
             .tabItem {
                 Image(systemName: "person.crop.circle.fill")

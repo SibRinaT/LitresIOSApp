@@ -7,15 +7,29 @@
 
 import SwiftUI
 import Firebase
+import FirebaseAuth
 
 @main
 struct PracticeAppSwiftUIApp: App {
+    @StateObject private var appRootManager = AppRootManager()
+    
     init() {
         FirebaseApp.configure()
     }
+    
     var body: some Scene {
         WindowGroup {
-            SignUpView()
+            Group {
+                switch appRootManager.currentRoot {
+                case .signUp:
+                    SignUpView()
+                case .signIn:
+                    LogInView()
+                case .main:
+                    MainView()
+                }
+            }
+            .environmentObject(appRootManager)
         }
     }
 }

@@ -10,6 +10,10 @@ import FirebaseCore
 import FirebaseAuth
 
 struct LogInView: View {
+    @EnvironmentObject private var appRootManager: AppRootManager
+    @State private var email = ""
+    @State private var password = ""
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -26,24 +30,33 @@ struct LogInView: View {
                         .padding()
                         .padding(.bottom, 20)
                     
-                    InputFieldView(title: "email", placeholder: "book@gmail.com", text: "")
+                    InputFieldView(title: "email", placeholder: "book@gmail.com", text: email)
                     
-                    PasswordFieldView(title: "пароль", placeholder: "book123", text: "")
+                    PasswordFieldView(title: "пароль", placeholder: "book123", text: password)
                         .padding(-20)
+                        .font(.custom("AmericanTypewriter", size: 14))
+                        .multilineTextAlignment(.center)
+
                     
-//                    VStack {
-//                        Text("У вас нет аккаунта?")
-//                            .foregroundColor(.white)
-//                        NavigationLink(destination: SignUpView()) {
-//                            Text("Начните чтение!")
-//                                .foregroundColor(Color("MainColor"))
-//                        }
-//                    }
-//                    .padding(3)
-                    
+                    VStack {
+                        Button(action: {
+                            appRootManager.currentRoot = .signUp
+                        }) {
+                            VStack {
+                                Text("У вас нет аккаунта?")
+                                    .foregroundColor(.white)
+                                Text("Начните чтение!")
+                                    .foregroundColor(Color("MainColor"))
+                            }
+                        }
+                    }
+                    .padding(10)
                     .font(.custom("AmericanTypewriter", size: 14))
                     .multilineTextAlignment(.center)
-                    NavigationLink(destination: MainView()) {
+                    
+                    Button(action: {
+                        signInWithEmail()
+                    }) {
                         Rectangle()
                             .frame(width: 224, height: 50)
                             .cornerRadius(16)
@@ -54,10 +67,22 @@ struct LogInView: View {
                                     .font(.custom("AmericanTypewriter", size: 20))
                             )
                     }
+                    
                 }
                 .foregroundColor(Color("MainColor"))
                 .font(.custom("AmericanTypewriter", size: 36))
                 .multilineTextAlignment(.center)
+            }
+        }
+    }
+    
+    func signInWithEmail() {
+        Task {
+            do {
+                _ = try await Auth.auth().signIn(withEmail: email, password: password)
+                appRootManager.currentRoot = .main
+            } catch {
+                print(error)
             }
         }
     }
