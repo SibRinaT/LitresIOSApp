@@ -47,6 +47,7 @@
 		2E8A61842BE6140A0013BD1F /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 2E8A61832BE6140A0013BD1F /* FirebaseStorage */; };
 		ACB46AC32BE7680B009A7ABA /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB46AC22BE7680B009A7ABA /* ProfileView.swift */; };
 		ACB46AC52BE769B1009A7ABA /* AppRootManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB46AC42BE769B1009A7ABA /* AppRootManager.swift */; };
+		2E8A61862BE6199E0013BD1F /* LoadinViewFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8A61852BE6199E0013BD1F /* LoadinViewFB.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,6 +87,7 @@
 		2E8A617F2BE6105D0013BD1F /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		ACB46AC22BE7680B009A7ABA /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		ACB46AC42BE769B1009A7ABA /* AppRootManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRootManager.swift; sourceTree = "<group>"; };
+		2E8A61852BE6199E0013BD1F /* LoadinViewFB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadinViewFB.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,6 +225,7 @@
 				2E3D19B02BE355770005CD68 /* AsyncContentView.swift */,
 				2E3D19B22BE355A20005CD68 /* LoadingErrorView.swift */,
 				2E3D19B62BE36BEA0005CD68 /* Loader.swift */,
+				2E8A61852BE6199E0013BD1F /* LoadinViewFB.swift */,
 			);
 			path = Load;
 			sourceTree = "<group>";
@@ -380,6 +383,7 @@
 				2E3D199C2BE3517A0005CD68 /* BookDetails.swift in Sources */,
 				2E3D19BB2BE36E240005CD68 /* BooksPageView.swift in Sources */,
 				2E3D19A02BE351950005CD68 /* BookDetailsBody.swift in Sources */,
+				2E8A61862BE6199E0013BD1F /* LoadinViewFB.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

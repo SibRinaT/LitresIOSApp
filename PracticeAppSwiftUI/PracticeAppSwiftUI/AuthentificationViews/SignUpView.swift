@@ -16,13 +16,14 @@ struct SignUpView: View {
     @State var login = ""
     @State var isRegistered = false
     @State private var isPasswordHidden = true
-    
-    let titleEmail = "Email"
-    let placeholderEmail = "book@gmail.com"
-    let titlePassword = "Password"
-    let placeholderPassword = "Qwe1234"
-    let titleLogin = "Login"
-    let placeholderLogin = "login"
+
+    @State private var showingAlert = false
+    let titleEmail: String = "Email"
+    let placeholderEmail: String = "book@gmail.com"
+    let titlePassword: String = "Password"
+    let placeholderPassword: String = "Qwe1234"
+    let titleLogin: String = "Login"
+    let placeholderLogin: String = "login"
     
     var body: some View {
         NavigationView {
@@ -130,8 +131,7 @@ struct SignUpView: View {
                         }
                     }
                     .padding(.bottom)
-                    
-                    
+
                     VStack {
                         Button(action: {
                                 appRootManager.currentRoot = .signIn
@@ -159,6 +159,7 @@ struct SignUpView: View {
                             )
                     }
                     //                    .disableWithOpacity()
+
                     //                        NavigationLink(destination: OTPVerificationView()) {
                     //                            Rectangle()
                     //                                .frame(width: 224, height: 50)
@@ -176,6 +177,9 @@ struct SignUpView: View {
                 .multilineTextAlignment(.center)
             }
         }
+        .sheet(isPresented: $isRegistered) {
+            MainView()
+        }
     }
     func signUpWithEmail() {
         Task {
@@ -185,6 +189,7 @@ struct SignUpView: View {
             } catch {
                 print(error)
             }
+
         }
     }
     
