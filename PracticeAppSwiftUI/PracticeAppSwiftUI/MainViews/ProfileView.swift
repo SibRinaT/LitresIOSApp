@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import FirebaseAuth
 
 struct ProfileView: View {
     @EnvironmentObject private var appRootManager: AppRootManager
@@ -21,7 +20,7 @@ struct ProfileView: View {
     
     private func logOut() {
         Task {
-            try Auth.auth().signOut()
+            try AuthService.shared.logOut()
             appRootManager.currentRoot = .signUp
         }
     }

@@ -6,8 +6,6 @@
 //
 
 import SwiftUI
-import FirebaseCore
-import FirebaseAuth
 
 struct LogInView: View {
     @EnvironmentObject private var appRootManager: AppRootManager
@@ -79,7 +77,7 @@ struct LogInView: View {
     func signInWithEmail() {
         Task {
             do {
-                _ = try await Auth.auth().signIn(withEmail: email, password: password)
+                try await AuthService.shared.signInWithEmail(email: email, password: password)
                 appRootManager.currentRoot = .main
             } catch {
                 print(error)

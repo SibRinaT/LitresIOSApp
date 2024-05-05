@@ -7,7 +7,6 @@
 
 import SwiftUI
 import Firebase
-import FirebaseAuth
 
 @main
 struct PracticeAppSwiftUIApp: App {
