@@ -67,6 +67,7 @@
 		2ECB527C2BE89BED0088E115 /* FirebaseRemoteConfigSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 2ECB527B2BE89BED0088E115 /* FirebaseRemoteConfigSwift */; };
 		2ECB527E2BE89BED0088E115 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 2ECB527D2BE89BED0088E115 /* FirebaseStorage */; };
 		2ECB52802BE89BED0088E115 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 2ECB527F2BE89BED0088E115 /* FirebaseStorageCombine-Community */; };
+		2ECB52832BE8C0B50088E115 /* OTPModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECB52822BE8C0B50088E115 /* OTPModifier.swift */; };
 		ACB46AC32BE7680B009A7ABA /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB46AC22BE7680B009A7ABA /* ProfileView.swift */; };
 		ACB46AC52BE769B1009A7ABA /* AppRootManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB46AC42BE769B1009A7ABA /* AppRootManager.swift */; };
 		ACB46AC92BE79F55009A7ABA /* FireStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB46AC82BE79F55009A7ABA /* FireStore.swift */; };
@@ -108,6 +109,7 @@
 		2E8A617B2BE5F71E0013BD1F /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		2E8A617F2BE6105D0013BD1F /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		2E8A61852BE6199E0013BD1F /* LoadinViewFB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadinViewFB.swift; sourceTree = "<group>"; };
+		2ECB52822BE8C0B50088E115 /* OTPModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPModifier.swift; sourceTree = "<group>"; };
 		ACB46AC22BE7680B009A7ABA /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		ACB46AC42BE769B1009A7ABA /* AppRootManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRootManager.swift; sourceTree = "<group>"; };
 		ACB46AC82BE79F55009A7ABA /* FireStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireStore.swift; sourceTree = "<group>"; };
@@ -209,11 +211,11 @@
 		2E3D19902BE26DFB0005CD68 /* AuthentificationViews */ = {
 			isa = PBXGroup;
 			children = (
+				2ECB52812BE8C08B0088E115 /* OTP */,
 				2E8A617E2BE6102B0013BD1F /* AuthViewModels */,
 				2E8A617A2BE5F7080013BD1F /* AuthService  */,
 				2E38F2A92BDE77AE00D76A03 /* SignUpView.swift */,
 				2E86C87B2BE231440093D70D /* LogInView.swift */,
-				2E86C87D2BE261510093D70D /* OTPVerificationView.swift */,
 			);
 			path = AuthentificationViews;
 			sourceTree = "<group>";
@@ -313,6 +315,15 @@
 				2E8A617D2BE6101F0013BD1F /* SignInViewModel */,
 			);
 			path = AuthViewModels;
+			sourceTree = "<group>";
+		};
+		2ECB52812BE8C08B0088E115 /* OTP */ = {
+			isa = PBXGroup;
+			children = (
+				2E86C87D2BE261510093D70D /* OTPVerificationView.swift */,
+				2ECB52822BE8C0B50088E115 /* OTPModifier.swift */,
+			);
+			path = OTP;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -426,6 +437,7 @@
 				2E3D19972BE34FB00005CD68 /* ShelfView.swift in Sources */,
 				2E77583C2BE03AF10079EFFE /* PasswordFieldView.swift in Sources */,
 				2E38F2AA2BDE77AE00D76A03 /* SignUpView.swift in Sources */,
+				2ECB52832BE8C0B50088E115 /* OTPModifier.swift in Sources */,
 				2E3D198F2BE26D700005CD68 /* Review.swift in Sources */,
 				2E3D19A42BE353A60005CD68 /* BookReview.swift in Sources */,
 				2E8A617C2BE5F71E0013BD1F /* AuthService.swift in Sources */,
