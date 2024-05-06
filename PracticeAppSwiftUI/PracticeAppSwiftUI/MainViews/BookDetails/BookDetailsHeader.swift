@@ -14,6 +14,8 @@ struct BookDetailsHeader: View {
     
     var body: some View {
         ZStack {
+            Color("BackColor")
+                .ignoresSafeArea(.all)
             Image(book.imageName, bundle: nil)
                 .resizable()
                 .aspectRatio(contentMode: .fill)

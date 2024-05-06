@@ -16,6 +16,7 @@ struct BookDetails: View {
             BookDetailsHeader(book: book)
             BookDetailsBody(book: book)
         }
+        .background(Color("BackColor").ignoresSafeArea(.all))
     }
 }
 

@@ -18,7 +18,7 @@ struct PracticeAppSwiftUIApp: App {
         AppCheck.setAppCheckProviderFactory(providerFactory)
         #endif
         FirebaseApp.configure()
-        Store().addBook()
+//        Store().addBook()
     }
     
     var body: some Scene {
