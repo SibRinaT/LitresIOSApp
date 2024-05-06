@@ -28,13 +28,21 @@ struct ImageStorage {
             let metadata = StorageMetadata()
             metadata.contentType = "image/jpeg"
             
-            let uploadTask = riversRef.putData(imageData, metadata: metadata) { (metadata, error) in
-                guard let metadata = metadata else {
+            _ = riversRef.putData(imageData, metadata: metadata) { (metadata, error) in
+                guard let _ = metadata else {
                     continuation.resume(throwing: error ?? ImageStorageError.custom(text: "putData error"))
                     return
                 }
                 continuation.resume(with: .success(name))
             }
+        }
+    }
+    
+    func deleteImage(with name: String) {
+        let storageRef = storage.reference()
+        let riversRef = storageRef.child("images/\(name).jpg")
+        riversRef.delete { error in
+            print("delete image error: ", error?.localizedDescription ?? "")
         }
     }
     

@@ -34,18 +34,13 @@ struct Store {
     static let shared = Store()
     let db = Firestore.firestore()
     
-    func add(book: Book1, imageData: Data) {
-        Task {
-            do {
-                
-                try await ImageStorage.shared.upload(imageData: imageData,
-                                                               name: book.id)
-                let ref = try db.collection("books").addDocument(from: book)
-
-            } catch {
-                print("Error adding document: \(error)")
-            }
-        }
+    func add(book: Book1, imageData: Data) async throws {
+        try await ImageStorage.shared.upload(imageData: imageData, name: book.id)
+        try db.collection("books").addDocument(from: book)
+    }
+    
+    func delete(book: Book1) {
+        
     }
     
     func getBooks() async throws -> [Book1] {
@@ -53,9 +48,9 @@ struct Store {
             let snapshot = try await db.collection("books").getDocuments()
             var books = [Book1]()
             for document in snapshot.documents {
-                var book = try document.data(as: Book1.self)
-                book.set(id: document.documentID)
-                books.append(book)
+                if let book = try? document.data(as: Book1.self) {
+                    books.append(book)
+                }
             }
             return books
         } catch {

@@ -7,9 +7,21 @@
 
 import SwiftUI
 import PhotosUI
+import UIKit
+
+private enum UploadError: LocalizedError {
+    case custom(text: String)
+    var errorDescription: String? {
+        switch self {
+        case .custom(let text):
+            return text
+        }
+    }
+}
 
 struct AdminAddBookView: View {
-    
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+
     @State private var bookName = ""
     @State private var releaseYear = ""
     @State private var description = ""
@@ -19,7 +31,15 @@ struct AdminAddBookView: View {
     @State private var bookImageData: Data?
     
     @State private var showNoImageAlert = false
+    @State private var uploadError: UploadError?
     
+    var isShowingUploadError: Binding<Bool> {
+        Binding {
+            uploadError != nil
+        } set: { _ in
+            uploadError = nil
+        }
+    }
     
     var body: some View {
         Form {
@@ -43,16 +63,7 @@ struct AdminAddBookView: View {
             }
         }
         .onChange(of: imageItem) {
-            Task {
-                if let loadedData = try? await imageItem?.loadTransferable(type: Data.self) {
-                    bookImageData = loadedData
-                    if let uimg = UIImage(data: loadedData) {
-                        bookImage = Image(uiImage: uimg)
-                    }
-                } else {
-                    print("Failed to get image from library")
-                }
-            }
+            updateImage()
         }
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
@@ -68,6 +79,31 @@ struct AdminAddBookView: View {
         .alert("Выберите обложку для книги", isPresented: $showNoImageAlert) {
             Button("OK", role: .cancel) { }
         }
+        .alert(isPresented: isShowingUploadError, error: uploadError) { _ in
+        } message: { error in
+            Text(error.errorDescription ?? "")
+        }
+    }
+    
+    private func updateImage() {
+        Task {
+            if let loadedData = try? await imageItem?.loadTransferable(type: Data.self) {
+                DispatchQueue.main.async {
+                    if let uimg = UIImage(data: loadedData) {
+                        if let resized = uimg.resizeWithWidth(width: 400) {
+                            bookImage = Image(uiImage: resized)
+                            bookImageData = resized.jpegData(compressionQuality: 1)
+                        } else {
+                            bookImage = Image(uiImage: uimg)
+                            bookImageData = uimg.jpegData(compressionQuality: 0.2)
+                        }
+                    }
+                }
+
+            } else {
+                print("Failed to get image from library")
+            }
+        }
     }
     
     private func saveBook() {
@@ -79,7 +115,30 @@ struct AdminAddBookView: View {
                          name: bookName,
                          year: Int(releaseYear) ?? 0,
                          format: nil)
-        Store.shared.add(book: book, imageData: bookImageData)
+        Task {
+            do {
+                try await Store.shared.add(book: book, imageData: bookImageData)
+                DispatchQueue.main.async {
+                    self.presentationMode.wrappedValue.dismiss()
+                }
+            } catch {
+                uploadError = UploadError.custom(text: error.localizedDescription)
+            }
+        }
+    }
+}
+
+private extension UIImage {
+    func resizeWithWidth(width: CGFloat) -> UIImage? {
+        let imageView = UIImageView(frame: CGRect(origin: .zero, size: CGSize(width: width, height: CGFloat(ceil(width/size.width * size.height)))))
+        imageView.contentMode = .scaleAspectFit
+        imageView.image = self
+        UIGraphicsBeginImageContextWithOptions(imageView.bounds.size, false, scale)
+        guard let context = UIGraphicsGetCurrentContext() else { return nil }
+        imageView.layer.render(in: context)
+        guard let result = UIGraphicsGetImageFromCurrentImageContext() else { return nil }
+        UIGraphicsEndImageContext()
+        return result
     }
 }
 
