@@ -39,22 +39,22 @@ struct Hotel: Codable {
 }
 
 class Book: Identifiable, Equatable {
-    var id: String
-    var name: String
+    var id: String //
+    var name: String//
     var shortDesc: String
     var imageName: String
-    var author: User
+    var author: User//
     var shelf: Shelf
     var isLiked: Bool
-    var rating: Double
-    var releaseYear: Int
+    var rating: Double//
+    var releaseYear: Int//
     var bookType: BookType
     var audioBookDetails: AudioBookDetails?
     var textBookDetails: TextBookDetails?
     var tags: [Tag]
     var linkedBook: Book?
     var content: BookContent?
-    var description: String
+    var description: String//
     var publisher: String
     var creatingDate: Date
     var reviews: [Review]

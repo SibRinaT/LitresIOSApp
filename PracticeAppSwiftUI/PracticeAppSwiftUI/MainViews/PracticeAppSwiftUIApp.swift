@@ -18,7 +18,13 @@ struct PracticeAppSwiftUIApp: App {
         AppCheck.setAppCheckProviderFactory(providerFactory)
         #endif
         FirebaseApp.configure()
-        Store().addBook()
+//        Store().addBook()
+        Task {
+            do {
+                try await Store().getBooks()
+            }
+        }
+        
     }
     
     var body: some Scene {
