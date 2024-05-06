@@ -13,7 +13,12 @@ struct PracticeAppSwiftUIApp: App {
     @StateObject private var appRootManager = AppRootManager()
     
     init() {
+        #if DEBUG
+        let providerFactory = AppCheckDebugProviderFactory()
+        AppCheck.setAppCheckProviderFactory(providerFactory)
+        #endif
         FirebaseApp.configure()
+        Store().addBook()
     }
     
     var body: some Scene {
