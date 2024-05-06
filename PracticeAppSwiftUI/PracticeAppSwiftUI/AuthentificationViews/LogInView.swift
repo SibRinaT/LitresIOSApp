@@ -30,7 +30,7 @@ struct LogInView: View {
                     
                     InputFieldView(title: "email", placeholder: "book@gmail.com", text: $email)
                     
-                    PasswordFieldView(title: "пароль", placeholder: "book123", text: password)
+                    PasswordFieldView(title: "пароль", placeholder: "book123", text: $password)
                         .padding(-20)
                         .font(.custom("AmericanTypewriter", size: 14))
                         .multilineTextAlignment(.center)
