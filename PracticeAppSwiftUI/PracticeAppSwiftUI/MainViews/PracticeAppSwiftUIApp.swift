@@ -24,7 +24,6 @@ struct PracticeAppSwiftUIApp: App {
                 try await Store().getBooks()
             }
         }
-        
     }
     
     var body: some Scene {

@@ -52,6 +52,7 @@ struct BookReview: View {
 
             }
         }
+        .background(Color("BackColor").ignoresSafeArea(.all))
     }
 }
 

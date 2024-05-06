@@ -9,9 +9,9 @@ import SwiftUI
 
 struct PasswordFieldView: View {
     let title: String
-       let placeholder: String
-       @State private var isPasswordHidden = true
-       @State var text: String
+    let placeholder: String
+    @State private var isPasswordHidden = true
+    @Binding var text: String
 
        var body: some View {
            VStack(alignment: .leading) {
@@ -58,6 +58,6 @@ struct PasswordFieldView: View {
 #Preview {
     PasswordFieldView(title: "Пароль",
                    placeholder: "*******",
-                    text: ""
+                      text: .constant("")
                     )
 }

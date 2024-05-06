@@ -12,6 +12,10 @@ struct LogInView: View {
     @State private var email = ""
     @State private var password = ""
     
+    var isLoginEnabled: Bool {
+        return (!password.isEmpty && !email.isEmpty)
+       }
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -30,7 +34,7 @@ struct LogInView: View {
                     
                     InputFieldView(title: "email", placeholder: "book@gmail.com", text: $email)
                     
-                    PasswordFieldView(title: "пароль", placeholder: "book123", text: password)
+                    PasswordFieldView(title: "пароль", placeholder: "book123", text: $password)
                         .padding(-20)
                         .font(.custom("AmericanTypewriter", size: 14))
                         .multilineTextAlignment(.center)
@@ -58,13 +62,13 @@ struct LogInView: View {
                         Rectangle()
                             .frame(width: 224, height: 50)
                             .cornerRadius(16)
-                            .foregroundColor(Color("MainColor"))
-                            .overlay(
+                            .foregroundColor(isLoginEnabled ? Color("MainColor") : Color("InactiveColor").opacity(0.5))                            .overlay(
                                 Text("Вход")
                                     .foregroundColor(.white)
                                     .font(.custom("AmericanTypewriter", size: 20))
                             )
                     }
+                    .disabled(!isLoginEnabled)
                     
                 }
                 .foregroundColor(Color("MainColor"))
