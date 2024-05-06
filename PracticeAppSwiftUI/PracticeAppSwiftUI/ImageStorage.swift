@@ -15,11 +15,11 @@ struct ImageStorage {
     let storage = Storage.storage()
         
     @discardableResult
-    func upload(imageData: Data, name: String) async throws -> String {
+    func upload(imageData: Data, imageId: String) async throws -> String {
         try await withCheckedThrowingContinuation { continuation in
             
             let storageRef = storage.reference()
-            let riversRef = storageRef.child("images/\(name).jpg")
+            let riversRef = storageRef.child("images/\(imageId).jpg")
             
             let metadata = StorageMetadata()
             metadata.contentType = "image/jpeg"
@@ -29,16 +29,16 @@ struct ImageStorage {
                     continuation.resume(throwing: error ?? ApiError.custom(text: "putData error"))
                     return
                 }
-                continuation.resume(with: .success(name))
+                continuation.resume(with: .success(imageId))
             }
         }
     }
     
     @discardableResult
-    func deleteImage(with name: String) async throws -> Bool {
+    func deleteImageWith(id: String) async throws -> Bool {
         try await withCheckedThrowingContinuation { continuation in
             let storageRef = storage.reference()
-            let riversRef = storageRef.child("images/\(name).jpg")
+            let riversRef = storageRef.child("images/\(id).jpg")
             riversRef.delete { error in
                 if let error {
                     print("delete image error: ", error.localizedDescription)
@@ -50,10 +50,10 @@ struct ImageStorage {
         }
     }
     
-    func getDownloadUrlFor(imageName: String) async throws -> URL {
+    func getDownloadUrlFor(imageId: String) async throws -> URL {
         try await withCheckedThrowingContinuation { continuation in
             let storageRef = storage.reference()
-            let riversRef = storageRef.child("images/\(imageName).jpg")
+            let riversRef = storageRef.child("images/\(imageId).jpg")
             riversRef.downloadURL { result in
                 continuation.resume(with: result)
             }

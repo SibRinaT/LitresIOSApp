@@ -81,19 +81,15 @@ struct AdminEditBookView: View {
             case .add:
                 break
             case .edit(let book):
-                self.bookName = book.name
-                if let year = book.year {
-                    self.releaseYear = "\(year)"
-                }
-                self.description = book.description ?? ""
-                
+                bookName = book.name
+                if let year = book.year { releaseYear = "\(year)" }
+                description = book.description ?? ""
                 do {
-                    let imageUrl = try await ImageStorage.shared.getDownloadUrlFor(imageName: book.id)
+                    let imageUrl = try await ImageStorage.shared.getDownloadUrlFor(imageId: book.imageId)
                     let imageData = try await ImageStorage.shared.loadImageData(from: imageUrl)
                     if let uiImage = UIImage(data: imageData) {
                         bookImage = Image(uiImage: uiImage)
                     }
-                    
                 } catch {
                     
                 }
@@ -141,7 +137,6 @@ struct AdminEditBookView: View {
                         }
                     }
                 }
-                
             } else {
                 print("Failed to get image from library")
             }

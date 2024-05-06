@@ -8,37 +8,13 @@
 import Foundation
 import FirebaseFirestore
 
-struct BookFormat: Codable {
-    let name: String
-}
-
-struct Book1: Codable, Identifiable {
-    private(set) var id: String
-    private(set) var firestoreId: String?
-    let name: String
-    let year: Int?
-    let format: BookFormat?
-    let description: String?
-    
-    init(id: String, name: String, year: Int?, format: BookFormat?, description: String?) {
-        self.id = id
-        self.name = name
-        self.year = year
-        self.format = format
-        self.description = description
-    }
-    
-    mutating func set(firestoreId: String) {
-        self.firestoreId = firestoreId
-    }
-}
-
 struct Store {
     static let shared = Store()
     let db = Firestore.firestore()
     
     func add(book: Book1, imageData: Data) async throws {
-        try await ImageStorage.shared.upload(imageData: imageData, name: book.id)
+        try await ImageStorage.shared.upload(imageData: imageData,
+                                             imageId: book.imageId)
         try db.collection("books").addDocument(from: book)
     }
     
@@ -50,8 +26,9 @@ struct Store {
             print("Update book with new image")
             // available imageData means that image has been changed.
             // Removing old image, uploading new one
-            try await ImageStorage.shared.deleteImage(with: book.id)
-            try await ImageStorage.shared.upload(imageData: imageData, name: book.id)
+            try await ImageStorage.shared.deleteImageWith(id: book.imageId)
+            try await ImageStorage.shared.upload(imageData: imageData,
+                                                 imageId: book.imageId)
         } else {
             print("Update book without image update")
         }
@@ -62,7 +39,7 @@ struct Store {
     func delete(book: Book1) async throws {
         if let firestoreId = book.firestoreId {
             try await db.collection("books").document(firestoreId).delete()
-            try await ImageStorage.shared.deleteImage(with: book.id)
+            try await ImageStorage.shared.deleteImageWith(id: book.imageId)
         } else {
             print("No firestore Id on book struct!")
         }
