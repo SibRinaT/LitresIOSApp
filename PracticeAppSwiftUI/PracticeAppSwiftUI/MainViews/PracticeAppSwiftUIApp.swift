@@ -17,6 +17,7 @@ struct PracticeAppSwiftUIApp: App {
         let providerFactory = AppCheckDebugProviderFactory()
         AppCheck.setAppCheckProviderFactory(providerFactory)
         #endif
+        FirebaseApp.configure()
     }
     
     var body: some Scene {
