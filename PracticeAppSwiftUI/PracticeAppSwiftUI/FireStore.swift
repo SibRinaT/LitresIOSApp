@@ -12,8 +12,9 @@ struct BookFormat: Codable {
     let name: String
 }
 
-struct Book1: Codable {
+struct Book1: Codable, Identifiable {
     private(set) var id: String
+    private(set) var firestoreId: String?
     let name: String
     let year: Int?
     let format: BookFormat?
@@ -25,8 +26,8 @@ struct Book1: Codable {
         self.format = format
     }
     
-    mutating func set(id: String) {
-        self.id = id
+    mutating func set(firestoreId: String) {
+        self.firestoreId = firestoreId
     }
 }
 
@@ -40,7 +41,11 @@ struct Store {
     }
     
     func delete(book: Book1) {
-        
+        if let firestoreId = book.firestoreId {
+            db.collection("books").document(firestoreId).delete()
+        } else {
+            print("No firestore Id on book struct!")
+        }
     }
     
     func getBooks() async throws -> [Book1] {
@@ -48,7 +53,8 @@ struct Store {
             let snapshot = try await db.collection("books").getDocuments()
             var books = [Book1]()
             for document in snapshot.documents {
-                if let book = try? document.data(as: Book1.self) {
+                if var book = try? document.data(as: Book1.self) {
+                    book.set(firestoreId: document.documentID)
                     books.append(book)
                 }
             }

@@ -11,9 +11,13 @@ struct AdminBooksList: View {
     @State var books = [Book1]()
     
     var body: some View {
-        List(books, id: \.id) { book in
-            Text(book.name)
+        List {
+            ForEach(books) { book in
+                Text(book.name)
+            }
+            .onDelete(perform: deleteBooks)
         }
+        
         .navigationTitle("Books")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
@@ -30,6 +34,12 @@ struct AdminBooksList: View {
             } catch {
                 print(error)
             }
+        }
+    }
+    
+    private func deleteBooks(at offsets: IndexSet) {
+        for i in offsets {
+            Store.shared.delete(book: books[i])
         }
     }
 }
