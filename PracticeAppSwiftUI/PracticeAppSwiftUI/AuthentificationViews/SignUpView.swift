@@ -17,6 +17,10 @@ struct SignUpView: View {
     @State private var isPasswordHidden = true
     @State private var showingAlert = false
     
+    var isRegistrationEnabled: Bool {
+        return !login.isEmpty && !password.isEmpty && !email.isEmpty
+       }
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -59,14 +63,15 @@ struct SignUpView: View {
                     Button(action: { signUpWithEmail()} ) {
                         Rectangle()
                             .frame(width: 224, height: 50)
+                            .foregroundColor(isRegistrationEnabled ? Color("MainColor") : Color("InactiveColor").opacity(0.5))
                             .cornerRadius(16)
-                            .foregroundColor(Color("MainColor"))
                             .overlay(
                                 Text("Регистрация")
                                     .foregroundColor(.white)
                                     .font(.custom("AmericanTypewriter", size: 20))
                             )
                     }
+                    .disabled(!isRegistrationEnabled)
                 }
                 .foregroundColor(Color("MainColor"))
                 .font(.custom("AmericanTypewriter", size: 36))
@@ -88,12 +93,6 @@ struct SignUpView: View {
 
         }
     }
-    
-//    func disableWithOpacity(_ condition: Bool ) -> some View  {
-//        self
-//            .disabled(condition)
-//            .opacity(condition ? 0.6 : 1)
-//    }
 }
 
 
