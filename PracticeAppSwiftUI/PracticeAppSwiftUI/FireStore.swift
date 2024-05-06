@@ -13,23 +13,35 @@ struct BookFormat: Codable {
 }
 
 struct Book1: Codable {
+    private(set) var id: String
     let name: String
-    let year: Int
+    let year: Int?
     let format: BookFormat?
+    
+    init(id: String, name: String, year: Int?, format: BookFormat?) {
+        self.id = id
+        self.name = name
+        self.year = year
+        self.format = format
+    }
+    
+    mutating func set(id: String) {
+        self.id = id
+    }
 }
 
 struct Store {
+    static let shared = Store()
     let db = Firestore.firestore()
     
-    func addBook() {
+    func add(book: Book1, imageData: Data) {
         Task {
             do {
-                let ref = try db.collection("books").addDocument(from: Book1(name: "TEST", year: 9999, format: BookFormat(name: "")))
-                //                let ref = try await db.collection("books").addDocument(data: [
-                //                    "name": "A secret book",
-                //                    "year": 1987
-                //                ])
-                print("Document added with ID: \(ref.documentID)")
+                
+                try await ImageStorage.shared.upload(imageData: imageData,
+                                                               name: book.id)
+                let ref = try db.collection("books").addDocument(from: book)
+
             } catch {
                 print("Error adding document: \(error)")
             }
@@ -39,12 +51,13 @@ struct Store {
     func getBooks() async throws -> [Book1] {
         do {
             let snapshot = try await db.collection("books").getDocuments()
+            var books = [Book1]()
             for document in snapshot.documents {
-                let book = try document.data(as: Book1.self)
-                print(book)
-                print("\(document.documentID) => \(document.data())")
+                var book = try document.data(as: Book1.self)
+                book.set(id: document.documentID)
+                books.append(book)
             }
-            return []
+            return books
         } catch {
             print("Error getting documents: \(error)")
             return []

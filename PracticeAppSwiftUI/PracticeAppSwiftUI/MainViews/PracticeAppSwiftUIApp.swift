@@ -21,7 +21,7 @@ struct PracticeAppSwiftUIApp: App {
 //        Store().addBook()
         Task {
             do {
-                try await Store().getBooks()
+//                try await Store().getBooks()
             }
         }
     }
