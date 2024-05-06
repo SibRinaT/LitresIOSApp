@@ -47,7 +47,7 @@
 		ACB46B3A2BE8BD53009A7ABA /* AdminOptionViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB46B392BE8BD53009A7ABA /* AdminOptionViews.swift */; };
 		ACB46B3C2BE8BE59009A7ABA /* AdminBooksList.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB46B3B2BE8BE59009A7ABA /* AdminBooksList.swift */; };
 		ACB46B3E2BE8C53F009A7ABA /* ImageStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB46B3D2BE8C53F009A7ABA /* ImageStorage.swift */; };
-		ACB46B402BE8CB43009A7ABA /* AdminAddBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB46B3F2BE8CB43009A7ABA /* AdminAddBookView.swift */; };
+		ACB46B402BE8CB43009A7ABA /* AdminEditBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB46B3F2BE8CB43009A7ABA /* AdminEditBookView.swift */; };
 		ACB46B432BE8EF28009A7ABA /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = ACB46B422BE8EF28009A7ABA /* FirebaseAnalytics */; };
 		ACB46B452BE8EF28009A7ABA /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = ACB46B442BE8EF28009A7ABA /* FirebaseAnalyticsOnDeviceConversion */; };
 		ACB46B472BE8EF28009A7ABA /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = ACB46B462BE8EF28009A7ABA /* FirebaseAnalyticsSwift */; };
@@ -75,6 +75,7 @@
 		ACB46B732BE8EF28009A7ABA /* FirebaseRemoteConfigSwift in Frameworks */ = {isa = PBXBuildFile; productRef = ACB46B722BE8EF28009A7ABA /* FirebaseRemoteConfigSwift */; };
 		ACB46B752BE8EF28009A7ABA /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = ACB46B742BE8EF28009A7ABA /* FirebaseStorage */; };
 		ACB46B772BE8EF28009A7ABA /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = ACB46B762BE8EF28009A7ABA /* FirebaseStorageCombine-Community */; };
+		ACB46B792BE8F51B009A7ABA /* ApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB46B782BE8F51B009A7ABA /* ApiError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -120,7 +121,8 @@
 		ACB46B392BE8BD53009A7ABA /* AdminOptionViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminOptionViews.swift; sourceTree = "<group>"; };
 		ACB46B3B2BE8BE59009A7ABA /* AdminBooksList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminBooksList.swift; sourceTree = "<group>"; };
 		ACB46B3D2BE8C53F009A7ABA /* ImageStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageStorage.swift; sourceTree = "<group>"; };
-		ACB46B3F2BE8CB43009A7ABA /* AdminAddBookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminAddBookView.swift; sourceTree = "<group>"; };
+		ACB46B3F2BE8CB43009A7ABA /* AdminEditBookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminEditBookView.swift; sourceTree = "<group>"; };
+		ACB46B782BE8F51B009A7ABA /* ApiError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,6 +194,7 @@
 				2E38F2AD2BDE77B100D76A03 /* Preview Content */,
 				ACB46AC82BE79F55009A7ABA /* FireStore.swift */,
 				ACB46B3D2BE8C53F009A7ABA /* ImageStorage.swift */,
+				ACB46B782BE8F51B009A7ABA /* ApiError.swift */,
 			);
 			path = PracticeAppSwiftUI;
 			sourceTree = "<group>";
@@ -341,7 +344,7 @@
 			children = (
 				ACB46B392BE8BD53009A7ABA /* AdminOptionViews.swift */,
 				ACB46B3B2BE8BE59009A7ABA /* AdminBooksList.swift */,
-				ACB46B3F2BE8CB43009A7ABA /* AdminAddBookView.swift */,
+				ACB46B3F2BE8CB43009A7ABA /* AdminEditBookView.swift */,
 			);
 			path = AdminViews;
 			sourceTree = "<group>";
@@ -450,7 +453,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2E3D198B2BE26C9A0005CD68 /* Book.swift in Sources */,
-				ACB46B402BE8CB43009A7ABA /* AdminAddBookView.swift in Sources */,
+				ACB46B402BE8CB43009A7ABA /* AdminEditBookView.swift in Sources */,
 				2E86C87C2BE231440093D70D /* LogInView.swift in Sources */,
 				2E3D19AB2BE354EB0005CD68 /* SwitchBookTypeView.swift in Sources */,
 				2E3D19882BE269430005CD68 /* MainView.swift in Sources */,
@@ -460,6 +463,7 @@
 				2E38F2AA2BDE77AE00D76A03 /* SignUpView.swift in Sources */,
 				2ECB52832BE8C0B50088E115 /* OTPModifier.swift in Sources */,
 				2E3D198F2BE26D700005CD68 /* Review.swift in Sources */,
+				ACB46B792BE8F51B009A7ABA /* ApiError.swift in Sources */,
 				2E3D19A42BE353A60005CD68 /* BookReview.swift in Sources */,
 				2E8A617C2BE5F71E0013BD1F /* AuthService.swift in Sources */,
 				ACB46B3C2BE8BE59009A7ABA /* AdminBooksList.swift in Sources */,

@@ -13,7 +13,9 @@ struct AdminBooksList: View {
     var body: some View {
         List {
             ForEach(books) { book in
-                Text(book.name)
+                NavigationLink(destination: AdminEditBookView(viewType: .edit(book: book))) {
+                    Text(book.name)
+                }
             }
             .onDelete(perform: deleteBooks)
         }
@@ -22,7 +24,7 @@ struct AdminBooksList: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
-                NavigationLink(destination: AdminAddBookView()) {
+                NavigationLink(destination: AdminEditBookView(viewType: .add)) {
                     Text("+ книга")
                 }
 
@@ -38,9 +40,12 @@ struct AdminBooksList: View {
     }
     
     private func deleteBooks(at offsets: IndexSet) {
-        for i in offsets {
-            Store.shared.delete(book: books[i])
+        Task {
+            for i in offsets {
+                try await Store.shared.delete(book: books[i])
+            }
         }
+
     }
 }
 

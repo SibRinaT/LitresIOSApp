@@ -18,12 +18,14 @@ struct Book1: Codable, Identifiable {
     let name: String
     let year: Int?
     let format: BookFormat?
+    let description: String?
     
-    init(id: String, name: String, year: Int?, format: BookFormat?) {
+    init(id: String, name: String, year: Int?, format: BookFormat?, description: String?) {
         self.id = id
         self.name = name
         self.year = year
         self.format = format
+        self.description = description
     }
     
     mutating func set(firestoreId: String) {
@@ -40,9 +42,27 @@ struct Store {
         try db.collection("books").addDocument(from: book)
     }
     
-    func delete(book: Book1) {
+    func update(book: Book1, imageData: Data?) async throws {
+        guard let firestoreId = book.firestoreId else {
+            throw ApiError.custom(text: "No firestoreId assigned to the book")
+        }
+        if let imageData {
+            print("Update book with new image")
+            // available imageData means that image has been changed.
+            // Removing old image, uploading new one
+            try await ImageStorage.shared.deleteImage(with: book.id)
+            try await ImageStorage.shared.upload(imageData: imageData, name: book.id)
+        } else {
+            print("Update book without image update")
+        }
+        let ref = db.collection("books").document(firestoreId)
+        try await ref.updateData(book.asDictionary())
+    }
+    
+    func delete(book: Book1) async throws {
         if let firestoreId = book.firestoreId {
-            db.collection("books").document(firestoreId).delete()
+            try await db.collection("books").document(firestoreId).delete()
+            try await ImageStorage.shared.deleteImage(with: book.id)
         } else {
             print("No firestore Id on book struct!")
         }
@@ -64,4 +84,14 @@ struct Store {
             return []
         }
     }
+}
+
+private extension Encodable {
+  func asDictionary() throws -> [String: Any] {
+    let data = try JSONEncoder().encode(self)
+    guard let dictionary = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any] else {
+      throw NSError()
+    }
+    return dictionary
+  }
 }

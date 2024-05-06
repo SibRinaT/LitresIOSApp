@@ -19,9 +19,14 @@ private enum UploadError: LocalizedError {
     }
 }
 
-struct AdminAddBookView: View {
+struct AdminEditBookView: View {
+    enum ViewType {
+        case add
+        case edit(book: Book1)
+    }
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-
+    
+    let viewType: ViewType
     @State private var bookName = ""
     @State private var releaseYear = ""
     @State private var description = ""
@@ -38,6 +43,15 @@ struct AdminAddBookView: View {
             uploadError != nil
         } set: { _ in
             uploadError = nil
+        }
+    }
+    
+    var title: String {
+        switch viewType {
+        case .add:
+            "Добавить книгу"
+        case .edit:
+            "Изменить книгу"
         }
     }
     
@@ -62,20 +76,48 @@ struct AdminAddBookView: View {
                     .frame(width: 300, height: 300)
             }
         }
+        .task {
+            switch viewType {
+            case .add:
+                break
+            case .edit(let book):
+                self.bookName = book.name
+                if let year = book.year {
+                    self.releaseYear = "\(year)"
+                }
+                self.description = book.description ?? ""
+                
+                do {
+                    let imageUrl = try await ImageStorage.shared.getDownloadUrlFor(imageName: book.id)
+                    let imageData = try await ImageStorage.shared.loadImageData(from: imageUrl)
+                    if let uiImage = UIImage(data: imageData) {
+                        bookImage = Image(uiImage: uiImage)
+                    }
+                    
+                } catch {
+                    
+                }
+            }
+        }
         .onChange(of: imageItem) {
             updateImage()
         }
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
-                    saveBook()
+                    switch viewType {
+                    case .add:
+                        createBook()
+                    case .edit(let book):
+                        updateBook(oldBook: book)
+                    }
                 } label: {
                     Text("Готово")
                 }
                 
             }
         }
-        .navigationTitle("Добавить книгу")
+        .navigationTitle(title)
         .alert("Выберите обложку для книги", isPresented: $showNoImageAlert) {
             Button("OK", role: .cancel) { }
         }
@@ -99,22 +141,19 @@ struct AdminAddBookView: View {
                         }
                     }
                 }
-
+                
             } else {
                 print("Failed to get image from library")
             }
         }
     }
     
-    private func saveBook() {
+    private func createBook() {
         guard let bookImageData else {
             showNoImageAlert = true
             return
         }
-        let book = Book1(id: UUID().uuidString,
-                         name: bookName,
-                         year: Int(releaseYear) ?? 0,
-                         format: nil)
+        let book = buildBook(bookId: UUID().uuidString, firestoreId: nil)
         Task {
             do {
                 try await Store.shared.add(book: book, imageData: bookImageData)
@@ -125,6 +164,33 @@ struct AdminAddBookView: View {
                 uploadError = UploadError.custom(text: error.localizedDescription)
             }
         }
+    }
+    
+    private func updateBook(oldBook: Book1) {
+        Task {
+            let book = buildBook(bookId: oldBook.id,
+                                 firestoreId: oldBook.firestoreId)
+            do {
+                try await Store.shared.update(book: book, imageData: bookImageData)
+                DispatchQueue.main.async {
+                    self.presentationMode.wrappedValue.dismiss()
+                }
+            } catch {
+                uploadError = UploadError.custom(text: error.localizedDescription)
+            }
+        }
+    }
+    
+    private func buildBook(bookId: String, firestoreId: String?) -> Book1 {
+        var book = Book1(id: bookId,
+                         name: bookName,
+                         year: Int(releaseYear),
+                         format: nil,
+                         description: description)
+        if let firestoreId {
+            book.set(firestoreId: firestoreId)
+        }
+        return book
     }
 }
 
@@ -143,5 +209,5 @@ private extension UIImage {
 }
 
 #Preview {
-    AdminAddBookView()
+    AdminEditBookView(viewType: .add)
 }

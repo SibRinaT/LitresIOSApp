@@ -11,10 +11,6 @@ import FirebaseStorage
 
 struct ImageStorage {
     
-    enum ImageStorageError: Error {
-        case custom(text: String)
-    }
-    
     static let shared = ImageStorage()
     let storage = Storage.storage()
         
@@ -30,7 +26,7 @@ struct ImageStorage {
             
             _ = riversRef.putData(imageData, metadata: metadata) { (metadata, error) in
                 guard let _ = metadata else {
-                    continuation.resume(throwing: error ?? ImageStorageError.custom(text: "putData error"))
+                    continuation.resume(throwing: error ?? ApiError.custom(text: "putData error"))
                     return
                 }
                 continuation.resume(with: .success(name))
@@ -38,11 +34,19 @@ struct ImageStorage {
         }
     }
     
-    func deleteImage(with name: String) {
-        let storageRef = storage.reference()
-        let riversRef = storageRef.child("images/\(name).jpg")
-        riversRef.delete { error in
-            print("delete image error: ", error?.localizedDescription ?? "")
+    @discardableResult
+    func deleteImage(with name: String) async throws -> Bool {
+        try await withCheckedThrowingContinuation { continuation in
+            let storageRef = storage.reference()
+            let riversRef = storageRef.child("images/\(name).jpg")
+            riversRef.delete { error in
+                if let error {
+                    print("delete image error: ", error.localizedDescription)
+                    continuation.resume(throwing: error)
+                } else {
+                    continuation.resume(with: .success(true))
+                }
+            }
         }
     }
     
@@ -54,5 +58,10 @@ struct ImageStorage {
                 continuation.resume(with: result)
             }
         }
+    }
+    
+    func loadImageData(from url: URL) async throws -> Data {
+        let (data, _) = try await URLSession.shared.data(from: url)
+        return data
     }
 }
