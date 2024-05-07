@@ -9,7 +9,8 @@ import SwiftUI
 
 struct AddNewFeedbackView: View {
     @State private var reviewText = ""
-    
+    @State private var rating = 0
+
     var body: some View {
         ZStack {
             Color("BackColor")
@@ -43,11 +44,20 @@ struct AddNewFeedbackView: View {
                                         .font(.custom("AmericanTypewriter", size: 18))
                                         .foregroundColor(.white)
                                     
-                                    //code for rating
+                                    ForEach(1..<6) { index in
+                                                        Image(systemName: index <= rating ? "star.fill" : "star")
+                                                            .resizable()
+                                                            .aspectRatio(contentMode: .fit)
+                                                            .frame(width: 15, height: 15)
+                                                            .foregroundColor(.yellow)
+                                                            .onTapGesture {
+                                                                rating = index
+                                                            }
+                                                    }
                                 }
                                 TextEditor(text: $reviewText)
-                                    .cornerRadius(14) // закругляем углы
-                                    .frame(height: 180) // минимальная высота для большего текста
+                                    .cornerRadius(14)
+                                    .frame(height: 180)
                                     .padding()
                                     .padding()
                                     .padding(.horizontal, 30)
@@ -61,17 +71,25 @@ struct AddNewFeedbackView: View {
                                     Text("")
                                         .padding()
                                 }
+                                if rating == 0 {
+                                               Text("Пожалуйста, выставьте рейтинг")
+                                                   .foregroundColor(.white)
+                                                   .padding()
+                                           } else {
+                                               Text("")
+                                                   .padding()
+                                           }
                         
                                 
                                 Text("\(reviewText.count)/150 символов")
-                                    .foregroundColor(reviewText.count > 150 ? .red : .white) // изменяем цвет текста, если превышен лимит символов
+                                    .foregroundColor(reviewText.count > 150 ? .red : .white)
                                               .padding(.bottom, 20)
                                 
                                 Button(action: {}) {
                                     Rectangle()
                                         .cornerRadius(14)
                                         .frame(width: 200 ,height: 70)
-                                        .foregroundColor(reviewText.count < 20 ? .black : .gray) // изменяем цвет текста, если превышен лимит символов
+                                        .foregroundColor(reviewText.count < 20 ? .black : .gray)
                                         .overlay(
                                             Text("Отправить")
                                                 .font(.custom("AmericanTypewriter", size: 18))
