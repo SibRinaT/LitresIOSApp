@@ -41,6 +41,14 @@ struct LogInView: View {
 
                     
                     VStack {
+                        VStack {
+                            Text("Забыли пароль?")
+                                .foregroundColor(.white)
+                            Text("Восстановите доступ!")
+                                .foregroundColor(Color("MainColor"))
+                        }
+                        .padding(.bottom, 30)
+
                         Button(action: {
                             appRootManager.currentRoot = .signUp
                         }) {
