@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Firebase
+import FirebaseAppCheck
 
 @main
 struct PracticeAppSwiftUIApp: App {
@@ -18,7 +19,6 @@ struct PracticeAppSwiftUIApp: App {
         AppCheck.setAppCheckProviderFactory(providerFactory)
         #endif
         FirebaseApp.configure()
-//        Store().addBook()
     }
     
     var body: some Scene {

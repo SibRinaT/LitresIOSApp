@@ -38,23 +38,52 @@ struct Hotel: Codable {
     }
 }
 
+struct BookFormat: Codable {
+    let name: String
+}
+
+struct Book1: Codable, Identifiable {
+    private(set) var id: String
+    private(set) var firestoreId: String?
+    let name: String
+    let year: Int?
+    let format: BookFormat?
+    let description: String?
+    
+    var imageId: String {
+        id
+    }
+    
+    init(id: String, name: String, year: Int?, format: BookFormat?, description: String?) {
+        self.id = id
+        self.name = name
+        self.year = year
+        self.format = format
+        self.description = description
+    }
+    
+    mutating func set(firestoreId: String) {
+        self.firestoreId = firestoreId
+    }
+}
+
 class Book: Identifiable, Equatable {
-    var id: String
-    var name: String
+    var id: String //
+    var name: String//
     var shortDesc: String
     var imageName: String
-    var author: User
+    var author: User//
     var shelf: Shelf
     var isLiked: Bool
-    var rating: Double
-    var releaseYear: Int
+    var rating: Double//
+    var releaseYear: Int//
     var bookType: BookType
     var audioBookDetails: AudioBookDetails?
     var textBookDetails: TextBookDetails?
     var tags: [Tag]
     var linkedBook: Book?
     var content: BookContent?
-    var description: String
+    var description: String//
     var publisher: String
     var creatingDate: Date
     var reviews: [Review]
