@@ -90,53 +90,6 @@ struct Book1: Codable, Identifiable, Hashable {
     }
 }
 
-class Book: Identifiable, Equatable {
-    var id: String //
-    var name: String//
-    var shortDesc: String
-    var imageName: String
-    var author: User//
-    var shelf: Shelf
-    var isLiked: Bool
-    var rating: Double//
-    var releaseYear: Int//
-    var bookType: BookType
-    var audioBookDetails: AudioBookDetails?
-    var textBookDetails: TextBookDetails?
-    var tags: [Tag]
-    var linkedBook: Book?
-    var content: BookContent?
-    var description: String//
-    var publisher: String
-    var creatingDate: Date
-    var reviews: [Review]
-    
-    static func == (lhs: Book, rhs: Book) -> Bool {
-        lhs.id == rhs.id
-    }
-    
-    init(id: String, name: String, shortDesc: String = "", imageName: String, author: User, shelf: Shelf, isLiked: Bool, rating: Double, releaseYear: Int, bookType: BookType, audioBookDetails: AudioBookDetails? = nil, textBookDetails: TextBookDetails? = nil, tags: [Tag], linkedBook: Book? = nil, content: BookContent?, description: String, publisher: String, creatingDate: Date, reviews: [Review]) {
-        self.id = id
-        self.name = name
-        self.shortDesc = shortDesc
-        self.imageName = imageName
-        self.author = author
-        self.shelf = shelf
-        self.isLiked = isLiked
-        self.rating = rating
-        self.releaseYear = releaseYear
-        self.bookType = bookType
-        self.audioBookDetails = audioBookDetails
-        self.textBookDetails = textBookDetails
-        self.tags = tags
-        self.linkedBook = linkedBook
-        self.content = content
-        self.description = description
-        self.publisher = publisher
-        self.creatingDate = creatingDate
-        self.reviews = reviews
-    }
-}
 
 class BookContent {
     var fakeBookTextContent: String?

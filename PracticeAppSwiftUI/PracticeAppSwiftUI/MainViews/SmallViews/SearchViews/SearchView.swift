@@ -55,6 +55,6 @@ class SearchViewModel: LoadableObject {
 
 #Preview {
     NavigationStack {
-        SearchView(viewModel: SearchViewModel(tagID: MockData.getBook().tags.randomElement()!.id))
+        
     }
 }

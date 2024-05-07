@@ -58,6 +58,6 @@ struct BookReview: View {
 
 #Preview {
     ScrollView {
-        BookReview(review: MockData.getBook().reviews.randomElement()!)
+        
     }
 }

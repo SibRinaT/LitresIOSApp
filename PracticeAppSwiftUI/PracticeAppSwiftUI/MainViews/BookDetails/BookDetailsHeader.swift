@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct BookDetailsHeader: View {
-    var book: Book
+    var book: Book1
     var textBookContent: String = "Оглавление"
 
     
@@ -16,15 +16,18 @@ struct BookDetailsHeader: View {
         ZStack {
             Color("BackColor")
                 .ignoresSafeArea(.all)
-            Image(book.imageName, bundle: nil)
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-
-                .visualEffect { content, geometryProxy in
-                    content
-                        .blur(radius: 20)
-                        .brightness(-0.3)
-                }
+            
+            AsyncImage(url: URL(string: book.imageUrl ?? "")) { image in
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .visualEffect { content, geometryProxy in
+                        content
+                            .blur(radius: 20)
+                            .brightness(-0.3)
+                    }
+            } placeholder: {}
+            
             HStack {
                 VStack {
                     HStack {
@@ -36,17 +39,21 @@ struct BookDetailsHeader: View {
                         
                         VStack {
                             Text(String(format: "%.1f", book.rating))
-                            Text("\(book.reviews.count)")
-                                .font(.system(size: 14))
-                                .foregroundColor(Color("MainColor"))
+//                            Text("\(book.reviews.count)")
+//                                .font(.system(size: 14))
+//                                .foregroundColor(Color("MainColor"))
                         }
                         .font(.callout)
 
                         .foregroundColor(.white)
-                        Image(book.imageName, bundle: nil)
-                            .resizable()
-                            .aspectRatio(1, contentMode: .fit)
-                            .frame(height: 200)
+                        
+                        AsyncImage(url: URL(string: book.imageUrl ?? "")) { image in
+                            image
+                                .resizable()
+                                .aspectRatio(1, contentMode: .fit)
+                                .frame(height: 200)
+                        } placeholder: {}
+
                         Button(action: {
                             
                         }) {
@@ -66,7 +73,7 @@ struct BookDetailsHeader: View {
                             Text(book.name)
                                 .bold()
                                 .font(.system(size: 18))
-                            switch book.bookType {
+                            switch BookType(rawValue: book.bookType) {
                             case .text:
                                 Capsule()
                                     .foregroundColor(Color("MainColor"))
@@ -83,6 +90,8 @@ struct BookDetailsHeader: View {
                                         Text("Аудио")
                                             .font(.callout)
                                     }
+                            case .none:
+                                Color.white
                             }
                         }
                         .foregroundColor(.white)
@@ -91,31 +100,31 @@ struct BookDetailsHeader: View {
                             Button(action: {
                                 
                             }) {
-                                Text(book.author.name)
+                                Text(book.authorName ?? "")
                                     .foregroundColor(Color("MainColor"))
                                 Image(systemName: "chevron.right")
                                     .foregroundColor(Color("MainColor"))
                             }
                             .font(.callout)
                         }
-                        if let authorName = book.audioBookDetails?.audioAuthor, book.bookType == .audio {
-                            HStack {
-                                Text("Is reading")
-                                    .font(.callout)
-                                    .foregroundColor(.white)
-                                Button(action: {
-                                    
-                                }) {
-                                    HStack {
-                                        Text(authorName)
-                                        Image(systemName: "chevron.right")
-                                    }
-                                    .foregroundColor(Color("MainColor"))
-                                    .foregroundColor(.white)
-                                }
-                                .font(.callout)
-                            }
-                        }
+//                        if let authorName = book.audioBookDetails?.audioAuthor, book.bookType == .audio {
+//                            HStack {
+//                                Text("Is reading")
+//                                    .font(.callout)
+//                                    .foregroundColor(.white)
+//                                Button(action: {
+//                                    
+//                                }) {
+//                                    HStack {
+//                                        Text(authorName)
+//                                        Image(systemName: "chevron.right")
+//                                    }
+//                                    .foregroundColor(Color("MainColor"))
+//                                    .foregroundColor(.white)
+//                                }
+//                                .font(.callout)
+//                            }
+//                        }
                     }
                 }
             }
@@ -123,6 +132,6 @@ struct BookDetailsHeader: View {
     }
 }
 
-#Preview {
-    BookDetailsHeader(book: MockData.getBook())
-}
+//#Preview {
+//    BookDetailsHeader(book: MockData.getBook())
+//}

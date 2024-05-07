@@ -11,7 +11,7 @@ import Foundation
 import SwiftUI
 
 struct BookDetailsBody: View {
-    var book: Book
+    var book: Book1
     @State var isExpanded = false
     @State private var selectedTab = "One"
     
@@ -22,18 +22,20 @@ struct BookDetailsBody: View {
             VStack(alignment: .leading) {
                 HStack {
                     VStack(alignment: .leading) {
-                        Text(book.bookType.rawValue)
-                        Text("Release date: \(book.releaseYear)")
-                        switch book.bookType {
-                        case .text:
-                            if let pages = book.textBookDetails?.pages {
-                                Text("Pages: \(pages)")
-                            }
-                        case .audio:
-                            if let len = book.audioBookDetails?.length {
-                                Text("Length: \(len)")
-                            }
-                        }
+                        Text(book.bookType)
+                        Text("Release date: \(book.year)")
+//                        switch BookType(rawValue: book.bookType) {
+//                        case .text:
+//                            if let pages = book.textBookDetails?.pages {
+//                                Text("Pages: \(pages)")
+//                            }
+//                        case .audio:
+//                            if let len = book.audioBookDetails?.length {
+//                                Text("Length: \(len)")
+//                            }
+//                        case .none:
+//                            Color.white
+//                        }
                     }
                     Spacer()
 //                    if let linkedBook = book.linkedBook {
@@ -41,25 +43,25 @@ struct BookDetailsBody: View {
 //                    }
                 }
                 .padding(.vertical)
-                TagsView(tags: book.tags)
+//                TagsView(tags: book.tags)
                 DisclosureGroup(
                     isExpanded: $isExpanded,
-                    content: { Text(book.description)},
+                    content: { Text(book.description ?? "") },
                     label: { Text("Описание книги \(book.name)") }
                 )
                 .foregroundColor(.black)
-                Text("\nИздатель: \(book.publisher)")
-                Text("Дата выхода на ЧитайBook: \(book.creatingDate.formatted(date: .long, time: .omitted))")
+//                Text("\nИздатель: \(book.publisher)")
+//                Text("Дата выхода на ЧитайBook: \(book.creatingDate.formatted(date: .long, time: .omitted))")
                 Spacer(minLength: 20)
-                if !book.reviews.isEmpty {
-                    Text(book.reviews.count == 1 ? "Отзыв" : "Отзывы")
-                        .font(.largeTitle)
-                        .bold()
-                }
-                ForEach(book.reviews) { review in
-                    BookReview(review: review)
-                        .padding(EdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0))
-                }
+//                if !book.reviews.isEmpty {
+//                    Text(book.reviews.count == 1 ? "Отзыв" : "Отзывы")
+//                        .font(.largeTitle)
+//                        .bold()
+//                }
+//                ForEach(book.reviews) { review in
+//                    BookReview(review: review)
+//                        .padding(EdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0))
+//                }
             }
             //        NavigationView {
             //                       NavigationLink(destination: PlaysoundView()) {

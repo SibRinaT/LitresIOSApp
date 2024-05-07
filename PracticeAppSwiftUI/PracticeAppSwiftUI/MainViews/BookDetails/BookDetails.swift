@@ -13,7 +13,7 @@ struct BookDetails: View {
     
     var body: some View {
         ScrollView {
-//            BookDetailsHeader(book: book)
+            BookDetailsHeader(book: book)
 //            BookDetailsBody(book: book)
         }
         .background(Color("BackColor").ignoresSafeArea(.all))

@@ -43,6 +43,6 @@ struct TagsView: View {
 
 #Preview {
     NavigationStack {
-        TagsView(tags: MockData.getBook().tags)
+        
     }
 }
