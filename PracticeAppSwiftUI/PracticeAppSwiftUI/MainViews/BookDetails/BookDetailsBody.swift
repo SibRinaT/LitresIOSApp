@@ -11,7 +11,7 @@ import Foundation
 import SwiftUI
 
 struct BookDetailsBody: View {
-    var book: Book1
+    var book: Book
     @State var isExpanded = false
     @State private var selectedTab = "One"
     

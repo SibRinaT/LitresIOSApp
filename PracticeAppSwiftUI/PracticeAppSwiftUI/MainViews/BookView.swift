@@ -9,7 +9,7 @@ import SwiftUI
 import Foundation
 
 struct BookView: View {
-    var book: Book1
+    var book: Book
     
     
     var body: some View {

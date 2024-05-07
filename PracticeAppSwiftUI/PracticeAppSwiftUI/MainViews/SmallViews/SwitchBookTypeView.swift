@@ -10,7 +10,7 @@ import Foundation
 import SwiftUI
 
 struct SwitchBookTypeView: View {
-    var book: Book1
+    var book: Book
     
     var body: some View {
         NavigationLink(destination: BookDetails(book: book)) {

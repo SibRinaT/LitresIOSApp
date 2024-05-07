@@ -12,7 +12,7 @@ struct Store {
     static let shared = Store()
     let db = Firestore.firestore()
     
-    func add(book: Book1, imageData: Data) async throws {
+    func add(book: Book, imageData: Data) async throws {
         let imageUrl = try await ImageStorage.shared.upload(imageData: imageData,
                                              imageId: book.imageId)
         var mutableBook = book
@@ -20,7 +20,7 @@ struct Store {
         try db.collection("books").addDocument(from: mutableBook)
     }
     
-    func update(book: Book1, imageData: Data?) async throws {
+    func update(book: Book, imageData: Data?) async throws {
         guard let firestoreId = book.firestoreId else {
             throw ApiError.custom(text: "No firestoreId assigned to the book")
         }
@@ -38,7 +38,7 @@ struct Store {
         try await ref.updateData(book.asDictionary())
     }
     
-    func delete(book: Book1) async throws {
+    func delete(book: Book) async throws {
         if let firestoreId = book.firestoreId {
             try await db.collection("books").document(firestoreId).delete()
             try await ImageStorage.shared.deleteImageWith(id: book.imageId)
@@ -47,12 +47,12 @@ struct Store {
         }
     }
     
-    func getBooks() async throws -> [Book1] {
+    func getBooks() async throws -> [Book] {
         do {
             let snapshot = try await db.collection("books").getDocuments()
-            var books = [Book1]()
+            var books = [Book]()
             for document in snapshot.documents {
-                if var book = try? document.data(as: Book1.self) {
+                if var book = try? document.data(as: Book.self) {
                     book.set(firestoreId: document.documentID)
                     books.append(book)
                 }

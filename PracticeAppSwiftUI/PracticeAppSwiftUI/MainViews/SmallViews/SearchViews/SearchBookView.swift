@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SearchBookView: View {
-    var book: Book1
+    var book: Book
     
     var body: some View {
         HStack(alignment: .top) {

@@ -46,7 +46,7 @@ struct BookGenre: Codable, Hashable {
     let name: String
 }
 
-struct Book1: Codable, Identifiable, Hashable {    
+struct Book: Codable, Identifiable, Hashable {    
     private(set) var id: String
     private(set) var firestoreId: String?
     private(set) var imageUrl: String?

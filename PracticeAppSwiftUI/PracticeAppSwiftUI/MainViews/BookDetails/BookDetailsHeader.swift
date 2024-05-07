@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct BookDetailsHeader: View {
-    var book: Book1
+    var book: Book
     var textBookContent: String = "Оглавление"
 
     

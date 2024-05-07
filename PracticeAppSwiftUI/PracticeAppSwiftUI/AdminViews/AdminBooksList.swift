@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AdminBooksList: View {
-    @State var books = [Book1]()
+    @State var books = [Book]()
     
     var body: some View {
         List {

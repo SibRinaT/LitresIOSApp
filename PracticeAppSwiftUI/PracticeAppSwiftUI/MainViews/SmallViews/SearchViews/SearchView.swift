@@ -26,9 +26,9 @@ struct SearchView: View {
 
 @Observable
 class SearchViewModel: LoadableObject {
-    typealias Output = [Book1]
+    typealias Output = [Book]
         
-    private(set) var state: LoadingState<[Book1]>
+    private(set) var state: LoadingState<[Book]>
     private let tagID: Tag.ID
     @MainActor private let loader = Loader()
     

@@ -22,7 +22,7 @@ private enum UploadError: LocalizedError {
 struct AdminEditBookView: View {
     enum ViewType {
         case add
-        case edit(book: Book1)
+        case edit(book: Book)
     }
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
@@ -207,7 +207,7 @@ struct AdminEditBookView: View {
         }
     }
     
-    private func updateBook(oldBook: Book1) {
+    private func updateBook(oldBook: Book) {
         Task {
             guard let book = buildBook(bookId: oldBook.id,
                                        firestoreId: oldBook.firestoreId) else {
@@ -224,8 +224,8 @@ struct AdminEditBookView: View {
         }
     }
     
-    private func buildBook(bookId: String, firestoreId: String?) -> Book1? {
-        var book = Book1(id: bookId,
+    private func buildBook(bookId: String, firestoreId: String?) -> Book? {
+        var book = Book(id: bookId,
                          name: bookName,
                          year: Int(releaseYear),
                          format: nil,

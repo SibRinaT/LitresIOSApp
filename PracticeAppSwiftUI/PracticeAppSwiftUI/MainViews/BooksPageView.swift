@@ -10,7 +10,7 @@ import SwiftData
 
 fileprivate struct BooksShelf {
     let genre: BookGenre
-    let books: [Book1]
+    let books: [Book]
 }
 
 struct BooksPageView: View {

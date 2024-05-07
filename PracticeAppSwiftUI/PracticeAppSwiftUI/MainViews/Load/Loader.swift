@@ -10,7 +10,7 @@ import Foundation
 @MainActor
 struct Loader {
 
-    func loadBooks(with tagId: String, result: @escaping (Result<[Book1], CustomError>) -> Void) {
+    func loadBooks(with tagId: String, result: @escaping (Result<[Book], CustomError>) -> Void) {
         result(.success([]))
     }
 
