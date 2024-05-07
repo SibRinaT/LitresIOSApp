@@ -93,13 +93,17 @@ struct AddNewFeedbackView: View {
                                         .cornerRadius(14)
                                         .frame(width: 200 ,height: 70)
                                         .foregroundColor(reviewText.count < 20 ? .black : .gray)
+                                        .foregroundColor(rating == 0 ? .black : .gray)
+
                                         .overlay(
                                             Text("Отправить")
                                                 .font(.custom("AmericanTypewriter", size: 18))
                                                 .foregroundColor(.white)
                                         )
                                 }
+                                .disabled(rating == 0 || reviewText.count < 20)
                             }
+
                         }
                     )
                 
