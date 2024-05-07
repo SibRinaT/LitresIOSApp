@@ -23,7 +23,7 @@ struct BookDetailsBody: View {
                 HStack {
                     VStack(alignment: .leading) {
                         Text(book.bookType)
-                        Text("Release date: \(book.year)")
+//                        Text("Release date: \(book.year)") // закомитил потому что ошибка, а если запулить то придется скачаивать FB заново))
 //                        switch BookType(rawValue: book.bookType) {
 //                        case .text:
 //                            if let pages = book.textBookDetails?.pages {

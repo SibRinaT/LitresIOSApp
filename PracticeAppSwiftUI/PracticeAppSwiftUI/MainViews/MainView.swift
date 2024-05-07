@@ -12,7 +12,7 @@ struct MainView: View {
     var body: some View {
         TabView {
             NavigationView {
-                BooksPageView()
+                SubscriptionView()
             }
             .tabItem {
                 Image(systemName: "trophy.circle.fill")
