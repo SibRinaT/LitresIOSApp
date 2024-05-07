@@ -65,15 +65,18 @@ struct AddNewFeedbackView: View {
                                 if reviewText.count < 20 {
                                     Text("Минимальная длина 20 символов!")
                                         .foregroundColor(.white)
+                                        .font(.custom("AmericanTypewriter", size: 14))
                                         .padding()
 
                                 } else {
                                     Text("")
                                         .padding()
                                 }
+                                
                                 if rating == 0 {
                                                Text("Пожалуйста, выставьте рейтинг")
                                                    .foregroundColor(.white)
+                                                   .font(.custom("AmericanTypewriter", size: 14))
                                                    .padding()
                                            } else {
                                                Text("")
