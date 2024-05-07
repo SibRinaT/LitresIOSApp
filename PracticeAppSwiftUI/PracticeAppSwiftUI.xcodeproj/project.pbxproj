@@ -59,6 +59,7 @@
 		2E5B19262BEA345300E205BB /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 2E5B19252BEA345300E205BB /* FirebaseStorage */; };
 		2E5B19282BEA345300E205BB /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 2E5B19272BEA345300E205BB /* FirebaseStorageCombine-Community */; };
 		2E5B192A2BEA348500E205BB /* SubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5B19292BEA348500E205BB /* SubscriptionView.swift */; };
+		2E5B192C2BEA436400E205BB /* AddNewFeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5B192B2BEA436400E205BB /* AddNewFeedbackView.swift */; };
 		2E6F0EC32BDEC9E7003312F5 /* InputFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6F0EC22BDEC9E7003312F5 /* InputFieldView.swift */; };
 		2E77583C2BE03AF10079EFFE /* PasswordFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E77583B2BE03AF10079EFFE /* PasswordFieldView.swift */; };
 		2E86C87C2BE231440093D70D /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E86C87B2BE231440093D70D /* LogInView.swift */; };
@@ -107,6 +108,7 @@
 		2E3D19B82BE36C140005CD68 /* Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
 		2E3D19BA2BE36E240005CD68 /* BooksPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooksPageView.swift; sourceTree = "<group>"; };
 		2E5B19292BEA348500E205BB /* SubscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionView.swift; sourceTree = "<group>"; };
+		2E5B192B2BEA436400E205BB /* AddNewFeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewFeedbackView.swift; sourceTree = "<group>"; };
 		2E6F0EC22BDEC9E7003312F5 /* InputFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputFieldView.swift; sourceTree = "<group>"; };
 		2E77583B2BE03AF10079EFFE /* PasswordFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordFieldView.swift; sourceTree = "<group>"; };
 		2E86C87B2BE231440093D70D /* LogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
@@ -245,6 +247,7 @@
 				2E3D19962BE34FB00005CD68 /* ShelfView.swift */,
 				2E3D19BA2BE36E240005CD68 /* BooksPageView.swift */,
 				2E5B19292BEA348500E205BB /* SubscriptionView.swift */,
+				2E5B192B2BEA436400E205BB /* AddNewFeedbackView.swift */,
 				2E3D199A2BE3515F0005CD68 /* BookDetails */,
 				2E3D19A72BE354A60005CD68 /* SmallViews */,
 				2E3D19B52BE3582D0005CD68 /* Load */,
@@ -470,6 +473,7 @@
 				2E8A617C2BE5F71E0013BD1F /* AuthService.swift in Sources */,
 				ACB46B3C2BE8BE59009A7ABA /* AdminBooksList.swift in Sources */,
 				ACB46AC52BE769B1009A7ABA /* AppRootManager.swift in Sources */,
+				2E5B192C2BEA436400E205BB /* AddNewFeedbackView.swift in Sources */,
 				2E3D19AD2BE3552E0005CD68 /* SearchView.swift in Sources */,
 				2E38F2A82BDE77AE00D76A03 /* PracticeAppSwiftUIApp.swift in Sources */,
 				2E3D19B12BE355770005CD68 /* AsyncContentView.swift in Sources */,

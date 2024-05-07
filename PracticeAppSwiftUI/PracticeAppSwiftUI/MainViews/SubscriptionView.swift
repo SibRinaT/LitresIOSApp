@@ -34,7 +34,7 @@ struct SubscriptionView: View {
                             .cornerRadius(14)
                             .foregroundColor(Color("SecondaryColor"))
                             .overlay(
-                                    Text("Расщиренная на месяц")
+                                    Text("Расширенная на месяц")
                                         .foregroundColor(.white)
                             )
                     }
