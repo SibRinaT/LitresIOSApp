@@ -76,6 +76,7 @@
 		ACB46B752BE8EF28009A7ABA /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = ACB46B742BE8EF28009A7ABA /* FirebaseStorage */; };
 		ACB46B772BE8EF28009A7ABA /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = ACB46B762BE8EF28009A7ABA /* FirebaseStorageCombine-Community */; };
 		ACB46B792BE8F51B009A7ABA /* ApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB46B782BE8F51B009A7ABA /* ApiError.swift */; };
+		ACB46B7B2BE92516009A7ABA /* FileStore+Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB46B7A2BE92516009A7ABA /* FileStore+Genre.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -123,6 +124,7 @@
 		ACB46B3D2BE8C53F009A7ABA /* ImageStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageStorage.swift; sourceTree = "<group>"; };
 		ACB46B3F2BE8CB43009A7ABA /* AdminEditBookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminEditBookView.swift; sourceTree = "<group>"; };
 		ACB46B782BE8F51B009A7ABA /* ApiError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiError.swift; sourceTree = "<group>"; };
+		ACB46B7A2BE92516009A7ABA /* FileStore+Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileStore+Genre.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,8 +194,9 @@
 				2E38F2B52BDE7ABE00D76A03 /* Info.plist */,
 				2E8A61782BE5F6640013BD1F /* GoogleService-Info.plist */,
 				2E38F2AD2BDE77B100D76A03 /* Preview Content */,
-				ACB46AC82BE79F55009A7ABA /* FireStore.swift */,
 				ACB46B3D2BE8C53F009A7ABA /* ImageStorage.swift */,
+				ACB46AC82BE79F55009A7ABA /* FireStore.swift */,
+				ACB46B7A2BE92516009A7ABA /* FileStore+Genre.swift */,
 				ACB46B782BE8F51B009A7ABA /* ApiError.swift */,
 			);
 			path = PracticeAppSwiftUI;
@@ -477,6 +480,7 @@
 				2E3D198D2BE26CC40005CD68 /* Tag.swift in Sources */,
 				2E3D199E2BE351890005CD68 /* BookDetailsHeader.swift in Sources */,
 				2E3D19AF2BE355410005CD68 /* SearchBookView.swift in Sources */,
+				ACB46B7B2BE92516009A7ABA /* FileStore+Genre.swift in Sources */,
 				ACB46B3A2BE8BD53009A7ABA /* AdminOptionViews.swift in Sources */,
 				2E3D19952BE34FA10005CD68 /* BookView.swift in Sources */,
 				2E3D19B72BE36BEA0005CD68 /* Loader.swift in Sources */,

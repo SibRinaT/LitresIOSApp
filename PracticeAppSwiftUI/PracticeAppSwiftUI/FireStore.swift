@@ -13,9 +13,11 @@ struct Store {
     let db = Firestore.firestore()
     
     func add(book: Book1, imageData: Data) async throws {
-        try await ImageStorage.shared.upload(imageData: imageData,
+        let imageUrl = try await ImageStorage.shared.upload(imageData: imageData,
                                              imageId: book.imageId)
-        try db.collection("books").addDocument(from: book)
+        var mutableBook = book
+        mutableBook.set(imageUrl: imageUrl.absoluteString)
+        try db.collection("books").addDocument(from: mutableBook)
     }
     
     func update(book: Book1, imageData: Data?) async throws {

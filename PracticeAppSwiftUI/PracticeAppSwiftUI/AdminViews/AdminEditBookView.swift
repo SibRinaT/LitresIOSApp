@@ -30,10 +30,17 @@ struct AdminEditBookView: View {
     @State private var bookName = ""
     @State private var releaseYear = ""
     @State private var description = ""
+    @State private var authorName = ""
+    
     
     @State private var imageItem: PhotosPickerItem?
     @State private var bookImage: Image?
     @State private var bookImageData: Data?
+    
+    @State private var genres = [BookGenre]()
+    @State private var selectedGenre = ""
+    
+    @State private var selectedBookType = BookType.text
     
     @State private var showNoImageAlert = false
     @State private var uploadError: UploadError?
@@ -69,6 +76,19 @@ struct AdminEditBookView: View {
                     }
                     TextEditor(text: $description)
                 }
+                TextField("Имя автора", text: $authorName)
+                Picker("Выберите жанр", selection: $selectedGenre) {
+                    ForEach(genres, id: \.name) {
+                        Text($0.name)
+                    }
+                }
+                .pickerStyle(.menu)
+                Picker("Тип книги", selection: $selectedBookType) {
+                    ForEach(BookType.allCases, id: \.self) {
+                        Text($0.rawValue)
+                    }
+                }
+                .pickerStyle(.menu)
                 PhotosPicker("Обложка книги", selection: $imageItem, matching: .images)
                 bookImage?
                     .resizable()
@@ -76,24 +96,8 @@ struct AdminEditBookView: View {
                     .frame(width: 300, height: 300)
             }
         }
-        .task {
-            switch viewType {
-            case .add:
-                break
-            case .edit(let book):
-                bookName = book.name
-                if let year = book.year { releaseYear = "\(year)" }
-                description = book.description ?? ""
-                do {
-                    let imageUrl = try await ImageStorage.shared.getDownloadUrlFor(imageId: book.imageId)
-                    let imageData = try await ImageStorage.shared.loadImageData(from: imageUrl)
-                    if let uiImage = UIImage(data: imageData) {
-                        bookImage = Image(uiImage: uiImage)
-                    }
-                } catch {
-                    
-                }
-            }
+        .onAppear {
+            loadInitialData()
         }
         .onChange(of: imageItem) {
             updateImage()
@@ -143,12 +147,54 @@ struct AdminEditBookView: View {
         }
     }
     
+    private func loadInitialData() {
+        switch viewType {
+        case .add:
+            break
+        case .edit(let book):
+            bookName = book.name
+            if let year = book.year { releaseYear = "\(year)" }
+            description = book.description ?? ""
+            selectedGenre = book.genre
+            authorName = book.authorName ?? ""
+            selectedBookType = BookType(rawValue: book.bookType) ?? .text
+            selectedGenre = book.genre
+        }
+        
+        Task  {
+            do {
+                genres = try await Store.shared.getGenres()
+                
+                switch viewType {
+                case .add:
+                    DispatchQueue.main.async {
+                        selectedGenre = genres.first?.name ?? ""
+                    }
+                case .edit(let book):
+                    if let imageUrl = URL(string: book.imageUrl ?? "") {
+                        let imageData = try await ImageStorage.shared.loadImageData(from: imageUrl)
+                        if let uiImage = UIImage(data: imageData) {
+                            DispatchQueue.main.async {
+                                bookImage = Image(uiImage: uiImage)
+                            }
+                        }
+                    }
+                }
+                
+            } catch {
+                
+            }
+        }
+    }
+    
     private func createBook() {
         guard let bookImageData else {
             showNoImageAlert = true
             return
         }
-        let book = buildBook(bookId: UUID().uuidString, firestoreId: nil)
+        guard let book = buildBook(bookId: UUID().uuidString, firestoreId: nil) else {
+            return
+        }
         Task {
             do {
                 try await Store.shared.add(book: book, imageData: bookImageData)
@@ -163,8 +209,10 @@ struct AdminEditBookView: View {
     
     private func updateBook(oldBook: Book1) {
         Task {
-            let book = buildBook(bookId: oldBook.id,
-                                 firestoreId: oldBook.firestoreId)
+            guard let book = buildBook(bookId: oldBook.id,
+                                       firestoreId: oldBook.firestoreId) else {
+                return
+            }
             do {
                 try await Store.shared.update(book: book, imageData: bookImageData)
                 DispatchQueue.main.async {
@@ -176,12 +224,15 @@ struct AdminEditBookView: View {
         }
     }
     
-    private func buildBook(bookId: String, firestoreId: String?) -> Book1 {
+    private func buildBook(bookId: String, firestoreId: String?) -> Book1? {
         var book = Book1(id: bookId,
                          name: bookName,
                          year: Int(releaseYear),
                          format: nil,
-                         description: description)
+                         description: description,
+                         genre: selectedGenre,
+                         authorName: authorName,
+                         bookType: selectedBookType.rawValue)
         if let firestoreId {
             book.set(firestoreId: firestoreId)
         }

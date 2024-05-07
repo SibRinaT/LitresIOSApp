@@ -8,7 +8,14 @@
 import SwiftUI
 import SwiftData
 
+fileprivate struct BooksShelf {
+    let genre: BookGenre
+    let books: [Book1]
+}
+
 struct BooksPageView: View {
+    @State private var shelfs = [BooksShelf]()
+    
     var body: some View {
         NavigationStack {
             ZStack {
@@ -16,8 +23,9 @@ struct BooksPageView: View {
                     .ignoresSafeArea(.all)
                 ScrollView(.vertical, showsIndicators: false) {
                     LazyVStack {
-                        ForEach(Shelf.allCases.map{ $0.rawValue }, id: \.self) { shelf in
-                            ShelfView(shelfName: shelf, books: MockData.getBooks())
+                        ForEach(shelfs, id: \.genre.name) { shelf in
+                            ShelfView(shelfName: shelf.genre.name,
+                                      books: shelf.books)
                                 .scrollTransition { content, phase in
                                     content
                                         .scaleEffect(phase.isIdentity ? 1 : 0.8)
@@ -25,6 +33,21 @@ struct BooksPageView: View {
                                 }
                         }
                     }
+                }
+            }
+            .task {
+                do {
+                    shelfs.removeAll()
+                    let genresArray = try await Store.shared.getGenres()
+                    let books = try await Store.shared.getBooks()
+                    for genre in genresArray {
+                        let booksForGenre = books.filter { $0.genre == genre.name }
+                        let shelf = BooksShelf(genre: genre,
+                                               books: booksForGenre)
+                        shelfs.append(shelf)
+                    }
+                } catch {
+                    print(error)
                 }
             }
         }
