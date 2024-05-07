@@ -12,7 +12,7 @@ struct ShelfView: View {
     @Environment(\.horizontalSizeClass) private var sizeClass
 
     var shelfName: String
-    var books: [Book]
+    var books: [Book1]
     
     var body: some View {
         ZStack {
@@ -39,5 +39,5 @@ struct ShelfView: View {
 }
 
 #Preview {
-    ShelfView(shelfName: "New Releases", books: MockData.getBooks(count: 10))
+    ShelfView(shelfName: "New Releases", books: [])
 }

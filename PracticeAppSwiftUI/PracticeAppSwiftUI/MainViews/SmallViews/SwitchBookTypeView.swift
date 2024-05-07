@@ -10,18 +10,20 @@ import Foundation
 import SwiftUI
 
 struct SwitchBookTypeView: View {
-    var book: Book
+    var book: Book1
     
     var body: some View {
         NavigationLink(destination: BookDetails(book: book)) {
             HStack() {
                 Image(systemName: "book")
                     .font(.title2)
-                switch book.bookType {
+                switch BookType(rawValue: book.bookType) {
                 case .audio:
                     Text("To the audio\nversion")
                 case .text:
                     Text("To the text\nversion")
+                case .none:
+                    Text("")
                 }
             }
         }
@@ -30,6 +32,6 @@ struct SwitchBookTypeView: View {
     }
 }
 
-#Preview {
-    SwitchBookTypeView(book: MockData.getBook())
-}
+//#Preview {
+//    SwitchBookTypeView(book: MockData.getBook())
+//}

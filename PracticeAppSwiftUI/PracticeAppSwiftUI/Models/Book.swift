@@ -38,32 +38,55 @@ struct Hotel: Codable {
     }
 }
 
-struct BookFormat: Codable {
+struct BookFormat: Codable, Hashable {
     let name: String
 }
 
-struct Book1: Codable, Identifiable {
+struct BookGenre: Codable, Hashable {
+    let name: String
+}
+
+struct Book1: Codable, Identifiable, Hashable {    
     private(set) var id: String
     private(set) var firestoreId: String?
+    private(set) var imageUrl: String?
     let name: String
     let year: Int?
     let format: BookFormat?
     let description: String?
+    let genre: String
+    let authorName: String?
+    let bookType: String
+    var rating = 0.0
     
     var imageId: String {
         id
     }
     
-    init(id: String, name: String, year: Int?, format: BookFormat?, description: String?) {
+    init(id: String,
+         name: String,
+         year: Int?,
+         format: BookFormat?,
+         description: String?,
+         genre: String,
+         authorName: String,
+         bookType: String) {
         self.id = id
         self.name = name
         self.year = year
         self.format = format
         self.description = description
+        self.genre = genre
+        self.authorName = authorName
+        self.bookType = bookType
     }
     
     mutating func set(firestoreId: String) {
         self.firestoreId = firestoreId
+    }
+    
+    mutating func set(imageUrl: String) {
+        self.imageUrl = imageUrl
     }
 }
 

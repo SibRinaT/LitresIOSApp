@@ -9,8 +9,9 @@ import SwiftUI
 import Foundation
 
 struct BookView: View {
-    var book: Book
-        
+    var book: Book1
+    
+    
     var body: some View {
         ZStack {
             Color("BackColor")
@@ -20,36 +21,44 @@ struct BookView: View {
                 .cornerRadius(35)
                 .overlay {
                     VStack(alignment: .leading) {
-                        
-                        Image(book.imageName, bundle: nil)
-                            .resizable()
-                            .frame(width: 200, height: 200)
-                            .overlay(alignment: .topTrailing) {
-                                Image(systemName: "heart.circle")
-                                    .font(.largeTitle)
-                                    .symbolVariant(book.isLiked ? .fill : .none)
-                                    .foregroundColor(.white)
-                                    .padding(15)
-                            }
-                            .padding()
+                        AsyncImage(url: URL(string: book.imageUrl ?? "")) { image in
+                            image
+                                .resizable()
+                                .frame(width: 200.0, height: 200.0)
+                        } placeholder: {
+                            Image("book")
+                        }
+//                            .overlay(alignment: .topTrailing) {
+//                                Image(systemName: "heart.circle")
+//                                    .font(.largeTitle)
+//                                    .symbolVariant(book.isLiked ? .fill : .none)
+//                                    .foregroundColor(.white)
+//                                    .padding(15)
+//                            }
+//                            .padding()
                         Text(book.name)
                             .foregroundColor(.white)
                             .font(.title2)
                             .lineLimit(1)
-                        Text(book.author.name)
-                            .foregroundColor(.white)
-                            .font(.title2)
-                            .lineLimit(1)
+                        if let authorName = book.authorName {
+                            Text(authorName)
+                                .foregroundColor(.white)
+                                .font(.title2)
+                                .lineLimit(1)
+                        }
+
                         
                         HStack {
                             HStack {
-                                switch book.bookType {
+                                switch BookType(rawValue: book.bookType) {
                                 case .text:
                                     Image(systemName: "book")
                                         .foregroundColor(.white)
                                 case .audio:
                                     Image(systemName: "headphones")
                                         .foregroundColor(.white)
+                                case .none:
+                                    Color.white
                                 }
                             }
                             .padding()
@@ -69,6 +78,6 @@ struct BookView: View {
     }
 }
 
-#Preview {
-    BookView(book: MockData.getBook())
-}
+//#Preview {
+//    BookView(book: Book1(id: "", name: "", year: nil, format: nil, description: nil, genre: "", authorName: ""))
+//}

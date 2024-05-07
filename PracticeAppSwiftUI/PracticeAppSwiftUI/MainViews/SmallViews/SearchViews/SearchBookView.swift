@@ -8,31 +8,37 @@
 import SwiftUI
 
 struct SearchBookView: View {
-    var book: Book
+    var book: Book1
     
     var body: some View {
         HStack(alignment: .top) {
-            Image(book.imageName, bundle: nil)
-                .resizable()
-                .frame(width: 120)
-                .aspectRatio(1, contentMode: .fill)
+            AsyncImage(url: URL(string: book.imageUrl ?? "")) { image in
+                image
+                    .frame(width: 120)
+                    .aspectRatio(1, contentMode: .fill)
+            } placeholder: {
+                Image("book")
+            }
+
             VStack(alignment: .leading) {
                 Text(book.name)
                     .foregroundStyle(.black)
                     .font(.headline)
                 .lineLimit(1)
-                Text(book.author.name)
+                Text(book.authorName ?? "")
                     .foregroundStyle(.gray)
                     .font(.headline)
                     .lineLimit(1)
                 
                 HStack {
                     HStack {
-                        switch book.bookType {
+                        switch BookType(rawValue: book.bookType) {
                         case .text:
                             Image(systemName: "book")
                         case .audio:
                             Image(systemName: "headphones")
+                        case .none:
+                            Color.white
                         }
                     }
                     .font(.callout)
@@ -48,16 +54,16 @@ struct SearchBookView: View {
                 }
             }
             Spacer()
-            Image(systemName: "heart")
-                .font(.title2)
-                .symbolVariant(book.isLiked ? .fill : .none)
+//            Image(systemName: "heart")
+//                .font(.title2)
+//                .symbolVariant(book.isLiked ? .fill : .none)
         }
     }
 }
 
-#Preview {
-    List {
-        SearchBookView(book: MockData.getBook())
-    }
-    
-}
+//#Preview {
+//    List {
+//        SearchBookView(book: MockData.getBook())
+//    }
+//    
+//}

@@ -10,14 +10,8 @@ import Foundation
 @MainActor
 struct Loader {
 
-    func loadBooks(with tagId: String, result: @escaping (Result<[Book], CustomError>) -> Void) {
-        let filteredBooks = MockData
-            .getBooks()
-            .filter { $0.tags.contains { $0.id == tagId } }
-        result(.success(filteredBooks))
+    func loadBooks(with tagId: String, result: @escaping (Result<[Book1], CustomError>) -> Void) {
+        result(.success([]))
     }
-    
-    func loadHotel(result: @escaping (Hotel?) -> ()) {
-        
-    }
+
 }
