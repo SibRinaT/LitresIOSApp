@@ -9,17 +9,17 @@ import Foundation
 import SwiftUI
 
 struct BookDetails: View {
-    var book: Book
+    var book: Book1
     
     var body: some View {
         ScrollView {
-            BookDetailsHeader(book: book)
-            BookDetailsBody(book: book)
+//            BookDetailsHeader(book: book)
+//            BookDetailsBody(book: book)
         }
         .background(Color("BackColor").ignoresSafeArea(.all))
     }
 }
 
-#Preview {
-    BookDetails(book: MockData.getBook())
-}
+//#Preview {
+//    BookDetails(book: MockData.getBook())
+//}

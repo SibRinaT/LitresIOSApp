@@ -36,9 +36,9 @@ struct BookDetailsBody: View {
                         }
                     }
                     Spacer()
-                    if let linkedBook = book.linkedBook {
-                        SwitchBookTypeView(book: linkedBook)
-                    }
+//                    if let linkedBook = book.linkedBook {
+//                        SwitchBookTypeView(book: linkedBook)
+//                    }
                 }
                 .padding(.vertical)
                 TagsView(tags: book.tags)
@@ -71,8 +71,8 @@ struct BookDetailsBody: View {
     }
 }
 
-#Preview {
-    NavigationStack {
-        BookDetails(book: MockData.getBook())
-    }
-}
+//#Preview {
+//    NavigationStack {
+//        BookDetails(book: MockData.getBook())
+//    }
+//}
