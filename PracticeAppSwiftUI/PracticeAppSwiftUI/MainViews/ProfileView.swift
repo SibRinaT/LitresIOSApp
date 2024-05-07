@@ -12,7 +12,6 @@ struct ProfileView: View {
     @State private var presentAdminView = false
     @State private var login: String = "SibRinaT"
     @State private var email: String = "sibrinat616@gmail.com"
-    @State private var books: Int = 2
     @State private var sub: String = "Базовая"
     @State private var Role: String = "Админ"
 
@@ -47,18 +46,6 @@ struct ProfileView: View {
                                 Text("Почта - ")
                                     .foregroundColor(.white)
                                 Text(email)
-                                    .foregroundColor(.white)
-                            }
-                        )
-                    Rectangle()
-                        .frame(width: 280, height: 57)
-                        .cornerRadius(14)
-                        .foregroundColor(Color("SecondaryColor"))
-                        .overlay(
-                            HStack {
-                                Text("Книг - ")
-                                    .foregroundColor(.white)
-                                Text(String(books))
                                     .foregroundColor(.white)
                             }
                         )
