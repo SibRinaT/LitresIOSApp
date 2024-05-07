@@ -41,24 +41,24 @@ struct LogInView: View {
 
                     
                     VStack {
+                        VStack {
+                            Text("Забыли пароль?")
+                                .foregroundColor(.white)
+                            Text("Восстановите доступ!")
+                                .foregroundColor(Color("MainColor"))
+                        }
+                        .padding(.bottom, 30)
+
                         Button(action: {
                             appRootManager.currentRoot = .signUp
                         }) {
                             VStack {
-                                Text("Забыли пароль?")
+                                Text("У вас нет аккаунта?")
                                     .foregroundColor(.white)
-                                Text("Восстановите доступ!")
+                                Text("Начните чтение!")
                                     .foregroundColor(Color("MainColor"))
                             }
                         }
-                        .padding(.bottom, 30)
-                        VStack {
-                            Text("У вас нет аккаунта?")
-                                .foregroundColor(.white)
-                            Text("Начните чтение!")
-                                .foregroundColor(Color("MainColor"))
-                        }
-                        
                     }
                     .padding(10)
                     .font(.custom("AmericanTypewriter", size: 14))
