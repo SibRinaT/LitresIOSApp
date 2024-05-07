@@ -10,21 +10,107 @@ import SwiftUI
 struct ProfileView: View {
     @EnvironmentObject private var appRootManager: AppRootManager
     @State private var presentAdminView = false
-    
+    @State private var login: String = "SibRinaT"
+    @State private var email: String = "sibrinat616@gmail.com"
+    @State private var books: Int = 2
+    @State private var sub: String = "Базовая"
+    @State private var Role: String = "Админ"
+
     var body: some View {
-        VStack {
-            Button {
-                logOut()
-            } label: {
-                Text("Выйти из аккаунта")
+        ZStack {
+            Color("BackColor")
+                .ignoresSafeArea(.all)
+            VStack {
+                Text("Профиль")
+                    .font(.custom("AmericanTypewriter", size: 48))
+                    .foregroundColor(.white)
+                
+                VStack {
+                    Rectangle()
+                        .frame(width: 280, height: 57)
+                        .cornerRadius(14)
+                        .foregroundColor(Color("SecondaryColor"))
+                        .overlay(
+                            HStack {
+                                Text("Логин - ")
+                                    .foregroundColor(.white)
+                                Text(login)
+                                    .foregroundColor(.white)
+                            }
+                        )
+                    Rectangle()
+                        .frame(width: 280, height: 57)
+                        .cornerRadius(14)
+                        .foregroundColor(Color("SecondaryColor"))
+                        .overlay(
+                            HStack {
+                                Text("Почта - ")
+                                    .foregroundColor(.white)
+                                Text(email)
+                                    .foregroundColor(.white)
+                            }
+                        )
+                    Rectangle()
+                        .frame(width: 280, height: 57)
+                        .cornerRadius(14)
+                        .foregroundColor(Color("SecondaryColor"))
+                        .overlay(
+                            HStack {
+                                Text("Книг - ")
+                                    .foregroundColor(.white)
+                                Text(String(books))
+                                    .foregroundColor(.white)
+                            }
+                        )
+                    Rectangle()
+                        .frame(width: 280, height: 57)
+                        .cornerRadius(14)
+                        .foregroundColor(Color("SecondaryColor"))
+                        .overlay(
+                            HStack {
+                                Text("Подписка - ")
+                                    .foregroundColor(.white)
+                                Text(sub)
+                                    .foregroundColor(.white)
+                            }
+                        )
+                    Rectangle()
+                        .frame(width: 280, height: 57)
+                        .cornerRadius(14)
+                        .foregroundColor(Color("SecondaryColor"))
+                        .overlay(
+                            HStack {
+                                Text("Роль - ")
+                                    .foregroundColor(.white)
+                                Text(Role)
+                                    .foregroundColor(.white)
+                            }
+                        )
+                }
+                .font(.custom("AmericanTypewriter", size: 16))
+
+                Button {
+                    logOut()
+                } label: {
+                    Rectangle()
+                        .frame(width: 200, height: 40)
+                        .foregroundColor(Color("SecondaryColor"))
+                        .cornerRadius(14)
+                        .overlay(
+                    Text("Выйти из аккаунта")
+                        .font(.custom("AmericanTypewriter", size: 16))
+                        .foregroundColor(Color("MainColor"))
+                    )
+                }
+                Spacer()
+                Button("Show Admin Panel") {
+                    presentAdminView = true
+                }
+                .foregroundColor(.white)
             }
-            Spacer()
-            Button("Show Admin Panel") {
-                presentAdminView = true
+            .popover(isPresented: $presentAdminView) {
+                AdminOptionViews(isSheetPresented: $presentAdminView)
             }
-        }
-        .popover(isPresented: $presentAdminView) {
-            AdminOptionViews(isSheetPresented: $presentAdminView)
         }
     }
     
