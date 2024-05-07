@@ -45,12 +45,20 @@ struct LogInView: View {
                             appRootManager.currentRoot = .signUp
                         }) {
                             VStack {
-                                Text("У вас нет аккаунта?")
+                                Text("Забыли пароль?")
                                     .foregroundColor(.white)
-                                Text("Начните чтение!")
+                                Text("Восстановите доступ!")
                                     .foregroundColor(Color("MainColor"))
                             }
                         }
+                        .padding(.bottom, 30)
+                        VStack {
+                            Text("У вас нет аккаунта?")
+                                .foregroundColor(.white)
+                            Text("Начните чтение!")
+                                .foregroundColor(Color("MainColor"))
+                        }
+                        
                     }
                     .padding(10)
                     .font(.custom("AmericanTypewriter", size: 14))
