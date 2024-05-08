@@ -12,21 +12,26 @@ struct AdminImageUploadView: View {
     @State private var imageItem: PhotosPickerItem?
     @State private var bookImage: Image?
     @Binding var imageUrl: String?
-
+    @State private var isLoading = false
     
     var body: some View {
         VStack {
-            if imageUrl != nil {
-                bookImage?
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 300, height: 300)
-                Button("Удалить") {
-                    deleteOldImageIfNeeded()
-                }
-                .foregroundColor(.red)
+            if isLoading {
+                ProgressView()
+                    .progressViewStyle(.circular)
             } else {
-                PhotosPicker("Обложка книги", selection: $imageItem, matching: .images)
+                if imageUrl != nil {
+                    bookImage?
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 300, height: 300)
+                    Button("Удалить") {
+                        deleteOldImageIfNeeded()
+                    }
+                    .foregroundColor(.red)
+                } else {
+                    PhotosPicker("Обложка книги", selection: $imageItem, matching: .images)
+                }
             }
         }
         .onChange(of: imageItem) {
@@ -74,19 +79,27 @@ struct AdminImageUploadView: View {
     
     private func deleteOldImageIfNeeded() {
         guard let imageUrl, let url = URL(string: imageUrl) else { return }
+        isLoading = true
         Task {
             let imageName = url.deletingPathExtension().lastPathComponent
             let path = "images/\(imageName).jpg"
             try await ImageStorage.shared.deleteFileFrom(path: path)
-            self.bookImage = nil
-            self.imageUrl = nil
+            DispatchQueue.main.async {
+                self.bookImage = nil
+                self.imageUrl = nil
+                self.isLoading = false
+            }
         }
     }
     
     private func uploadImage(data: Data) {
+        isLoading = true
         Task {
             do {
                 self.imageUrl = try await ImageStorage.shared.upload(imageData: data).absoluteString
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                }
             } catch {
                 print(error)
             }
