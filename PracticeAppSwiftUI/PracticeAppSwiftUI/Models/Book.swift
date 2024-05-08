@@ -112,4 +112,11 @@ struct User: Codable {
     mutating func enableSubscription() {
         isSubscriptionEnabled = true
     }
+    
+    init(id: String, name: String, isAdmin: Bool) {
+        self.id = id
+        self.name = name
+        self.isAdmin = isAdmin
+        self.isSubscriptionEnabled = false
+    }
 }
