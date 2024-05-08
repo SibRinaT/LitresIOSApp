@@ -20,10 +20,10 @@ final class AuthService {
     
     private init() {}
     
-    func registerWithEmail(email: String, password: String, isAdmin: Bool) async throws {
+    func registerWithEmail(email: String, name: String, password: String, isAdmin: Bool) async throws {
         let result = try await auth.createUser(withEmail: email, password: password)
         let userId = result.user.uid
-        let user = User(id: userId, name: "", isAdmin: isAdmin, isSubscriptionEnabled: false)
+        let user = User(id: userId, name: name, isAdmin: isAdmin, isSubscriptionEnabled: false)
         try db.collection("users").document(userId).setData(from: user)
         setLocalUser(id: userId)
     }

@@ -85,7 +85,7 @@ struct SignUpView: View {
     func signUpWithEmail() {
         Task {
             do {
-                try await AuthService.shared.registerWithEmail(email: email, password: password, isAdmin: false)
+                try await AuthService.shared.registerWithEmail(email: email, name: login, password: password, isAdmin: false)
                 appRootManager.currentRoot = .main
             } catch {
                 print(error)
