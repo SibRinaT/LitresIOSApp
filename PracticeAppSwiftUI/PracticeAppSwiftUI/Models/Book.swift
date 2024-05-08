@@ -104,8 +104,12 @@ struct TextBookDetails {
 }
 
 struct User: Codable {
-    var id: String
-    var name: String
+    let id: String
+    let name: String
     let isAdmin: Bool
-    var isSubscriptionEnabled: Bool
+    private(set) var isSubscriptionEnabled: Bool
+    
+    mutating func enableSubscription() {
+        isSubscriptionEnabled = true
+    }
 }

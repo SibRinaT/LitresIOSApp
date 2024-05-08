@@ -41,18 +41,20 @@ final class AuthService {
     }
     
     func fetchUserInfo() async throws -> User? {
-        do {
-            guard let userId = getUserId() else { return nil }
-            let document = try await db.collection("users").document(userId).getDocument()
-            return try document.data(as: User.self)
-        } catch {
-            print("Error getting documents: \(error)")
-            return nil
-        }
+        guard let userId = getUserId() else { return nil }
+        let document = try await db.collection("users").document(userId).getDocument()
+        return try document.data(as: User.self)
     }
     
-    func enableSubscription() {
-        
+    func enableSubscription() async throws {
+        if var user = try await fetchUserInfo() {
+            if user.isSubscriptionEnabled {
+                throw ApiError.custom(text: "subscription is already enabled.")
+            }
+            user.enableSubscription()
+            let ref = db.collection("users").document(user.id)
+            try await ref.updateData(user.asDictionary())
+        }
     }
     
     func setLocalUser(id: String) {
