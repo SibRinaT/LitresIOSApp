@@ -15,9 +15,9 @@ struct ImageStorage {
     let storage = Storage.storage()
         
     @discardableResult
-    func upload(imageData: Data, imageId: String) async throws -> URL {
+    func upload(imageData: Data) async throws -> URL {
         try await withCheckedThrowingContinuation { continuation in
-            
+            let imageId = UUID().uuidString
             let storageRef = storage.reference()
             let riversRef = storageRef.child("images/\(imageId).jpg")
             

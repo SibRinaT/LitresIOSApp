@@ -23,7 +23,17 @@ struct AdminEditBookView: View {
     enum ViewType {
         case add
         case edit(book: Book)
+        
+        var title: String {
+            switch self {
+            case .add:
+                "Добавить книгу"
+            case .edit:
+                "Изменить книгу"
+            }
+        }
     }
+    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     let viewType: ViewType
@@ -32,17 +42,14 @@ struct AdminEditBookView: View {
     @State private var description = ""
     @State private var authorName = ""
     
-    
-    @State private var imageItem: PhotosPickerItem?
-    @State private var bookImage: Image?
-    @State private var bookImageData: Data?
-    
     @State private var genres = [BookGenre]()
     @State private var selectedGenre = ""
     
+    @State private var imageUrl: String?
+    
     @State private var selectedBookType = BookType.text
     
-    @State private var showNoImageAlert = false
+//    @State private var showNoImageAlert = false
     @State private var uploadError: UploadError?
     
     var isShowingUploadError: Binding<Bool> {
@@ -53,54 +60,49 @@ struct AdminEditBookView: View {
         }
     }
     
-    var title: String {
-        switch viewType {
-        case .add:
-            "Добавить книгу"
-        case .edit:
-            "Изменить книгу"
-        }
-    }
-    
     var body: some View {
-        Form {
-            List {
-                TextField("Название", text: $bookName)
-                TextField("Год выпуска", text: $releaseYear)
-                    .keyboardType(.numberPad)
-                ZStack(alignment: .leading) {
-                    if description.isEmpty {
-                        Text("Описание")
-                            .opacity(0.3)
-                            .padding(.horizontal, 3)
+        VStack {
+            Form {
+                Section {
+                    TextField("Название", text: $bookName)
+                    TextField("Год выпуска", text: $releaseYear)
+                        .keyboardType(.numberPad)
+                    ZStack(alignment: .leading) {
+                        if description.isEmpty {
+                            Text("Описание")
+                                .opacity(0.3)
+                                .padding(.horizontal, 3)
+                        }
+                        TextEditor(text: $description)
                     }
-                    TextEditor(text: $description)
-                }
-                TextField("Имя автора", text: $authorName)
-                Picker("Выберите жанр", selection: $selectedGenre) {
-                    ForEach(genres, id: \.name) {
-                        Text($0.name)
+                    TextField("Имя автора", text: $authorName)
+                    Picker("Выберите жанр", selection: $selectedGenre) {
+                        ForEach(genres, id: \.name) {
+                            Text($0.name)
+                        }
                     }
-                }
-                .pickerStyle(.menu)
-                Picker("Тип книги", selection: $selectedBookType) {
-                    ForEach(BookType.allCases, id: \.self) {
-                        Text($0.rawValue)
+                    .pickerStyle(.menu)
+                    Picker("Тип книги", selection: $selectedBookType) {
+                        ForEach(BookType.allCases, id: \.self) {
+                            Text($0.rawValue)
+                        }
                     }
+                    .pickerStyle(.menu)
+                    
                 }
-                .pickerStyle(.menu)
-                PhotosPicker("Обложка книги", selection: $imageItem, matching: .images)
-                bookImage?
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 300, height: 300)
+                
+                Section {
+                    AdminFileUploadView()
+                }
+                
+                Section {
+                    AdminImageUploadView(imageUrl: $imageUrl)
+                }
             }
+            
         }
         .onAppear {
             loadInitialData()
-        }
-        .onChange(of: imageItem) {
-            updateImage()
         }
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
@@ -114,36 +116,13 @@ struct AdminEditBookView: View {
                 } label: {
                     Text("Готово")
                 }
-                
+                .disabled(imageUrl == nil)
             }
         }
-        .navigationTitle(title)
-        .alert("Выберите обложку для книги", isPresented: $showNoImageAlert) {
-            Button("OK", role: .cancel) { }
-        }
+        .navigationTitle(viewType.title)
         .alert(isPresented: isShowingUploadError, error: uploadError) { _ in
         } message: { error in
             Text(error.errorDescription ?? "")
-        }
-    }
-    
-    private func updateImage() {
-        Task {
-            if let loadedData = try? await imageItem?.loadTransferable(type: Data.self) {
-                DispatchQueue.main.async {
-                    if let uimg = UIImage(data: loadedData) {
-                        if let resized = uimg.resizeWithWidth(width: 400) {
-                            bookImage = Image(uiImage: resized)
-                            bookImageData = resized.jpegData(compressionQuality: 1)
-                        } else {
-                            bookImage = Image(uiImage: uimg)
-                            bookImageData = uimg.jpegData(compressionQuality: 0.2)
-                        }
-                    }
-                }
-            } else {
-                print("Failed to get image from library")
-            }
         }
     }
     
@@ -159,28 +138,20 @@ struct AdminEditBookView: View {
             authorName = book.authorName ?? ""
             selectedBookType = BookType(rawValue: book.bookType) ?? .text
             selectedGenre = book.genre
+            imageUrl = book.imageUrl
         }
         
         Task  {
             do {
                 genres = try await Store.shared.getGenres()
-                
-                switch viewType {
-                case .add:
-                    DispatchQueue.main.async {
+                DispatchQueue.main.async {
+                    switch viewType {
+                    case .add:
                         selectedGenre = genres.first?.name ?? ""
-                    }
-                case .edit(let book):
-                    if let imageUrl = URL(string: book.imageUrl ?? "") {
-                        let imageData = try await ImageStorage.shared.loadImageData(from: imageUrl)
-                        if let uiImage = UIImage(data: imageData) {
-                            DispatchQueue.main.async {
-                                bookImage = Image(uiImage: uiImage)
-                            }
-                        }
+                    case .edit(let book):
+                        imageUrl = book.imageUrl
                     }
                 }
-                
             } catch {
                 
             }
@@ -188,16 +159,12 @@ struct AdminEditBookView: View {
     }
     
     private func createBook() {
-        guard let bookImageData else {
-            showNoImageAlert = true
-            return
-        }
         guard let book = buildBook(bookId: UUID().uuidString, firestoreId: nil) else {
             return
         }
         Task {
             do {
-                try await Store.shared.add(book: book, imageData: bookImageData)
+                try await Store.shared.add(book: book)
                 DispatchQueue.main.async {
                     self.presentationMode.wrappedValue.dismiss()
                 }
@@ -214,7 +181,7 @@ struct AdminEditBookView: View {
                 return
             }
             do {
-                try await Store.shared.update(book: book, imageData: bookImageData)
+                try await Store.shared.update(book: book)
                 DispatchQueue.main.async {
                     self.presentationMode.wrappedValue.dismiss()
                 }
@@ -226,31 +193,18 @@ struct AdminEditBookView: View {
     
     private func buildBook(bookId: String, firestoreId: String?) -> Book? {
         var book = Book(id: bookId,
-                         name: bookName,
-                         year: Int(releaseYear),
-                         format: nil,
-                         description: description,
-                         genre: selectedGenre,
-                         authorName: authorName,
-                         bookType: selectedBookType.rawValue)
+                        name: bookName,
+                        year: Int(releaseYear),
+                        format: nil,
+                        description: description,
+                        genre: selectedGenre,
+                        authorName: authorName,
+                        bookType: selectedBookType.rawValue,
+                        imageUrl: imageUrl)
         if let firestoreId {
             book.set(firestoreId: firestoreId)
         }
         return book
-    }
-}
-
-private extension UIImage {
-    func resizeWithWidth(width: CGFloat) -> UIImage? {
-        let imageView = UIImageView(frame: CGRect(origin: .zero, size: CGSize(width: width, height: CGFloat(ceil(width/size.width * size.height)))))
-        imageView.contentMode = .scaleAspectFit
-        imageView.image = self
-        UIGraphicsBeginImageContextWithOptions(imageView.bounds.size, false, scale)
-        guard let context = UIGraphicsGetCurrentContext() else { return nil }
-        imageView.layer.render(in: context)
-        guard let result = UIGraphicsGetImageFromCurrentImageContext() else { return nil }
-        UIGraphicsEndImageContext()
-        return result
     }
 }
 

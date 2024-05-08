@@ -49,7 +49,6 @@ struct BookGenre: Codable, Hashable {
 struct Book: Codable, Identifiable, Hashable {    
     private(set) var id: String
     private(set) var firestoreId: String?
-    private(set) var imageUrl: String?
     let name: String
     let year: Int?
     let format: BookFormat?
@@ -58,11 +57,8 @@ struct Book: Codable, Identifiable, Hashable {
     let authorName: String?
     let bookType: String
     var rating = 0.0
-    
-    var imageId: String {
-        id
-    }
-    
+    let imageUrl: String?
+
     init(id: String,
          name: String,
          year: Int?,
@@ -70,7 +66,9 @@ struct Book: Codable, Identifiable, Hashable {
          description: String?,
          genre: String,
          authorName: String,
-         bookType: String) {
+         bookType: String,
+         imageUrl: String?) 
+    {
         self.id = id
         self.name = name
         self.year = year
@@ -79,14 +77,11 @@ struct Book: Codable, Identifiable, Hashable {
         self.genre = genre
         self.authorName = authorName
         self.bookType = bookType
+        self.imageUrl = imageUrl
     }
     
     mutating func set(firestoreId: String) {
         self.firestoreId = firestoreId
-    }
-    
-    mutating func set(imageUrl: String) {
-        self.imageUrl = imageUrl
     }
 }
 

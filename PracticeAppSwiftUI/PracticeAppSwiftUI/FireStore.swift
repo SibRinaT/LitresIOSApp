@@ -12,27 +12,13 @@ struct Store {
     static let shared = Store()
     let db = Firestore.firestore()
     
-    func add(book: Book, imageData: Data) async throws {
-        let imageUrl = try await ImageStorage.shared.upload(imageData: imageData,
-                                             imageId: book.imageId)
-        var mutableBook = book
-        mutableBook.set(imageUrl: imageUrl.absoluteString)
-        try db.collection("books").addDocument(from: mutableBook)
+    func add(book: Book) async throws {
+        try db.collection("books").addDocument(from: book)
     }
     
-    func update(book: Book, imageData: Data?) async throws {
+    func update(book: Book) async throws {
         guard let firestoreId = book.firestoreId else {
             throw ApiError.custom(text: "No firestoreId assigned to the book")
-        }
-        if let imageData {
-            print("Update book with new image")
-            // available imageData means that image has been changed.
-            // Removing old image, uploading new one
-            try await ImageStorage.shared.deleteImageWith(id: book.imageId)
-            try await ImageStorage.shared.upload(imageData: imageData,
-                                                 imageId: book.imageId)
-        } else {
-            print("Update book without image update")
         }
         let ref = db.collection("books").document(firestoreId)
         try await ref.updateData(book.asDictionary())
@@ -41,7 +27,9 @@ struct Store {
     func delete(book: Book) async throws {
         if let firestoreId = book.firestoreId {
             try await db.collection("books").document(firestoreId).delete()
-            try await ImageStorage.shared.deleteImageWith(id: book.imageId)
+            if let imageId = URL(string: book.imageUrl ?? "")?.deletingPathExtension().lastPathComponent {
+                try await ImageStorage.shared.deleteImageWith(id: imageId)
+            }
         } else {
             print("No firestore Id on book struct!")
         }
