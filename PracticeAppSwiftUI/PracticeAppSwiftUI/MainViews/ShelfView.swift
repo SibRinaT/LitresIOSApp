@@ -21,6 +21,7 @@ struct ShelfView: View {
             VStack(alignment: .leading) {
                 Text(shelfName)
                     .foregroundColor(.white)
+                    .font(.custom("AmericanTypewriter", size: 24))
                     .multilineTextAlignment(.leading)
                     .font(.largeTitle)
                 
