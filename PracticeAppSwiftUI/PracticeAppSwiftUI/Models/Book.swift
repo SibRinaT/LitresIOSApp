@@ -103,8 +103,9 @@ struct TextBookDetails {
     var pages: Int
 }
 
-struct User {
-    var id: Int
+struct User: Codable {
+    var id: String
     var name: String
-    var isSubscriptionEnabled: Bool?
+    let isAdmin: Bool
+    var isSubscriptionEnabled: Bool
 }

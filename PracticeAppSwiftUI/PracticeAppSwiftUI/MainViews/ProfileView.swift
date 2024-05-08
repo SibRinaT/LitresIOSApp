@@ -98,6 +98,20 @@ struct ProfileView: View {
             .popover(isPresented: $presentAdminView) {
                 AdminOptionViews(isSheetPresented: $presentAdminView)
             }
+            .onAppear {
+                getUser()
+            }
+        }
+    }
+    
+    private func getUser() {
+        Task {
+            do {
+                let user = try? await AuthService.shared.fetchUserInfo()
+                print(user)
+            } catch {
+                
+            }
         }
     }
     
