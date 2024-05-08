@@ -14,7 +14,7 @@ struct BookDetailsBody: View {
     var book: Book
     @State var isExpanded = false
     @State private var selectedTab = "One"
-    
+    @State var userCanRead = true
     var body: some View {
         ZStack {
             Color("BackColor")
@@ -38,6 +38,7 @@ struct BookDetailsBody: View {
 //                        case .none:
 //                            Color.white
 //                        }
+                        
                     }
                     Spacer()
 //                    if let linkedBook = book.linkedBook {
@@ -53,9 +54,23 @@ struct BookDetailsBody: View {
                 )
                 .font(.custom("AmericanTypewriter", size: 16))
                 .foregroundColor(Color(.white))
+                VStack(alignment: .center){
+                    Button(action: {} ) { //need code for action
+                        Rectangle()
+                            .frame(width: 224, height: 50)
+                            .foregroundColor(userCanRead ? Color("MainColor") : Color("InactiveColor").opacity(0.5))
+                            .cornerRadius(16)
+                            .overlay(
+                                Text("Читать")
+                                    .foregroundColor(.white)
+                                    .font(.custom("AmericanTypewriter", size: 20))
+                            )
+                    }
+                }
+               
                 //                Text("\nИздатель: \(book.publisher)")
 //                Text("Дата выхода на ЧитайBook: \(book.creatingDate.formatted(date: .long, time: .omitted))")
-                Spacer(minLength: 20)
+//                Spacer(minLength: 20)
 //                if !book.reviews.isEmpty {
 //                    Text(book.reviews.count == 1 ? "Отзыв" : "Отзывы")
 //                        .font(.largeTitle)

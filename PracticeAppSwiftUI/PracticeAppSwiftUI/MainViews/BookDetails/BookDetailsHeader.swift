@@ -10,7 +10,6 @@ import SwiftUI
 struct BookDetailsHeader: View {
     var book: Book
     var textBookContent: String = "Оглавление"
-
     
     var body: some View {
         ZStack {
@@ -112,6 +111,8 @@ struct BookDetailsHeader: View {
                             }
                             .font(.callout)
                         }
+                        
+                   
 //                        if let authorName = book.audioBookDetails?.audioAuthor, book.bookType == .audio {
 //                            HStack {
 //                                Text("Is reading")
