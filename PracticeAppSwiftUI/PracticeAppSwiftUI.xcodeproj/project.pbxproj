@@ -176,7 +176,6 @@
 			children = (
 				2E38F2A62BDE77AE00D76A03 /* PracticeAppSwiftUI */,
 				2E38F2A52BDE77AE00D76A03 /* Products */,
-				2E8A616F2BE4DC200013BD1F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -204,6 +203,7 @@
 				ACB46AC82BE79F55009A7ABA /* FireStore.swift */,
 				ACB46B7A2BE92516009A7ABA /* FileStore+Genre.swift */,
 				ACB46B782BE8F51B009A7ABA /* ApiError.swift */,
+				2E8A616F2BE4DC200013BD1F /* Frameworks */,
 			);
 			path = PracticeAppSwiftUI;
 			sourceTree = "<group>";
@@ -314,6 +314,7 @@
 			children = (
 			);
 			name = Frameworks;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		2E8A617A2BE5F7080013BD1F /* AuthService  */ = {

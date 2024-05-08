@@ -23,6 +23,8 @@ struct BookDetailsBody: View {
                 HStack {
                     VStack(alignment: .leading) {
                         Text(book.bookType)
+                            .font(.custom("AmericanTypewriter", size: 16))
+                            .foregroundColor(Color(.white))
 //                        Text("Release date: \(book.year)") // закомитил потому что ошибка, а если запулить то придется скачаивать FB заново))
 //                        switch BookType(rawValue: book.bookType) {
 //                        case .text:
@@ -49,8 +51,9 @@ struct BookDetailsBody: View {
                     content: { Text(book.description ?? "") },
                     label: { Text("Описание книги \(book.name)") }
                 )
-                .foregroundColor(.black)
-//                Text("\nИздатель: \(book.publisher)")
+                .font(.custom("AmericanTypewriter", size: 16))
+                .foregroundColor(Color(.white))
+                //                Text("\nИздатель: \(book.publisher)")
 //                Text("Дата выхода на ЧитайBook: \(book.creatingDate.formatted(date: .long, time: .omitted))")
                 Spacer(minLength: 20)
 //                if !book.reviews.isEmpty {

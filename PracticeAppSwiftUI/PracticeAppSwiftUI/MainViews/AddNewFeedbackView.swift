@@ -10,6 +10,7 @@ import SwiftUI
 struct AddNewFeedbackView: View {
     @State private var reviewText = ""
     @State private var rating = 0
+    var book: Book
 
     var body: some View {
         ZStack {
@@ -28,16 +29,14 @@ struct AddNewFeedbackView: View {
                                 .font(.custom("AmericanTypewriter", size: 24))
                             VStack {
                                 HStack {
-                                    Text("Название книги: ")
-                                    Text("1984") // code for name book
+                                    Text(book.name)
                                 }
-                                .font(.custom("AmericanTypewriter", size: 18))
+                                .font(.custom("AmericanTypewriter", size: 24))
                                 .foregroundColor(.white)
                                 HStack {
-                                    Text("Автор книги: ")
-                                    Text("Дж. Оруэлл") // code for author book
+                                    Text(book.authorName ?? "")
                                 }
-                                .font(.custom("AmericanTypewriter", size: 18))
+                                .font(.custom("AmericanTypewriter", size: 24))
                                 .foregroundColor(.white)
                                 HStack {
                                     Text("Оценка: ")
@@ -61,12 +60,14 @@ struct AddNewFeedbackView: View {
                                     .padding()
                                     .padding()
                                     .padding(.horizontal, 30)
-                                
+                                    .padding(.bottom, -50)
+
                                 if reviewText.count < 20 {
                                     Text("Минимальная длина 20 символов!")
                                         .foregroundColor(.white)
                                         .font(.custom("AmericanTypewriter", size: 14))
                                         .padding()
+                                        .padding(.bottom, -30)
 
                                 } else {
                                     Text("")
@@ -82,7 +83,6 @@ struct AddNewFeedbackView: View {
                                                Text("")
                                                    .padding()
                                            }
-                        
                                 
                                 Text("\(reviewText.count)/150 символов")
                                     .foregroundColor(reviewText.count > 150 ? .red : .white)
@@ -103,15 +103,13 @@ struct AddNewFeedbackView: View {
                                 }
                                 .disabled(rating == 0 || reviewText.count < 20)
                             }
-
                         }
                     )
-                
             }
         }
     }
 }
 
-#Preview {
-    AddNewFeedbackView()
-}
+//#Preview {
+//    AddNewFeedbackView()
+//}

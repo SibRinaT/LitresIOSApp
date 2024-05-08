@@ -39,6 +39,8 @@ struct BookDetailsHeader: View {
                         
                         VStack {
                             Text(String(format: "%.1f", book.rating))
+                                .font(.custom("AmericanTypewriter", size: 16))
+                                .foregroundColor(Color(.white))
 //                            Text("\(book.reviews.count)")
 //                                .font(.system(size: 14))
 //                                .foregroundColor(Color("MainColor"))
@@ -59,12 +61,12 @@ struct BookDetailsHeader: View {
                         }) {
                             VStack {
                                 Image(systemName: "list.bullet")
-                                    .font(.title)
+                                    .font(.custom("AmericanTypewriter", size: 20))
+                                    .foregroundColor(Color(.white))
                                     .foregroundColor(.white)
                                 Text(textBookContent)
-                                    .font(.callout)
-                                    .foregroundColor(Color("MainColor"))
-
+                                    .font(.custom("AmericanTypewriter", size: 14))
+                                    .foregroundColor(Color(.white))
                             }
                         }
                     }
@@ -72,7 +74,8 @@ struct BookDetailsHeader: View {
                         HStack {
                             Text(book.name)
                                 .bold()
-                                .font(.system(size: 18))
+                                .font(.custom("AmericanTypewriter", size: 20))
+                                .foregroundColor(Color(.white))
                             switch BookType(rawValue: book.bookType) {
                             case .text:
                                 Capsule()
@@ -101,9 +104,11 @@ struct BookDetailsHeader: View {
                                 
                             }) {
                                 Text(book.authorName ?? "")
-                                    .foregroundColor(Color("MainColor"))
+                                    .font(.custom("AmericanTypewriter", size: 16))
+                                    .foregroundColor(Color(.white))
                                 Image(systemName: "chevron.right")
-                                    .foregroundColor(Color("MainColor"))
+                                    .font(.custom("AmericanTypewriter", size: 16))
+                                    .foregroundColor(Color(.white))
                             }
                             .font(.callout)
                         }
