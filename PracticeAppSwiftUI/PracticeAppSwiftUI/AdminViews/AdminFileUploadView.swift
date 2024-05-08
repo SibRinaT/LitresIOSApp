@@ -12,19 +12,27 @@ struct AdminFileUploadView: View {
     @State private var isFileImporterPresented = false
     
     var body: some View {
-        Button("Добавить файл") {
-            isFileImporterPresented = true
-        }
-        .fileImporter(isPresented: $isFileImporterPresented, allowedContentTypes: [.item]) { result in
-            switch result {
-            case .success(let url):
-                uploadFileFrom(url: url)
-            case .failure(let failure):
-                print(failure.localizedDescription)
-            }
-        }
         if let fileName {
-            Text(fileName)
+            HStack {
+                Text(fileName)
+                Spacer()
+                Button("Удалить") {
+                    deleteFile()
+                }
+                .foregroundColor(.red)
+            }
+        } else {
+            Button("Добавить файл") {
+                isFileImporterPresented = true
+            }
+            .fileImporter(isPresented: $isFileImporterPresented, allowedContentTypes: [.item]) { result in
+                switch result {
+                case .success(let url):
+                    uploadFileFrom(url: url)
+                case .failure(let failure):
+                    print(failure.localizedDescription)
+                }
+            }
         }
     }
     
@@ -38,6 +46,14 @@ struct AdminFileUploadView: View {
             } catch {
                 print(error)
             }
+        }
+    }
+    
+    private func deleteFile() {
+        guard let fileName else { return }
+        Task {
+            try await ImageStorage.shared.deleteFileFrom(path: "files/\(fileName)")
+            self.fileName = nil
         }
     }
 }
