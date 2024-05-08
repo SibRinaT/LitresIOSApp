@@ -27,8 +27,10 @@ struct Store {
     func delete(book: Book) async throws {
         if let firestoreId = book.firestoreId {
             try await db.collection("books").document(firestoreId).delete()
-            if let imageId = URL(string: book.imageUrl ?? "")?.deletingPathExtension().lastPathComponent {
-                try await ImageStorage.shared.deleteImageWith(id: imageId)
+            if let url = URL(string: book.imageUrl ?? "") {
+                let imageName = url.deletingPathExtension().lastPathComponent
+                let path = "images/\(imageName).jpg"
+                try await ImageStorage.shared.deleteFileFrom(path: path)
             }
         } else {
             print("No firestore Id on book struct!")

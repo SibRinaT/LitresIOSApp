@@ -16,14 +16,20 @@ struct AdminImageUploadView: View {
     
     var body: some View {
         VStack {
-            PhotosPicker("Обложка книги", selection: $imageItem, matching: .images)
-            bookImage?
-                .resizable()
-                .scaledToFit()
-                .frame(width: 300, height: 300)
+            if imageUrl != nil {
+                bookImage?
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 300, height: 300)
+                Button("Удалить") {
+                    deleteOldImageIfNeeded()
+                }
+                .foregroundColor(.red)
+            } else {
+                PhotosPicker("Обложка книги", selection: $imageItem, matching: .images)
+            }
         }
         .onChange(of: imageItem) {
-            deleteOldImageIfNeeded()
             prepareAndUploadImage()
         }
         .task {
@@ -47,14 +53,14 @@ struct AdminImageUploadView: View {
             if let loadedData = try? await imageItem?.loadTransferable(type: Data.self) {
                 DispatchQueue.main.async {
                     if let uimg = UIImage(data: loadedData) {
-                        if let resized = uimg.resizeWithWidth(width: 400) {
+                        if let resized = uimg.resizeWithWidth(width: 200) {
                             bookImage = Image(uiImage: resized)
                             if let data = resized.jpegData(compressionQuality: 1) {
                                 uploadImage(data: data)
                             }
                         } else {
                             bookImage = Image(uiImage: uimg)
-                            if let data = uimg.jpegData(compressionQuality: 0.2) {
+                            if let data = uimg.jpegData(compressionQuality: 0.1) {
                                 uploadImage(data: data)
                             }
                         }
@@ -69,11 +75,11 @@ struct AdminImageUploadView: View {
     private func deleteOldImageIfNeeded() {
         guard let imageUrl, let url = URL(string: imageUrl) else { return }
         Task {
-            try await ImageStorage
-                .shared
-                .deleteImageWith(id: url
-                    .deletingPathExtension()
-                    .lastPathComponent)
+            let imageName = url.deletingPathExtension().lastPathComponent
+            let path = "images/\(imageName).jpg"
+            try await ImageStorage.shared.deleteFileFrom(path: path)
+            self.bookImage = nil
+            self.imageUrl = nil
         }
     }
     
