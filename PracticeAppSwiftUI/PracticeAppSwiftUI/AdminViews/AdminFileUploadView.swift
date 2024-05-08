@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AdminFileUploadView: View {
-    @State private var fileURL: URL?
+    @Binding var fileName: String?
     @State private var isFileImporterPresented = false
     
     var body: some View {
@@ -18,17 +18,26 @@ struct AdminFileUploadView: View {
         .fileImporter(isPresented: $isFileImporterPresented, allowedContentTypes: [.item]) { result in
             switch result {
             case .success(let url):
-                self.fileURL = url
+                uploadFileFrom(url: url)
             case .failure(let failure):
                 print(failure.localizedDescription)
             }
         }
-        if let fileURL {
-            Text(fileURL.lastPathComponent)
+        if let fileName {
+            Text(fileName)
         }
     }
-}
-
-#Preview {
-    AdminFileUploadView()
+    
+    private func uploadFileFrom(url: URL) {
+        Task {
+            do {
+                let data = try Data(contentsOf: url)
+                let fileName = url.lastPathComponent
+                try await ImageStorage.shared.upload(data: data, path: "files/\(fileName)")
+                self.fileName = fileName
+            } catch {
+                print(error)
+            }
+        }
+    }
 }

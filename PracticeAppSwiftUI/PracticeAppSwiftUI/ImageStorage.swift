@@ -14,7 +14,6 @@ struct ImageStorage {
     static let shared = ImageStorage()
     let storage = Storage.storage()
         
-    @discardableResult
     func upload(imageData: Data) async throws -> URL {
         try await withCheckedThrowingContinuation { continuation in
             let imageId = UUID().uuidString
@@ -32,6 +31,31 @@ struct ImageStorage {
                 riversRef.downloadURL { result in
                     continuation.resume(with: result)
                 }
+            }
+        }
+    }
+    
+    @discardableResult
+    func upload(data: Data, path: String) async throws -> Bool {
+        try await withCheckedThrowingContinuation { continuation in
+            let storageRef = storage.reference()
+            let riversRef = storageRef.child(path)
+
+            _ = riversRef.putData(data, metadata: nil) { (metadata, error) in
+                guard let _ = metadata else {
+                    continuation.resume(throwing: error ?? ApiError.custom(text: "putData error"))
+                    return
+                }
+                continuation.resume(with: .success(true))
+            }
+        }
+    }
+    
+    func getUrlForFile(name: String) async throws -> URL {
+        try await withCheckedThrowingContinuation { continuation in
+            let ref = storage.reference().child("files/\(name)")
+            ref.downloadURL { result in
+                continuation.resume(with: result)
             }
         }
     }

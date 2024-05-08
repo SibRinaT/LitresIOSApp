@@ -58,6 +58,7 @@ struct Book: Codable, Identifiable, Hashable {
     let bookType: String
     var rating = 0.0
     let imageUrl: String?
+    let fileName: String?
 
     init(id: String,
          name: String,
@@ -67,7 +68,8 @@ struct Book: Codable, Identifiable, Hashable {
          genre: String,
          authorName: String,
          bookType: String,
-         imageUrl: String?) 
+         imageUrl: String?,
+         fileName: String?)
     {
         self.id = id
         self.name = name
@@ -78,6 +80,7 @@ struct Book: Codable, Identifiable, Hashable {
         self.authorName = authorName
         self.bookType = bookType
         self.imageUrl = imageUrl
+        self.fileName = fileName
     }
     
     mutating func set(firestoreId: String) {
