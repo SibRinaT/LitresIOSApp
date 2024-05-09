@@ -15,7 +15,7 @@ struct BookDetailsBody: View {
     @State var isExpanded = false
     @State private var selectedTab = "One"
     @State var userCanRead = true
-    let imageStorage = ImageStorage()
+    let imageStorage = ImageStorage.shared
 
     var body: some View {
         ZStack {
