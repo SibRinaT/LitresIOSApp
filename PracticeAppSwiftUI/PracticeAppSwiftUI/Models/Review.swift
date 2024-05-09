@@ -7,11 +7,19 @@
 
 import Foundation
 
-struct Review: Identifiable {
+struct Review: Codable, Identifiable {
     var id = UUID().uuidString
+    var bookId: String
     var reviewText: String
     var userName: String
-    var userImageURL: String
     var rating: Int
     var reviewDate: Date
+    
+    init(bookId: String, reviewText: String, userName: String, rating: Int) {
+        self.bookId = bookId
+        self.reviewText = reviewText
+        self.userName = userName
+        self.rating = rating
+        self.reviewDate = Date()
+    }
 }

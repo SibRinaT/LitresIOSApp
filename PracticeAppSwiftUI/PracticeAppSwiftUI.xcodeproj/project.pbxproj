@@ -69,6 +69,7 @@
 		AC19BE112BEB95E10064A95E /* FirebaseRemoteConfigSwift in Frameworks */ = {isa = PBXBuildFile; productRef = AC19BE102BEB95E10064A95E /* FirebaseRemoteConfigSwift */; };
 		AC19BE132BEB95E10064A95E /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = AC19BE122BEB95E10064A95E /* FirebaseStorage */; };
 		AC19BE152BEB95E10064A95E /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = AC19BE142BEB95E10064A95E /* FirebaseStorageCombine-Community */; };
+		AC99B3312BED0ABB00D28199 /* FireStore+Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC99B3302BED0ABB00D28199 /* FireStore+Review.swift */; };
 		ACAE92522BEB25DE00722E1F /* AdminFileUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAE92512BEB25DE00722E1F /* AdminFileUploadView.swift */; };
 		ACAE92542BEB262D00722E1F /* AdminImageUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAE92532BEB262D00722E1F /* AdminImageUploadView.swift */; };
 		ACB46AC32BE7680B009A7ABA /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB46AC22BE7680B009A7ABA /* ProfileView.swift */; };
@@ -120,6 +121,7 @@
 		2E8A617F2BE6105D0013BD1F /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		2E8A61852BE6199E0013BD1F /* LoadinViewFB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadinViewFB.swift; sourceTree = "<group>"; };
 		2ECB52822BE8C0B50088E115 /* OTPModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPModifier.swift; sourceTree = "<group>"; };
+		AC99B3302BED0ABB00D28199 /* FireStore+Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FireStore+Review.swift"; sourceTree = "<group>"; };
 		ACAE92512BEB25DE00722E1F /* AdminFileUploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminFileUploadView.swift; sourceTree = "<group>"; };
 		ACAE92532BEB262D00722E1F /* AdminImageUploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminImageUploadView.swift; sourceTree = "<group>"; };
 		ACB46AC22BE7680B009A7ABA /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 				ACB46B3D2BE8C53F009A7ABA /* ImageStorage.swift */,
 				ACB46AC82BE79F55009A7ABA /* FireStore.swift */,
 				ACB46B7A2BE92516009A7ABA /* FileStore+Genre.swift */,
+				AC99B3302BED0ABB00D28199 /* FireStore+Review.swift */,
 				ACB46B782BE8F51B009A7ABA /* ApiError.swift */,
 				2E8A616F2BE4DC200013BD1F /* Frameworks */,
 			);
@@ -498,6 +501,7 @@
 				2E3D198D2BE26CC40005CD68 /* Tag.swift in Sources */,
 				2E3D199E2BE351890005CD68 /* BookDetailsHeader.swift in Sources */,
 				ACAE92522BEB25DE00722E1F /* AdminFileUploadView.swift in Sources */,
+				AC99B3312BED0ABB00D28199 /* FireStore+Review.swift in Sources */,
 				2E3D19AF2BE355410005CD68 /* SearchBookView.swift in Sources */,
 				ACB46B7B2BE92516009A7ABA /* FileStore+Genre.swift in Sources */,
 				ACB46B3A2BE8BD53009A7ABA /* AdminOptionViews.swift in Sources */,

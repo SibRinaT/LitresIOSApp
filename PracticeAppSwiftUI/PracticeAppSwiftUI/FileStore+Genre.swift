@@ -9,19 +9,10 @@ import Foundation
 import FirebaseFirestore
 
 extension Store {
+    private var genreCollection: String { "bookGenre" }
+    
     func getGenres() async throws -> [BookGenre] {
-        do {
-            let snapshot = try await db.collection("bookGenre").getDocuments()
-            var genres = [BookGenre]()
-            for document in snapshot.documents {
-                if var genre = try? document.data(as: BookGenre.self) {
-                    genres.append(genre)
-                }
-            }
-            return genres
-        } catch {
-            print("Error getting documents: \(error)")
-            return []
-        }
+        let docs = try await db.collection(genreCollection).getDocuments()
+        return docs.documents.compactMap { try? $0.data(as: BookGenre.self) }
     }
 }

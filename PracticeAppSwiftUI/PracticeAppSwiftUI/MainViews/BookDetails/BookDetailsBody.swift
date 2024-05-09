@@ -16,7 +16,8 @@ struct BookDetailsBody: View {
     @State private var selectedTab = "One"
     @State var userCanRead = true
     let imageStorage = ImageStorage.shared
-
+    @State private var reviews = [Review]()
+    
     var body: some View {
         ZStack {
             Color("BackColor")
@@ -86,16 +87,16 @@ struct BookDetailsBody: View {
               
                 //                Text("\nИздатель: \(book.publisher)")
 //                Text("Дата выхода на ЧитайBook: \(book.creatingDate.formatted(date: .long, time: .omitted))")
-//                Spacer(minLength: 20)
-//                if !book.reviews.isEmpty {
-//                    Text(book.reviews.count == 1 ? "Отзыв" : "Отзывы")
-//                        .font(.largeTitle)
-//                        .bold()
-//                }
-//                ForEach(book.reviews) { review in
-//                    BookReview(review: review)
-//                        .padding(EdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0))
-//                }
+                Spacer(minLength: 20)
+                if !reviews.isEmpty {
+                    Text(reviews.count == 1 ? "Отзыв" : "Отзывы")
+                        .font(.largeTitle)
+                        .bold()
+                }
+                ForEach(reviews) { review in
+                    BookReview(review: review)
+                        .padding(EdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0))
+                }
             }
             
             //        NavigationView {
@@ -105,7 +106,16 @@ struct BookDetailsBody: View {
             //                   }
             //        .padding()
         }
+        .task {
+            do {
+                self.reviews = try await Store.shared.getReviewsFor(bookId: book.id)
+            } catch {
+                print(error)
+            }
+        }
     }
+    
+    
 }
 
 //#Preview {
