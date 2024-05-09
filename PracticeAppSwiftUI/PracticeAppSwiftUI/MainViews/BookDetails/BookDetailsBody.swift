@@ -15,6 +15,8 @@ struct BookDetailsBody: View {
     @State var isExpanded = false
     @State private var selectedTab = "One"
     @State var userCanRead = true
+    let imageStorage = ImageStorage()
+
     var body: some View {
         ZStack {
             Color("BackColor")
@@ -54,8 +56,18 @@ struct BookDetailsBody: View {
                 )
                 .font(.custom("AmericanTypewriter", size: 16))
                 .foregroundColor(Color(.white))
+                
                 VStack(alignment: .center){
-                    Button(action: {} ) { //need code for action
+                    Button(action: {
+                        Task {
+                            do {
+                                let fileURL = try await imageStorage.getUrlForFile(name: book.name)
+                                print("File URL:", fileURL)
+                            } catch {
+                                print("Error:", error)
+                            }
+                        }
+                    }) {
                         Rectangle()
                             .frame(width: 224, height: 50)
                             .foregroundColor(userCanRead ? Color("MainColor") : Color("InactiveColor").opacity(0.5))
@@ -67,6 +79,7 @@ struct BookDetailsBody: View {
                             )
                     }
                 }
+                
                
                 //                Text("\nИздатель: \(book.publisher)")
 //                Text("Дата выхода на ЧитайBook: \(book.creatingDate.formatted(date: .long, time: .omitted))")
@@ -81,6 +94,7 @@ struct BookDetailsBody: View {
 //                        .padding(EdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0))
 //                }
             }
+            
             //        NavigationView {
             //                       NavigationLink(destination: PlaysoundView()) {
             //                           Text("Перейти к проигрывателю")
