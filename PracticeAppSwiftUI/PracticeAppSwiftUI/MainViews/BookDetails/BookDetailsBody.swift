@@ -24,6 +24,31 @@ struct BookDetailsBody: View {
             VStack(alignment: .leading) {
                 HStack {
                     VStack(alignment: .leading) {
+                        HStack {
+                            Spacer()
+                            Button(action: {
+                                Task {
+                                    do {
+                                        let fileURL = try await imageStorage.getUrlForFile(name: book.name)
+                                        print("File URL:", fileURL)
+                                    } catch {
+                                        print("Error:", error)
+                                    }
+                                }
+                            }) {
+                                Rectangle()
+                                    .frame(width: 100, height: 25)
+                                    .foregroundColor(userCanRead ? Color("MainColor") : Color("InactiveColor").opacity(0.5))
+                                    .cornerRadius(16)
+                                    .overlay(
+                                        Text("Читать")
+                                            .foregroundColor(.white)
+                                            .font(.custom("AmericanTypewriter", size: 20))
+                                    )
+                            }
+                            Spacer()
+                        }
+                       
                         Text(book.bookType)
                             .font(.custom("AmericanTypewriter", size: 16))
                             .foregroundColor(Color(.white))
@@ -49,6 +74,7 @@ struct BookDetailsBody: View {
                 }
                 .padding(.vertical)
 //                TagsView(tags: book.tags)
+                
                 DisclosureGroup(
                     isExpanded: $isExpanded,
                     content: { Text(book.description ?? "") },
@@ -57,30 +83,7 @@ struct BookDetailsBody: View {
                 .font(.custom("AmericanTypewriter", size: 16))
                 .foregroundColor(Color(.white))
                 
-                VStack(alignment: .center){
-                    Button(action: {
-                        Task {
-                            do {
-                                let fileURL = try await imageStorage.getUrlForFile(name: book.name)
-                                print("File URL:", fileURL)
-                            } catch {
-                                print("Error:", error)
-                            }
-                        }
-                    }) {
-                        Rectangle()
-                            .frame(width: 224, height: 50)
-                            .foregroundColor(userCanRead ? Color("MainColor") : Color("InactiveColor").opacity(0.5))
-                            .cornerRadius(16)
-                            .overlay(
-                                Text("Читать")
-                                    .foregroundColor(.white)
-                                    .font(.custom("AmericanTypewriter", size: 20))
-                            )
-                    }
-                }
-                
-               
+              
                 //                Text("\nИздатель: \(book.publisher)")
 //                Text("Дата выхода на ЧитайBook: \(book.creatingDate.formatted(date: .long, time: .omitted))")
 //                Spacer(minLength: 20)
