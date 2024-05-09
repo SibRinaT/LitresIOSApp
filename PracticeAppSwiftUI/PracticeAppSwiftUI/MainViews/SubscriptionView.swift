@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct SubscriptionView: View {
+    let authService = AuthService.shared
+    
     var body: some View {
         ZStack {
             Color("BackColor")
@@ -28,7 +30,16 @@ struct SubscriptionView: View {
                             )
                     }
                     
-                    Button (action: {}) {
+                    Button (action: {
+                        Task {
+                            do {
+                                let enableSubscription = try await authService.enableSubscription()
+                                print("subscription: ", enableSubscription)
+                            } catch {
+                                print(error)
+                            }
+                        }
+                    }) {
                         Rectangle()
                             .frame(width: 280, height: 57)
                             .cornerRadius(14)
@@ -39,7 +50,16 @@ struct SubscriptionView: View {
                             )
                     }
                     
-                    Button (action: {}) {
+                    Button (action: {
+                        Task {
+                            do {
+                                let enableSubscription = try await authService.enableSubscription()
+                                print("subscription: ", enableSubscription)
+                            } catch {
+                                print(error)
+                            }
+                        }
+                    }) {
                         Rectangle()
                             .frame(width: 280, height: 57)
                             .cornerRadius(14)
