@@ -122,5 +122,5 @@ enum SubscriptionType {
 }
 
 #Preview {
-    SubscriptionView()
+    SubscriptionView(isSheetPresented: .constant(true))
 }
