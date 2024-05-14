@@ -42,6 +42,7 @@
 		2E8A61802BE6105D0013BD1F /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8A617F2BE6105D0013BD1F /* SignUpViewModel.swift */; };
 		2E8A61862BE6199E0013BD1F /* LoadinViewFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8A61852BE6199E0013BD1F /* LoadinViewFB.swift */; };
 		2ECB52832BE8C0B50088E115 /* OTPModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECB52822BE8C0B50088E115 /* OTPModifier.swift */; };
+		2EFE3B5F2BF3704600A8E8D0 /* ReaderBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EFE3B5E2BF3704600A8E8D0 /* ReaderBookView.swift */; };
 		AC19BDE12BEB95E10064A95E /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = AC19BDE02BEB95E10064A95E /* FirebaseAnalytics */; };
 		AC19BDE32BEB95E10064A95E /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = AC19BDE22BEB95E10064A95E /* FirebaseAnalyticsOnDeviceConversion */; };
 		AC19BDE52BEB95E10064A95E /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = AC19BDE42BEB95E10064A95E /* FirebaseAnalyticsSwift */; };
@@ -121,6 +122,7 @@
 		2E8A617F2BE6105D0013BD1F /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		2E8A61852BE6199E0013BD1F /* LoadinViewFB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadinViewFB.swift; sourceTree = "<group>"; };
 		2ECB52822BE8C0B50088E115 /* OTPModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPModifier.swift; sourceTree = "<group>"; };
+		2EFE3B5E2BF3704600A8E8D0 /* ReaderBookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReaderBookView.swift; sourceTree = "<group>"; };
 		AC99B3302BED0ABB00D28199 /* FireStore+Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FireStore+Review.swift"; sourceTree = "<group>"; };
 		ACAE92512BEB25DE00722E1F /* AdminFileUploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminFileUploadView.swift; sourceTree = "<group>"; };
 		ACAE92532BEB262D00722E1F /* AdminImageUploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminImageUploadView.swift; sourceTree = "<group>"; };
@@ -259,6 +261,7 @@
 				2E3D199A2BE3515F0005CD68 /* BookDetails */,
 				2E3D19A72BE354A60005CD68 /* SmallViews */,
 				2E3D19B52BE3582D0005CD68 /* Load */,
+				2EFE3B5E2BF3704600A8E8D0 /* ReaderBookView.swift */,
 			);
 			path = MainViews;
 			sourceTree = "<group>";
@@ -497,6 +500,7 @@
 				2E3D19B12BE355770005CD68 /* AsyncContentView.swift in Sources */,
 				2E3D19A92BE354E10005CD68 /* TagsView.swift in Sources */,
 				2E6F0EC32BDEC9E7003312F5 /* InputFieldView.swift in Sources */,
+				2EFE3B5F2BF3704600A8E8D0 /* ReaderBookView.swift in Sources */,
 				2E8A61802BE6105D0013BD1F /* SignUpViewModel.swift in Sources */,
 				2E3D198D2BE26CC40005CD68 /* Tag.swift in Sources */,
 				2E3D199E2BE351890005CD68 /* BookDetailsHeader.swift in Sources */,
