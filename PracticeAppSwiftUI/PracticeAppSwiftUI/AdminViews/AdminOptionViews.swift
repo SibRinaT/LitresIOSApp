@@ -19,6 +19,9 @@ struct AdminOptionViews: View {
                 NavigationLink(destination: AdminBooksList()) {
                     Text("Books")
                 }
+                NavigationLink(destination: AdminReviewList()) {
+                    Text("Reviews")
+                }
             }
             .navigationTitle("Admin Panel")
             .toolbar {
@@ -28,7 +31,6 @@ struct AdminOptionViews: View {
                     } label: {
                         Text("Закрыть")
                     }
-
                 }
             }
         }

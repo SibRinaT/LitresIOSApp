@@ -8,10 +8,12 @@
 import SwiftUI
 
 struct AddNewFeedbackView: View {
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+
     @State private var reviewText = ""
     @State private var rating = 0
     var book: Book
-
+    
     var body: some View {
         ZStack {
             Color("BackColor")
@@ -44,15 +46,15 @@ struct AddNewFeedbackView: View {
                                         .foregroundColor(.white)
                                     
                                     ForEach(1..<6) { index in
-                                                        Image(systemName: index <= rating ? "star.fill" : "star")
-                                                            .resizable()
-                                                            .aspectRatio(contentMode: .fit)
-                                                            .frame(width: 15, height: 15)
-                                                            .foregroundColor(.yellow)
-                                                            .onTapGesture {
-                                                                rating = index
-                                                            }
-                                                    }
+                                        Image(systemName: index <= rating ? "star.fill" : "star")
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 15, height: 15)
+                                            .foregroundColor(.yellow)
+                                            .onTapGesture {
+                                                rating = index
+                                            }
+                                    }
                                 }
                                 TextEditor(text: $reviewText)
                                     .cornerRadius(14)
@@ -61,32 +63,32 @@ struct AddNewFeedbackView: View {
                                     .padding()
                                     .padding(.horizontal, 30)
                                     .padding(.bottom, -50)
-
+                                
                                 if reviewText.count < 20 {
                                     Text("Минимальная длина 20 символов!")
                                         .foregroundColor(.white)
                                         .font(.custom("AmericanTypewriter", size: 14))
                                         .padding()
                                         .padding(.bottom, -30)
-
+                                    
                                 } else {
                                     Text("")
                                         .padding()
                                 }
                                 
                                 if rating == 0 {
-                                               Text("Пожалуйста, выставьте рейтинг")
-                                                   .foregroundColor(.white)
-                                                   .font(.custom("AmericanTypewriter", size: 14))
-                                                   .padding()
-                                           } else {
-                                               Text("")
-                                                   .padding()
-                                           }
+                                    Text("Пожалуйста, выставьте рейтинг")
+                                        .foregroundColor(.white)
+                                        .font(.custom("AmericanTypewriter", size: 14))
+                                        .padding()
+                                } else {
+                                    Text("")
+                                        .padding()
+                                }
                                 
                                 Text("\(reviewText.count)/150 символов")
                                     .foregroundColor(reviewText.count > 150 ? .red : .white)
-                                              .padding(.bottom, 20)
+                                    .padding(.bottom, 20)
                                 
                                 Button(action: {
                                     sendReview()
@@ -96,7 +98,7 @@ struct AddNewFeedbackView: View {
                                         .frame(width: 200 ,height: 70)
                                         .foregroundColor(reviewText.count < 20 ? .black : .gray)
                                         .foregroundColor(rating == 0 ? .black : .gray)
-
+                                    
                                         .overlay(
                                             Text("Отправить")
                                                 .font(.custom("AmericanTypewriter", size: 18))
@@ -120,9 +122,16 @@ struct AddNewFeedbackView: View {
                                     userName: user?.name ?? "Anonym",
                                     rating: rating)
                 try Store.shared.add(review: review)
+                dismissSelf()
             } catch {
                 print(error)
             }
+        }
+    }
+    
+    private func dismissSelf() {
+        DispatchQueue.main.async {
+            self.presentationMode.wrappedValue.dismiss()
         }
     }
 }

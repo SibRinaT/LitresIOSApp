@@ -89,12 +89,17 @@ struct BookDetailsBody: View {
                         .font(.largeTitle)
                         .bold()
                 }
+                NavigationLink(destination: AddNewFeedbackView(book: book)) {
+                    Text("Написать отзыв")
+                        .padding(.vertical)
+                }
                 ForEach(reviews) { review in
                     BookReview(review: review)
                         .padding(EdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0))
                 }
             }
-            
+            .padding()
+
             //        NavigationView {
             //                       NavigationLink(destination: PlaysoundView()) {
             //                           Text("Перейти к проигрывателю")
