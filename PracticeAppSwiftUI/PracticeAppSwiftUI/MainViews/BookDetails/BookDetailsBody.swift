@@ -115,7 +115,7 @@ struct BookDetailsBody: View {
     private func downloadBookButtonPressed() {
         Task {
             do {
-                if let user = try await AuthService.shared.fetchUserInfo(), user.isSubscriptionEnabled && book.isFree {
+                if let user = try await AuthService.shared.fetchUserInfo(), user.isSubscriptionEnabled || book.isFree {
                     let fileURL = try await imageStorage.getUrlForFile(name: book.name)
                     let data = try await ImageStorage.shared.loadData(from: fileURL)
                     let text = String(data: data, encoding: .utf8)
