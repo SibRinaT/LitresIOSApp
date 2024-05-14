@@ -45,7 +45,6 @@ struct BookDetailsHeader: View {
 //                                .foregroundColor(Color("MainColor"))
                         }
                         .font(.callout)
-
                         .foregroundColor(.white)
                         
                         AsyncImage(url: URL(string: book.imageUrl ?? "")) { image in
@@ -70,6 +69,16 @@ struct BookDetailsHeader: View {
                         }
                     }
                     VStack {
+                        Rectangle()
+                            .frame(width: 130, height: 35)
+                            .foregroundColor(Color("MainColor"))
+                            .cornerRadius(14)
+                            .overlay(
+                                Text(book.isFree ? "Бесплатная" : "По подписке")
+                                    .foregroundColor(.white)
+                                    .font(.custom("AmericanTypewriter", size: 14))
+                                    .multilineTextAlignment(.center)
+                            )
                         HStack {
                             Text(book.name)
                                 .bold()
