@@ -56,6 +56,7 @@ struct Book: Codable, Identifiable, Hashable {
     let genre: String
     let authorName: String?
     let bookType: String
+    let isFree: Bool
     var rating = 0.0
     let imageUrl: String?
     let fileName: String?
@@ -67,6 +68,7 @@ struct Book: Codable, Identifiable, Hashable {
          description: String?,
          genre: String,
          authorName: String,
+         isFree: Bool,
          bookType: String,
          imageUrl: String?,
          fileName: String?)
@@ -78,6 +80,7 @@ struct Book: Codable, Identifiable, Hashable {
         self.description = description
         self.genre = genre
         self.authorName = authorName
+        self.isFree = isFree
         self.bookType = bookType
         self.imageUrl = imageUrl
         self.fileName = fileName

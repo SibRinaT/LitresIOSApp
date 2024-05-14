@@ -43,6 +43,7 @@ struct AdminEditBookView: View {
     @State private var authorName = ""
     @State private var selectedGenre = ""
     @State private var selectedBookType = BookType.text
+    @State private var isFree = true
     
     @State private var genres = [BookGenre]()
     @State private var imageUrl: String?
@@ -85,6 +86,9 @@ struct AdminEditBookView: View {
                         }
                     }
                     .pickerStyle(.menu)
+                    Toggle(isOn: $isFree) {
+                        Text("Доступна бесплатно")
+                    }
                 }
                 Section {
                     AdminFileUploadView(fileName: $fileName)
@@ -129,6 +133,7 @@ struct AdminEditBookView: View {
             description = book.description ?? ""
             selectedGenre = book.genre
             authorName = book.authorName ?? ""
+            isFree = book.isFree
             selectedBookType = BookType(rawValue: book.bookType) ?? .text
             imageUrl = book.imageUrl
             fileName = book.fileName
@@ -188,6 +193,7 @@ struct AdminEditBookView: View {
                         description: description,
                         genre: selectedGenre,
                         authorName: authorName,
+                        isFree: isFree,
                         bookType: selectedBookType.rawValue,
                         imageUrl: imageUrl,
                         fileName: fileName)
