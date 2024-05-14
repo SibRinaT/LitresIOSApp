@@ -9,7 +9,8 @@ import SwiftUI
 
 struct SubscriptionView: View {
     let authService = AuthService.shared
-    
+    @State private var selectedSubscription: SubscriptionType?
+
     var body: some View {
         ZStack {
             Color("BackColor")
@@ -19,38 +20,32 @@ struct SubscriptionView: View {
                     .font(.custom("AmericanTypewriter", size: 48))
                     .foregroundColor(.white)
                 VStack {
-                    Button (action: {}) {
-                        Rectangle()
-                            .frame(width: 280, height: 57)
-                            .cornerRadius(14)
-                            .foregroundColor(Color("SecondaryColor"))
-                            .overlay(
-                                Text("Базовая")
-                                    .foregroundColor(.white)
-                            )
-                    }
-                    
                     Button (action: {
-                        Task {
-                            do {
-                                let enableSubscription = try await authService.enableSubscription()
-                                print("subscription: ", enableSubscription)
-                            } catch {
-                                print(error)
-                            }
-                        }
+                        selectedSubscription = .basic
                     }) {
-                        Rectangle()
-                            .frame(width: 280, height: 57)
-                            .cornerRadius(14)
-                            .foregroundColor(Color("SecondaryColor"))
-                            .overlay(
-                                    Text("Расширенная на месяц")
+                        if selectedSubscription == .basic {
+                            Rectangle()
+                                .frame(width: 280, height: 57)
+                                .cornerRadius(14)
+                                .foregroundColor(Color("MainColor"))
+                                .overlay(
+                                    Text("Базовая")
                                         .foregroundColor(.white)
-                            )
+                                )
+                        } else {
+                            Rectangle()
+                                .frame(width: 280, height: 57)
+                                .cornerRadius(14)
+                                .foregroundColor(Color("SecondaryColor"))
+                                .overlay(
+                                    Text("Базовая")
+                                        .foregroundColor(.white)
+                                )
+                        }
                     }
                     
                     Button (action: {
+                        selectedSubscription = .month
                         Task {
                             do {
                                 let enableSubscription = try await authService.enableSubscription()
@@ -60,19 +55,69 @@ struct SubscriptionView: View {
                             }
                         }
                     }) {
-                        Rectangle()
-                            .frame(width: 280, height: 57)
-                            .cornerRadius(14)
-                            .foregroundColor(Color("SecondaryColor"))
-                            .overlay(
-                                Text("Расширенная на год")
-                                    .foregroundColor(.white)
-                            )
+                        if selectedSubscription == .month {
+                            Rectangle()
+                                .frame(width: 280, height: 57)
+                                .cornerRadius(14)
+                                .foregroundColor(Color("MainColor"))
+                                .overlay(
+                                        Text("Расширенная на месяц")
+                                            .foregroundColor(.white)
+                                )
+                        } else {
+                            Rectangle()
+                                .frame(width: 280, height: 57)
+                                .cornerRadius(14)
+                                .foregroundColor(Color("SecondaryColor"))
+                                .overlay(
+                                        Text("Расширенная на месяц")
+                                            .foregroundColor(.white)
+                                        )
+                        }
+                    }
+                    
+                    Button (action: {
+                        selectedSubscription = .year
+
+                        Task {
+                            do {
+                                let enableSubscription = try await authService.enableSubscription()
+                                print("subscription: ", enableSubscription)
+                            } catch {
+                                print(error)
+                            }
+                        }
+                    }) {
+                        if selectedSubscription == .year {
+                            Rectangle()
+                                .frame(width: 280, height: 57)
+                                .cornerRadius(14)
+                                .foregroundColor(Color("MainColor"))
+                                .overlay(
+                                    Text("Расширенная на год")
+                                        .foregroundColor(.white)
+                                )
+                        } else {
+                            Rectangle()
+                                .frame(width: 280, height: 57)
+                                .cornerRadius(14)
+                                .foregroundColor(Color("SecondaryColor"))
+                                .overlay(
+                                    Text("Расширенная на год")
+                                        .foregroundColor(.white)
+                                )
+                        }
                     }
                 }
             }
         }
     }
+}
+
+enum SubscriptionType {
+    case basic
+    case month
+    case year
 }
 
 #Preview {

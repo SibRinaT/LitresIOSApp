@@ -13,9 +13,9 @@ struct BookReview: View {
     var body: some View {
         VStack (alignment: .leading) {
             HStack {
-                AsyncImage(url: URL(string: review.userImageURL)!)
-                    .frame(width: 80, height: 80)
-                    .cornerRadius(50)
+//                AsyncImage(url: URL(string: review.userImageURL)!)
+//                    .frame(width: 80, height: 80)
+//                    .cornerRadius(50)
                 VStack (alignment: .leading) {
                     Text(review.userName)
                         .bold()
