@@ -36,9 +36,9 @@ final class AuthService {
     }
     
     func logOut() throws {
-        try auth.signOut()
         UserDefaults.standard.removeObject(forKey: userIdKey)
         cachedUser = nil
+        try auth.signOut()
         print("Signed out")
     }
     

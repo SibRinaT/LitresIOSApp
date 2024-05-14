@@ -10,11 +10,10 @@ import SwiftUI
 struct ProfileView: View {
     @EnvironmentObject private var appRootManager: AppRootManager
     @State private var presentAdminView = false
-    @State private var login: String = "SibRinaT"
     @State private var email: String = "sibrinat616@gmail.com"
     @State private var sub: String = "Базовая"
-    @State private var Role: String = "Админ"
-
+    @State private var user: User?
+    
     var body: some View {
         ZStack {
             Color("BackColor")
@@ -33,7 +32,7 @@ struct ProfileView: View {
                             HStack {
                                 Text("Логин - ")
                                     .foregroundColor(.white)
-                                Text(login)
+                                Text(user?.name ?? "No name")
                                     .foregroundColor(.white)
                             }
                         )
@@ -61,21 +60,27 @@ struct ProfileView: View {
                                     .foregroundColor(.white)
                             }
                         )
-                    Rectangle()
-                        .frame(width: 280, height: 57)
-                        .cornerRadius(14)
-                        .foregroundColor(Color("SecondaryColor"))
-                        .overlay(
-                            HStack {
-                                Text("Роль - ")
-                                    .foregroundColor(.white)
-                                Text(Role)
-                                    .foregroundColor(.white)
-                            }
-                        )
+                    
+                    if let user, user.isAdmin {
+                        Button {
+                            presentAdminView = true
+                        } label: {
+                            Rectangle()
+                                .frame(width: 280, height: 57)
+                                .cornerRadius(14)
+                                .foregroundColor(Color("SecondaryColor"))
+                                .overlay(
+                                    HStack {
+                                        Text("Роль - Admin")
+                                            .foregroundColor(.white)
+                                    }
+                                )
+                        }
+                    }
+                    
                 }
                 .font(.custom("AmericanTypewriter", size: 16))
-
+                
                 Button {
                     logOut()
                 } label: {
@@ -84,16 +89,12 @@ struct ProfileView: View {
                         .foregroundColor(Color("SecondaryColor"))
                         .cornerRadius(14)
                         .overlay(
-                    Text("Выйти из аккаунта")
-                        .font(.custom("AmericanTypewriter", size: 16))
-                        .foregroundColor(Color("MainColor"))
-                    )
+                            Text("Выйти из аккаунта")
+                                .font(.custom("AmericanTypewriter", size: 16))
+                                .foregroundColor(Color("MainColor"))
+                        )
                 }
                 Spacer()
-                Button("Show Admin Panel") {
-                    presentAdminView = true
-                }
-                .foregroundColor(.white)
             }
             .popover(isPresented: $presentAdminView) {
                 AdminOptionViews(isSheetPresented: $presentAdminView)
@@ -107,10 +108,9 @@ struct ProfileView: View {
     private func getUser() {
         Task {
             do {
-                let user = try? await AuthService.shared.fetchUserInfo()
-                print(user)
+                self.user = try? await AuthService.shared.fetchUserInfo()
             } catch {
-                
+                print(error)
             }
         }
     }
