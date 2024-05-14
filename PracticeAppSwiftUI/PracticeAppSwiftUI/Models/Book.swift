@@ -59,7 +59,7 @@ struct Book: Codable, Identifiable, Hashable {
     let isFree: Bool
     var rating = 0.0
     let imageUrl: String?
-    let fileName: String?
+    let fileName: String
 
     init(id: String,
          name: String,
@@ -71,7 +71,7 @@ struct Book: Codable, Identifiable, Hashable {
          isFree: Bool,
          bookType: String,
          imageUrl: String?,
-         fileName: String?)
+         fileName: String)
     {
         self.id = id
         self.name = name

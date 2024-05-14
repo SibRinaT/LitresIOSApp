@@ -8,13 +8,29 @@
 import SwiftUI
 
 struct ReaderBookView: View {
+
     @Binding var isSheetPresented: Bool
+    @State var book: Book
     @State var bookText: String
     
     var body: some View {
-        ScrollView {
-            TextEditor (text: $bookText)
+        NavigationStack {
+            VStack {
+                ScrollView {
+                    TextEditor (text: $bookText)
+                }
+            }
+            .navigationTitle(book.name)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("Закрыть") {
+                        isSheetPresented = false
+                    }
+                }
+            }
         }
     }
+    
+
 }
 

@@ -186,6 +186,7 @@ struct AdminEditBookView: View {
     }
     
     private func buildBook(bookId: String, firestoreId: String?) -> Book? {
+        guard let fileName else { return nil }
         var book = Book(id: bookId,
                         name: bookName,
                         year: Int(releaseYear),

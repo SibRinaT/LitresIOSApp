@@ -17,9 +17,17 @@ struct BookDetailsBody: View {
     @State var userCanRead = true
     let imageStorage = ImageStorage.shared
     @State private var reviews = [Review]()
+    
     @State private var isSubscriptionViewPresented = false
-    @State private var isReaderBookViewPresented = false
-    @State private var bookText: String?
+    @State private var bookText = ""
+    
+    var isReaderBookViewPresented: Binding<Bool> {
+        Binding {
+            !bookText.isEmpty
+        } set: { _ in
+            bookText = ""
+        }
+    }
     
     var body: some View {
         ZStack {
@@ -114,12 +122,10 @@ struct BookDetailsBody: View {
                 print(error)
             }
         }
-        .popover(isPresented: $isSubscriptionViewPresented) {
-            SubscriptionView(isSheetPresented: $isSubscriptionViewPresented)
-        }
-        .popover(isPresented: $isReaderBookViewPresented) {
-            if let bookText {
-                ReaderBookView(isSheetPresented: $isReaderBookViewPresented, bookText: bookText)
+        
+        .popover(isPresented: isReaderBookViewPresented) {
+            if !bookText.isEmpty {
+                ReaderBookView(isSheetPresented: isReaderBookViewPresented, book: book, bookText: bookText)
             }
         }
     }
@@ -127,17 +133,27 @@ struct BookDetailsBody: View {
     private func downloadBookButtonPressed() {
         Task {
             do {
-                if let user = try await AuthService.shared.fetchUserInfo(), user.isSubscriptionEnabled || book.isFree {
-                    let fileURL = try await imageStorage.getUrlForFile(name: book.name)
-                    let data = try await ImageStorage.shared.loadData(from: fileURL)
-                    bookText = String(data: data, encoding: .utf8)
-                    isReaderBookViewPresented = true
-                    
-                    
-                    // TODO open reader and pass text
+                if book.isFree {
+                    loadBookAndOpen()
                 } else {
-                    isSubscriptionViewPresented = true
+                    if let user = try await AuthService.shared.fetchUserInfo(), user.isSubscriptionEnabled {
+                        loadBookAndOpen()
+                    } else {
+                        isSubscriptionViewPresented = true
+                    }
                 }
+            } catch {
+                print("Error:", error)
+            }
+        }
+    }
+    
+    private func loadBookAndOpen() {
+        Task {
+            do {
+                let fileURL = try await imageStorage.getUrlForFile(name: book.fileName)
+                let data = try await ImageStorage.shared.loadData(from: fileURL)
+                bookText = String(data: data, encoding: .utf8) ?? ""
             } catch {
                 print("Error:", error)
             }
