@@ -15,6 +15,7 @@ final class AuthService {
     private let auth = Auth.auth()
     let db = Firestore.firestore()
     private let userIdKey = "userIdKey"
+    private var cachedUser: User?
     
     static let shared = AuthService()
     
@@ -37,13 +38,17 @@ final class AuthService {
     func logOut() throws {
         try auth.signOut()
         UserDefaults.standard.removeObject(forKey: userIdKey)
+        cachedUser = nil
         print("Signed out")
     }
     
     func fetchUserInfo() async throws -> User? {
+        if let cachedUser { return cachedUser }
         guard let userId = getUserId() else { return nil }
         let document = try await db.collection("users").document(userId).getDocument()
-        return try document.data(as: User.self)
+        let user = try document.data(as: User.self)
+        cachedUser = user
+        return user
     }
     
     func enableSubscription() async throws {
