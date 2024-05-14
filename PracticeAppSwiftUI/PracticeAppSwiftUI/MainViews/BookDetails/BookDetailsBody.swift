@@ -114,7 +114,7 @@ struct BookDetailsBody: View {
         }
         .popover(isPresented: $isReaderBookViewPresented) {
             if let bookText {
-                ReaderBookView(isSheetPresented: $isReaderViewPresented, bookText: bookText)
+                ReaderBookView(isSheetPresented: $isReaderBookViewPresented, bookText: bookText)
             }
         }
     }

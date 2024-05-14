@@ -65,22 +65,20 @@ struct BookDetailsHeader: View {
                                 Text(textBookContent)
                                     .font(.custom("AmericanTypewriter", size: 14))
                                     .foregroundColor(Color(.white))
-                                
-                                Rectangle()
-                                    .frame(width: 150, height: 50)
-                                    .foregroundColor(Color("SecondaryColor"))
-                                    .cornerRadius(14)
-                                    .overlay(
-                                        if book.isFree {
-                                            Text("Бесплатная")
-                                        } else {
-                                            Text("По подписке")
-                                        }
-                                    )
                             }
                         }
                     }
                     VStack {
+                        Rectangle()
+                            .frame(width: 130, height: 35)
+                            .foregroundColor(Color("MainColor"))
+                            .cornerRadius(14)
+                            .overlay(
+                                Text(book.isFree ? "Бесплатная" : "По подписке")
+                                    .foregroundColor(.white)
+                                    .font(.custom("AmericanTypewriter", size: 14))
+                                    .multilineTextAlignment(.center)
+                            )
                         HStack {
                             Text(book.name)
                                 .bold()
