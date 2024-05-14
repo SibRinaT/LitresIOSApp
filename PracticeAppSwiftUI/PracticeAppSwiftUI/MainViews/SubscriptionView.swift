@@ -10,6 +10,7 @@ import SwiftUI
 struct SubscriptionView: View {
     let authService = AuthService.shared
     @State private var selectedSubscription: SubscriptionType?
+    @Binding var isSheetPresented: Bool
 
     var body: some View {
         ZStack {

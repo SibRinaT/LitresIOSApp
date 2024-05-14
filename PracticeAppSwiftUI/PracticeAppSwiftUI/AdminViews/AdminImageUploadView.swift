@@ -40,7 +40,7 @@ struct AdminImageUploadView: View {
         .task {
             do {
                 if let imageUrl = URL(string: imageUrl ?? "") {
-                    let imageData = try await ImageStorage.shared.loadImageData(from: imageUrl)
+                    let imageData = try await ImageStorage.shared.loadData(from: imageUrl)
                     if let uiImage = UIImage(data: imageData) {
                         DispatchQueue.main.async {
                             bookImage = Image(uiImage: uiImage)

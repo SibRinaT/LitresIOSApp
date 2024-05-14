@@ -17,6 +17,7 @@ struct BookDetailsBody: View {
     @State var userCanRead = true
     let imageStorage = ImageStorage.shared
     @State private var reviews = [Review]()
+    @State private var isSubscriptionViewPresented = false
     
     var body: some View {
         ZStack {
@@ -28,14 +29,7 @@ struct BookDetailsBody: View {
                         HStack {
                             Spacer()
                             Button(action: {
-                                Task {
-                                    do {
-                                        let fileURL = try await imageStorage.getUrlForFile(name: book.name)
-                                        print("File URL:", fileURL)
-                                    } catch {
-                                        print("Error:", error)
-                                    }
-                                }
+                                downloadBookButtonPressed()
                             }) {
                                 Rectangle()
                                     .frame(width: 100, height: 25)
@@ -113,9 +107,27 @@ struct BookDetailsBody: View {
                 print(error)
             }
         }
+        .popover(isPresented: $isSubscriptionViewPresented) {
+            SubscriptionView(isSheetPresented: $isSubscriptionViewPresented)
+        }
     }
     
-    
+    private func downloadBookButtonPressed() {
+        Task {
+            do {
+                if let user = try await AuthService.shared.fetchUserInfo(), user.isSubscriptionEnabled {
+                    let fileURL = try await imageStorage.getUrlForFile(name: book.name)
+                    let data = try await ImageStorage.shared.loadData(from: fileURL)
+                    let text = String(data: data, encoding: .utf8)
+                    // TODO open reader and pass text
+                } else {
+                    isSubscriptionViewPresented = true
+                }
+            } catch {
+                print("Error:", error)
+            }
+        }
+    }
 }
 
 //#Preview {
