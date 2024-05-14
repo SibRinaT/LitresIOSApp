@@ -18,6 +18,8 @@ struct BookDetailsBody: View {
     let imageStorage = ImageStorage.shared
     @State private var reviews = [Review]()
     @State private var isSubscriptionViewPresented = false
+    @State private var isReaderViewPresented = false
+    @State private var bookText: String?
     
     var body: some View {
         ZStack {
@@ -110,6 +112,11 @@ struct BookDetailsBody: View {
         .popover(isPresented: $isSubscriptionViewPresented) {
             SubscriptionView(isSheetPresented: $isSubscriptionViewPresented)
         }
+        .popover(isPresented: $isReaderViewPresented) {
+            if let bookText {
+                ReaderView(isSheetPresented: $isReaderViewPresented, bookText: bookText)
+            }
+        }
     }
     
     private func downloadBookButtonPressed() {
@@ -118,7 +125,10 @@ struct BookDetailsBody: View {
                 if let user = try await AuthService.shared.fetchUserInfo(), user.isSubscriptionEnabled || book.isFree {
                     let fileURL = try await imageStorage.getUrlForFile(name: book.name)
                     let data = try await ImageStorage.shared.loadData(from: fileURL)
-                    let text = String(data: data, encoding: .utf8)
+                    bookText = String(data: data, encoding: .utf8)
+                    isReaderViewPresented = true
+                    
+                    
                     // TODO open reader and pass text
                 } else {
                     isSubscriptionViewPresented = true
