@@ -45,7 +45,6 @@ struct BookDetailsHeader: View {
 //                                .foregroundColor(Color("MainColor"))
                         }
                         .font(.callout)
-
                         .foregroundColor(.white)
                         
                         AsyncImage(url: URL(string: book.imageUrl ?? "")) { image in
@@ -66,6 +65,18 @@ struct BookDetailsHeader: View {
                                 Text(textBookContent)
                                     .font(.custom("AmericanTypewriter", size: 14))
                                     .foregroundColor(Color(.white))
+                                
+                                Rectangle()
+                                    .frame(width: 150, height: 50)
+                                    .foregroundColor(Color("SecondaryColor"))
+                                    .cornerRadius(14)
+                                    .overlay(
+                                        if book.isFree {
+                                            Text("Бесплатная")
+                                        } else {
+                                            Text("По подписке")
+                                        }
+                                    )
                             }
                         }
                     }

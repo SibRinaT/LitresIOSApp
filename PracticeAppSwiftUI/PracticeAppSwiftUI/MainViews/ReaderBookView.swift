@@ -10,7 +10,7 @@ import SwiftUI
 struct ReaderBookView: View {
     var body: some View {
         ScrollView {
-            TextEditor (text: ){
+            TextEditor (text: BookDetailsBody ){
                 
             }
         }

@@ -18,7 +18,7 @@ struct BookDetailsBody: View {
     let imageStorage = ImageStorage.shared
     @State private var reviews = [Review]()
     @State private var isSubscriptionViewPresented = false
-    @State private var isReaderViewPresented = false
+    @State private var isReaderBookViewPresented = false
     @State private var bookText: String?
     
     var body: some View {
@@ -112,9 +112,9 @@ struct BookDetailsBody: View {
         .popover(isPresented: $isSubscriptionViewPresented) {
             SubscriptionView(isSheetPresented: $isSubscriptionViewPresented)
         }
-        .popover(isPresented: $isReaderViewPresented) {
+        .popover(isPresented: $isReaderBookViewPresented) {
             if let bookText {
-                ReaderView(isSheetPresented: $isReaderViewPresented, bookText: bookText)
+//                ReaderBookView(isSheetPresented: $isReaderBookViewPresented, bookText: bookText)
             }
         }
     }
@@ -126,7 +126,7 @@ struct BookDetailsBody: View {
                     let fileURL = try await imageStorage.getUrlForFile(name: book.name)
                     let data = try await ImageStorage.shared.loadData(from: fileURL)
                     bookText = String(data: data, encoding: .utf8)
-                    isReaderViewPresented = true
+                    isReaderBookViewPresented = true
                     
                     
                     // TODO open reader and pass text
