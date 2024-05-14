@@ -88,7 +88,9 @@ struct AddNewFeedbackView: View {
                                     .foregroundColor(reviewText.count > 150 ? .red : .white)
                                               .padding(.bottom, 20)
                                 
-                                Button(action: {}) {
+                                Button(action: {
+                                    
+                                }) {
                                     Rectangle()
                                         .cornerRadius(14)
                                         .frame(width: 200 ,height: 70)

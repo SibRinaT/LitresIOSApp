@@ -12,7 +12,7 @@ struct MainView: View {
     var body: some View {
         TabView {
             NavigationView {
-                SubscriptionView()
+                SubscriptionView(isSheetPresented: .constant(true))
             }
             .tabItem {
                 Image(systemName: "trophy.circle.fill")

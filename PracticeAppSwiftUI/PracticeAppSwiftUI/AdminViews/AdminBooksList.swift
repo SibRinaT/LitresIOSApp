@@ -11,24 +11,34 @@ struct AdminBooksList: View {
     @State var books = [Book]()
     
     var body: some View {
-        List {
-            ForEach(books) { book in
-                NavigationLink(destination: AdminEditBookView(viewType: .edit(book: book))) {
-                    Text(book.name)
-                }
+        VStack(alignment: .leading) {
+            NavigationLink(destination: AdminEditBookView(viewType: .add)) {
+                Text("Добавить книгу")
+                    .padding()
             }
-            .onDelete(perform: deleteBooks)
+            List {
+                ForEach(books) { book in
+                    HStack {
+                        AsyncImage(url: URL(string: book.imageUrl ?? "")) { image in
+                            image
+                                .resizable()
+                                .frame(width: 50.0, height: 50.0)
+                        } placeholder: {
+//                            Image("book")
+//                                .frame(width: 50.0, height: 50.0)
+                        }
+                        NavigationLink(destination: AdminEditBookView(viewType: .edit(book: book))) {
+                            Text(book.name)
+                        }
+                    }
+                }
+                .onDelete(perform: deleteBooks)
+            }
         }
-        
         .navigationTitle("Books")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                NavigationLink(destination: AdminEditBookView(viewType: .add)) {
-                    Text("+ книга")
-                }
-
-            }
+            EditButton()
         }
         .task {
             do {
