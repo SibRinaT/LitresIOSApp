@@ -8,15 +8,13 @@
 import SwiftUI
 
 struct ReaderBookView: View {
+    @Binding var isSheetPresented: Bool
+    @State var bookText: String
+    
     var body: some View {
         ScrollView {
-            TextEditor (text: BookDetailsBody ){
-                
-            }
+            TextEditor (text: $bookText)
         }
     }
 }
 
-#Preview {
-    ReaderBookView()
-}

@@ -104,7 +104,7 @@ struct BookDetailsBody: View {
         }
         .task {
             do {
-                self.reviews = try await Store.shared.getReviewsFor(bookId: book.id)
+                self.reviews = try await Store.shared.getReviews(for: book.id)
             } catch {
                 print(error)
             }
@@ -114,7 +114,7 @@ struct BookDetailsBody: View {
         }
         .popover(isPresented: $isReaderBookViewPresented) {
             if let bookText {
-//                ReaderBookView(isSheetPresented: $isReaderBookViewPresented, bookText: bookText)
+                ReaderBookView(isSheetPresented: $isReaderViewPresented, bookText: bookText)
             }
         }
     }

@@ -9,6 +9,7 @@ import Foundation
 
 struct Review: Codable, Identifiable {
     var id = UUID().uuidString
+    private(set) var firestoreId: String?
     var bookId: String
     var reviewText: String
     var userName: String
@@ -21,5 +22,9 @@ struct Review: Codable, Identifiable {
         self.userName = userName
         self.rating = rating
         self.reviewDate = Date()
+    }
+    
+    mutating func set(firestoreId: String) {
+        self.firestoreId = firestoreId
     }
 }

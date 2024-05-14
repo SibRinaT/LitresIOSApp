@@ -15,10 +15,34 @@ extension Store {
         try db.collection(reviewCollection).addDocument(from: review)
     }
     
-    func getReviewsFor(bookId: String) async throws -> [Review] {
-        let docs = try await db.collection(reviewCollection)
-            .whereField("bookId", isEqualTo: bookId).getDocuments()
-        return docs.documents
-            .compactMap { try? $0.data(as: Review.self) }
+    func getReviews(for bookId: String? = nil) async throws -> [Review] {
+        let snapshot: QuerySnapshot
+        if let bookId {
+            snapshot = try await db.collection(reviewCollection)
+                .whereField("bookId", isEqualTo: bookId)
+                .getDocuments()
+        } else {
+            snapshot = try await db.collection(reviewCollection)
+                .getDocuments()
+        }
+        var reviews = [Review]()
+        for document in snapshot.documents {
+            if var review = try? document.data(as: Review.self) {
+                review.set(firestoreId: document.documentID)
+                reviews.append(review)
+            }
+        }
+        return reviews
+    }
+    
+    
+    func delete(review: Review) async throws {
+        if let firestoreId = review.firestoreId {
+            try await db.collection(reviewCollection)
+                .document(firestoreId)
+                .delete()
+        } else {
+            print("No firestore Id on book struct!")
+        }
     }
 }
