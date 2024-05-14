@@ -89,7 +89,7 @@ struct AddNewFeedbackView: View {
                                               .padding(.bottom, 20)
                                 
                                 Button(action: {
-                                    
+                                    sendReview()
                                 }) {
                                     Rectangle()
                                         .cornerRadius(14)
@@ -107,6 +107,21 @@ struct AddNewFeedbackView: View {
                             }
                         }
                     )
+            }
+        }
+    }
+    
+    private func sendReview() {
+        Task {
+            do {
+                let user = try await AuthService.shared.fetchUserInfo()
+                let review = Review(bookId: book.id,
+                                    reviewText: reviewText,
+                                    userName: user?.name ?? "Anonym",
+                                    rating: rating)
+                try Store.shared.add(review: review)
+            } catch {
+                print(error)
             }
         }
     }
