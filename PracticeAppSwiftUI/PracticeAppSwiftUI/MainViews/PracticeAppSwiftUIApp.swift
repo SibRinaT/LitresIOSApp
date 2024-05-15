@@ -12,6 +12,7 @@ import FirebaseAppCheck
 @main
 struct PracticeAppSwiftUIApp: App {
     @StateObject private var appRootManager = AppRootManager()
+    @State private var authService: AuthService
     
     init() {
         #if DEBUG
@@ -19,6 +20,8 @@ struct PracticeAppSwiftUIApp: App {
         AppCheck.setAppCheckProviderFactory(providerFactory)
         #endif
         FirebaseApp.configure()
+        
+        authService = AuthService()
     }
     
     var body: some Scene {
@@ -34,6 +37,7 @@ struct PracticeAppSwiftUIApp: App {
                 }
             }
             .environmentObject(appRootManager)
+            .environment(authService)
         }
     }
 }

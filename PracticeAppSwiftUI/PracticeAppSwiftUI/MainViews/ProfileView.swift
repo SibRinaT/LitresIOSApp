@@ -9,10 +9,10 @@ import SwiftUI
 
 struct ProfileView: View {
     @EnvironmentObject private var appRootManager: AppRootManager
+    @Environment(\.authService) var authService
+    
     @State private var presentAdminView = false
-    @State private var email: String = "sibrinat616@gmail.com"
     @State private var sub: String = "Базовая"
-    @State private var user: User?
     
     var body: some View {
         ZStack {
@@ -32,7 +32,7 @@ struct ProfileView: View {
                             HStack {
                                 Text("Логин - ")
                                     .foregroundColor(.white)
-                                Text(user?.name ?? "No name")
+                                Text(authService.user?.name ?? "No name")
                                     .foregroundColor(.white)
                             }
                         )
@@ -44,7 +44,7 @@ struct ProfileView: View {
                             HStack {
                                 Text("Почта - ")
                                     .foregroundColor(.white)
-                                Text(email)
+                                Text("No email")
                                     .foregroundColor(.white)
                             }
                         )
@@ -61,7 +61,7 @@ struct ProfileView: View {
                             }
                         )
                     
-                    if let user, user.isAdmin {
+                    if let user = authService.user, user.isAdmin {
                         Button {
                             presentAdminView = true
                         } label: {
@@ -99,19 +99,6 @@ struct ProfileView: View {
             .popover(isPresented: $presentAdminView) {
                 AdminOptionViews(isSheetPresented: $presentAdminView)
             }
-            .onAppear {
-                getUser()
-            }
-        }
-    }
-    
-    private func getUser() {
-        Task {
-            do {
-                self.user = try? await AuthService.shared.fetchUserInfo()
-            } catch {
-                print(error)
-            }
         }
     }
     
@@ -121,8 +108,4 @@ struct ProfileView: View {
             appRootManager.currentRoot = .signUp
         }
     }
-}
-
-#Preview {
-    ProfileView()
 }

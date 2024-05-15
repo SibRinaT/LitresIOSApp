@@ -43,6 +43,7 @@
 		2E8A61862BE6199E0013BD1F /* LoadinViewFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8A61852BE6199E0013BD1F /* LoadinViewFB.swift */; };
 		2ECB52832BE8C0B50088E115 /* OTPModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECB52822BE8C0B50088E115 /* OTPModifier.swift */; };
 		2EFE3B5F2BF3704600A8E8D0 /* ReaderBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EFE3B5E2BF3704600A8E8D0 /* ReaderBookView.swift */; };
+		AC3A85A02BF4DD89003A9101 /* EnvironmentValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3A859F2BF4DD89003A9101 /* EnvironmentValues.swift */; };
 		AC99B3312BED0ABB00D28199 /* FireStore+Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC99B3302BED0ABB00D28199 /* FireStore+Review.swift */; };
 		ACAE92522BEB25DE00722E1F /* AdminFileUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAE92512BEB25DE00722E1F /* AdminFileUploadView.swift */; };
 		ACAE92542BEB262D00722E1F /* AdminImageUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAE92532BEB262D00722E1F /* AdminImageUploadView.swift */; };
@@ -125,6 +126,7 @@
 		2E8A61852BE6199E0013BD1F /* LoadinViewFB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadinViewFB.swift; sourceTree = "<group>"; };
 		2ECB52822BE8C0B50088E115 /* OTPModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPModifier.swift; sourceTree = "<group>"; };
 		2EFE3B5E2BF3704600A8E8D0 /* ReaderBookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReaderBookView.swift; sourceTree = "<group>"; };
+		AC3A859F2BF4DD89003A9101 /* EnvironmentValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentValues.swift; sourceTree = "<group>"; };
 		AC99B3302BED0ABB00D28199 /* FireStore+Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FireStore+Review.swift"; sourceTree = "<group>"; };
 		ACAE92512BEB25DE00722E1F /* AdminFileUploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminFileUploadView.swift; sourceTree = "<group>"; };
 		ACAE92532BEB262D00722E1F /* AdminImageUploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminImageUploadView.swift; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 				ACB46B7A2BE92516009A7ABA /* FileStore+Genre.swift */,
 				AC99B3302BED0ABB00D28199 /* FireStore+Review.swift */,
 				ACB46B782BE8F51B009A7ABA /* ApiError.swift */,
+				AC3A859F2BF4DD89003A9101 /* EnvironmentValues.swift */,
 				2E8A616F2BE4DC200013BD1F /* Frameworks */,
 			);
 			path = PracticeAppSwiftUI;
@@ -528,6 +531,7 @@
 				2E86C87E2BE261510093D70D /* OTPVerificationView.swift in Sources */,
 				2E3D199C2BE3517A0005CD68 /* BookDetails.swift in Sources */,
 				2E3D19BB2BE36E240005CD68 /* BooksPageView.swift in Sources */,
+				AC3A85A02BF4DD89003A9101 /* EnvironmentValues.swift in Sources */,
 				2E3D19A02BE351950005CD68 /* BookDetailsBody.swift in Sources */,
 				ACB46AC92BE79F55009A7ABA /* FireStore.swift in Sources */,
 				2E8A61862BE6199E0013BD1F /* LoadinViewFB.swift in Sources */,

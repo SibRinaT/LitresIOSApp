@@ -11,6 +11,7 @@ import Foundation
 import SwiftUI
 
 struct BookDetailsBody: View {
+    @Environment(\.authService) var authService
     var book: Book
     @State var isExpanded = false
     @State private var selectedTab = "One"
@@ -131,19 +132,13 @@ struct BookDetailsBody: View {
     }
     
     private func downloadBookButtonPressed() {
-        Task {
-            do {
-                if book.isFree {
-                    loadBookAndOpen()
-                } else {
-                    if let user = try await AuthService.shared.fetchUserInfo(), user.isSubscriptionEnabled {
-                        loadBookAndOpen()
-                    } else {
-                        isSubscriptionViewPresented = true
-                    }
-                }
-            } catch {
-                print("Error:", error)
+        if book.isFree {
+            loadBookAndOpen()
+        } else {
+            if let user = authService.user, user.isSubscriptionEnabled {
+                loadBookAndOpen()
+            } else {
+                isSubscriptionViewPresented = true
             }
         }
     }

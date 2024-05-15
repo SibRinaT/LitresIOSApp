@@ -23,6 +23,8 @@ struct AddNewFeedbackView: View {
     }
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @Environment(\.authService) var authService
+    
     @State private var reviewText = ""
     @State private var rating = 0
     let book: Book
@@ -139,8 +141,7 @@ struct AddNewFeedbackView: View {
     private func sendReview() {
         Task {
             do {
-                let user = try await AuthService.shared.fetchUserInfo()
-                let userName = user?.name ?? "Anonym"
+                let userName = authService.user?.name ?? "Anonym"
                 switch viewType {
                 case .add:
                     let review = buildReview(userName: userName)
