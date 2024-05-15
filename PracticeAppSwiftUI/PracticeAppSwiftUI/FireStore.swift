@@ -53,6 +53,23 @@ struct Store {
             return []
         }
     }
+    
+    func getBook(by id: String) async throws -> Book? {
+        do {
+            let snapshot = try await db.collection("books")
+                .whereField("id", isEqualTo: id)
+                .getDocuments()
+            if let doc = snapshot.documents.first, var book = try? doc.data(as: Book.self) {
+                book.set(firestoreId: doc.documentID)
+                return book
+            } else {
+                return nil
+            }
+        } catch {
+            print("Error getting documents: \(error)")
+            return nil
+        }
+    }
 }
 
 extension Encodable {

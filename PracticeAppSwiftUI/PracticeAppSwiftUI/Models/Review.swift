@@ -8,7 +8,7 @@
 import Foundation
 
 struct Review: Codable, Identifiable {
-    var id = UUID().uuidString
+    var id: String
     private(set) var firestoreId: String?
     var bookId: String
     var reviewText: String
@@ -16,12 +16,13 @@ struct Review: Codable, Identifiable {
     var rating: Int
     var reviewDate: Date
     
-    init(bookId: String, reviewText: String, userName: String, rating: Int) {
+    init(id: String, bookId: String, reviewText: String, userName: String, rating: Int, reviewDate: Date) {
+        self.id = id
         self.bookId = bookId
         self.reviewText = reviewText
         self.userName = userName
         self.rating = rating
-        self.reviewDate = Date()
+        self.reviewDate = reviewDate
     }
     
     mutating func set(firestoreId: String) {

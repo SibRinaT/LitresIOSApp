@@ -8,11 +8,25 @@
 import SwiftUI
 
 struct AddNewFeedbackView: View {
+    enum ViewType {
+        case add
+        case edit(review: Review)
+        
+        var title: String {
+            switch self {
+            case .add:
+                "Новый отзыв"
+            case .edit:
+                "Изменить отзыв"
+            }
+        }
+    }
+    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-
     @State private var reviewText = ""
     @State private var rating = 0
-    var book: Book
+    let book: Book
+    let viewType: ViewType
     
     var body: some View {
         ZStack {
@@ -26,7 +40,7 @@ struct AddNewFeedbackView: View {
                     .padding(.vertical, 50)
                     .overlay(
                         VStack {
-                            Text("Новый отзыв")
+                            Text(viewType.title)
                                 .foregroundColor(.white)
                                 .font(.custom("AmericanTypewriter", size: 24))
                             VStack {
@@ -111,22 +125,47 @@ struct AddNewFeedbackView: View {
                     )
             }
         }
+        .onAppear {
+            switch viewType {
+            case .add:
+                break
+            case .edit(let review):
+                reviewText = review.reviewText
+                rating = review.rating
+            }
+        }
     }
     
     private func sendReview() {
         Task {
             do {
                 let user = try await AuthService.shared.fetchUserInfo()
-                let review = Review(bookId: book.id,
-                                    reviewText: reviewText,
-                                    userName: user?.name ?? "Anonym",
-                                    rating: rating)
-                try Store.shared.add(review: review)
+                let userName = user?.name ?? "Anonym"
+                switch viewType {
+                case .add:
+                    let review = buildReview(userName: userName)
+                    try Store.shared.add(review: review)
+                case .edit(let oldReview):
+                    guard let firestoreId = oldReview.firestoreId else { return }
+                    try await Store.shared.update(reviewId: firestoreId,
+                                                  text: reviewText,
+                                                  rating: rating)
+                }
                 dismissSelf()
             } catch {
                 print(error)
             }
         }
+    }
+    
+    private func buildReview(userName: String) -> Review {
+        var review = Review(id: UUID().uuidString,
+                            bookId: book.id,
+                            reviewText: reviewText,
+                            userName: userName,
+                            rating: rating,
+                            reviewDate: Date())
+        return review
     }
     
     private func dismissSelf() {

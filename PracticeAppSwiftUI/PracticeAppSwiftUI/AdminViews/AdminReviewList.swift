@@ -9,19 +9,33 @@ import SwiftUI
 
 struct AdminReviewList: View {
     @State var reviews = [Review]()
+    @State private var book: Book?
+    @State private var review: Review?
+    
+    var shouldOpenReview: Binding<Bool> {
+        Binding {
+            book != nil
+        } set: { _ in
+            book = nil
+        }
+    }
     
     var body: some View {
         VStack(alignment: .leading) {
             List {
                 ForEach(reviews) { review in
-                    HStack {
+                    Button {
+                        self.review = review
+                        getBookBy(id: review.bookId)
+                    } label: {
                         Text(review.reviewText)
                     }
+                    .buttonStyle(.plain)
                 }
                 .onDelete(perform: deleteBooks)
             }
         }
-        .navigationTitle("Books")
+        .navigationTitle("Reviews")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             EditButton()
@@ -33,6 +47,12 @@ struct AdminReviewList: View {
                 print(error)
             }
         }
+        .navigationDestination(isPresented: shouldOpenReview) {
+            if let book, let review {
+                AddNewFeedbackView(book: book, viewType: .edit(review: review))
+            }
+            
+        }
     }
     
     private func deleteBooks(at offsets: IndexSet) {
@@ -41,7 +61,16 @@ struct AdminReviewList: View {
                 try await Store.shared.delete(review: reviews[i])
             }
         }
-
+    }
+    
+    private func getBookBy(id: String) {
+        Task {
+            do {
+                self.book = try await Store.shared.getBook(by: id)
+            } catch {
+                print(error)
+            }
+        }
     }
 }
 

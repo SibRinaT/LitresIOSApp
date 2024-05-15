@@ -15,6 +15,11 @@ extension Store {
         try db.collection(reviewCollection).addDocument(from: review)
     }
     
+    func update(reviewId: String, text: String, rating: Int) async throws {
+        let ref = db.collection(reviewCollection).document(reviewId)
+        try await ref.updateData(["reviewText": text, "rating": rating])
+    }
+    
     func getReviews(for bookId: String? = nil) async throws -> [Review] {
         let snapshot: QuerySnapshot
         if let bookId {

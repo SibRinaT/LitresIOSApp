@@ -97,7 +97,7 @@ struct BookDetailsBody: View {
                         .font(.largeTitle)
                         .bold()
                 }
-                NavigationLink(destination: AddNewFeedbackView(book: book)) {
+                NavigationLink(destination: AddNewFeedbackView(book: book, viewType: .add)) {
                     Text("Написать отзыв")
                         .padding(.vertical)
                 }
