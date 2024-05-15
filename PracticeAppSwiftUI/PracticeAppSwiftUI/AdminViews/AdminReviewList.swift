@@ -14,9 +14,10 @@ struct AdminReviewList: View {
     
     var shouldOpenReview: Binding<Bool> {
         Binding {
-            book != nil
+            book != nil && review != nil
         } set: { _ in
             book = nil
+            review = nil
         }
     }
     
@@ -32,7 +33,7 @@ struct AdminReviewList: View {
                     }
                     .buttonStyle(.plain)
                 }
-                .onDelete(perform: deleteBooks)
+                .onDelete(perform: deleteReviews)
             }
         }
         .navigationTitle("Reviews")
@@ -55,11 +56,12 @@ struct AdminReviewList: View {
         }
     }
     
-    private func deleteBooks(at offsets: IndexSet) {
+    private func deleteReviews(at offsets: IndexSet) {
         Task {
             for i in offsets {
                 try await Store.shared.delete(review: reviews[i])
             }
+            reviews = try await Store.shared.getReviews()
         }
     }
     
