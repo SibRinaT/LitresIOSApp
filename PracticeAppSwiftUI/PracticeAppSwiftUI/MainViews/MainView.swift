@@ -34,7 +34,6 @@ struct MainView: View {
                 Text("Профиль")
             }
         }
-        .accentColor(.blue) // Изменяем цвет таб бара здесь
     }
 }
 

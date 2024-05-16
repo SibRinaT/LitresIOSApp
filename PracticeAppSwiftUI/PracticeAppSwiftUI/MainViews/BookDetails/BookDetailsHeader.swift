@@ -16,8 +16,7 @@ struct BookDetailsHeader: View {
             Color("BackColor")
                 .ignoresSafeArea(.all)
             
-            AsyncImage(url: URL(string: book.imageUrl ?? "")) { image in
-                image
+                Image("BookBackImage")
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .visualEffect { content, geometryProxy in
@@ -25,7 +24,6 @@ struct BookDetailsHeader: View {
                             .blur(radius: 20)
                             .brightness(-0.3)
                     }
-            } placeholder: {}
             
             HStack {
                 VStack {

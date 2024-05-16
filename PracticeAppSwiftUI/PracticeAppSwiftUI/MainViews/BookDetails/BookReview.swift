@@ -18,8 +18,11 @@ struct BookReview: View {
 //                    .cornerRadius(50)
                 VStack (alignment: .leading) {
                     Text(review.userName)
+                        .font(.custom("AmericanTypewriter", size: 20))
+                        .foregroundColor(.white)
                         .bold()
                     Text("\(review.reviewDate.formatted(date: .long, time: .omitted))")
+                        .foregroundColor(.white)
                 }
                 Spacer()
                 HStack {
@@ -31,16 +34,21 @@ struct BookReview: View {
                 }
             }
             Text(review.reviewText)
+                .foregroundColor(.white)
             HStack {
                 Button(action: {
                 }) {
                     Image(systemName: "hand.thumbsup")
+                        .foregroundColor(.green)
                     Text("2")
+                        .foregroundColor(.green)
                 }
                 Button(action: {
                 }) {
                     Image(systemName: "hand.thumbsdown")
+                        .foregroundColor(.red)
                     Text("1")
+                        .foregroundColor(.red)
                 }
                 Button(action: {
                 }) {
@@ -49,8 +57,9 @@ struct BookReview: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(height: 20)
                 }
-
             }
+            .foregroundColor(.white)
+
         }
         .background(Color("BackColor").ignoresSafeArea(.all))
     }

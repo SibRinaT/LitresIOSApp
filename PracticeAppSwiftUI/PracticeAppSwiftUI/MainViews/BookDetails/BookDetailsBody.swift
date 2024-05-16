@@ -58,6 +58,8 @@ struct BookDetailsBody: View {
                         Text(book.bookType)
                             .font(.custom("AmericanTypewriter", size: 16))
                             .foregroundColor(Color(.white))
+                            .padding(.bottom, -20)
+                        
 //                        Text("Release date: \(book.year)") // закомитил потому что ошибка, а если запулить то придется скачаивать FB заново))
 //                        switch BookType(rawValue: book.bookType) {
 //                        case .text:
@@ -88,19 +90,28 @@ struct BookDetailsBody: View {
                 )
                 .font(.custom("AmericanTypewriter", size: 16))
                 .foregroundColor(Color(.white))
-                
               
                 //                Text("\nИздатель: \(book.publisher)")
 //                Text("Дата выхода на ЧитайBook: \(book.creatingDate.formatted(date: .long, time: .omitted))")
                 Spacer(minLength: 20)
                 if !reviews.isEmpty {
                     Text(reviews.count == 1 ? "Отзыв" : "Отзывы")
-                        .font(.largeTitle)
+                        .foregroundColor(.white)
+                        .font(.custom("AmericanTypewriter", size: 36))
                         .bold()
                 }
+
                 NavigationLink(destination: AddNewFeedbackView(book: book, viewType: .add)) {
-                    Text("Написать отзыв")
-                        .padding(.vertical)
+                    Rectangle()
+                        .foregroundColor(Color("SecondaryColor"))
+                        .frame(width: 150, height: 40)
+                        .cornerRadius(16)
+                        .overlay (
+                            Text("Написать отзыв")
+                                .padding(.vertical)
+                                .foregroundColor(Color("InactiveColor"))
+                                .font(.custom("AmericanTypewriter", size: 16))
+                    )
                 }
                 ForEach(reviews) { review in
                     BookReview(review: review)
