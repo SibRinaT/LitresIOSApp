@@ -9,6 +9,7 @@ import Foundation
 import FirebaseFirestore
 
 struct Store {
+    private let booksCollection = "books"
     static let shared = Store()
     let db = Firestore.firestore()
     
@@ -20,13 +21,18 @@ struct Store {
         guard let firestoreId = book.firestoreId else {
             throw ApiError.custom(text: "No firestoreId assigned to the book")
         }
-        let ref = db.collection("books").document(firestoreId)
+        let ref = db.collection(booksCollection).document(firestoreId)
         try await ref.updateData(book.asDictionary())
+    }
+    
+    func update(rating: Double, for bookId: String) async throws {
+        let ref = db.collection(booksCollection).document(bookId)
+        try await ref.updateData(["rating": rating])
     }
     
     func delete(book: Book) async throws {
         if let firestoreId = book.firestoreId {
-            try await db.collection("books").document(firestoreId).delete()
+            try await db.collection(booksCollection).document(firestoreId).delete()
             if let url = URL(string: book.imageUrl ?? "") {
                 let imageName = url.deletingPathExtension().lastPathComponent
                 let path = "images/\(imageName).jpg"
@@ -39,7 +45,7 @@ struct Store {
     
     func getBooks() async throws -> [Book] {
         do {
-            let snapshot = try await db.collection("books").getDocuments()
+            let snapshot = try await db.collection(booksCollection).getDocuments()
             var books = [Book]()
             for document in snapshot.documents {
                 if var book = try? document.data(as: Book.self) {
@@ -56,7 +62,7 @@ struct Store {
     
     func getBook(by id: String) async throws -> Book? {
         do {
-            let snapshot = try await db.collection("books")
+            let snapshot = try await db.collection(booksCollection)
                 .whereField("id", isEqualTo: id)
                 .getDocuments()
             if let doc = snapshot.documents.first, var book = try? doc.data(as: Book.self) {

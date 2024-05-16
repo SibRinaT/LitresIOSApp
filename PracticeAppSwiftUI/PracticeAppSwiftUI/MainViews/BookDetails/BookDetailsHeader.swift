@@ -9,6 +9,7 @@ import SwiftUI
 
 struct BookDetailsHeader: View {
     var book: Book
+    @Binding var rating: Double
     var textBookContent: String = "Оглавление"
     
     var body: some View {
@@ -35,7 +36,7 @@ struct BookDetailsHeader: View {
                             .foregroundColor(.white)
                         
                         VStack {
-                            Text(String(format: "%.1f", book.rating))
+                            Text(String(format: "%.1f", rating))
                                 .font(.custom("AmericanTypewriter", size: 16))
                                 .foregroundColor(Color(.white))
 //                            Text("\(book.reviews.count)")

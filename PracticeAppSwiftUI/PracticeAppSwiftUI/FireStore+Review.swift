@@ -11,15 +11,6 @@ import FirebaseFirestore
 extension Store {
     private var reviewCollection: String { "bookReview" }
     
-    func add(review: Review) throws {
-        try db.collection(reviewCollection).addDocument(from: review)
-    }
-    
-    func update(reviewId: String, text: String, rating: Int) async throws {
-        let ref = db.collection(reviewCollection).document(reviewId)
-        try await ref.updateData(["reviewText": text, "rating": rating])
-    }
-    
     func getReviews(for bookId: String? = nil) async throws -> [Review] {
         let snapshot: QuerySnapshot
         if let bookId {
@@ -40,6 +31,14 @@ extension Store {
         return reviews
     }
     
+    func add(review: Review) throws {
+        try db.collection(reviewCollection).addDocument(from: review)
+    }
+    
+    func update(reviewId: String, text: String, rating: Int) async throws {
+        let ref = db.collection(reviewCollection).document(reviewId)
+        try await ref.updateData(["reviewText": text, "rating": rating])
+    }
     
     func delete(review: Review) async throws {
         if let firestoreId = review.firestoreId {
@@ -47,7 +46,7 @@ extension Store {
                 .document(firestoreId)
                 .delete()
         } else {
-            print("No firestore Id on book struct!")
+            print("No firestore Id on review struct!")
         }
     }
 }

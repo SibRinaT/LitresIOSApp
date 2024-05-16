@@ -17,7 +17,7 @@ struct BookDetailsBody: View {
     @State private var selectedTab = "One"
     @State var userCanRead = true
     let imageStorage = ImageStorage.shared
-    @State private var reviews = [Review]()
+    @Binding var reviews: [Review]
     
     @State private var isSubscriptionViewPresented = false
     @State private var bookText = ""
@@ -126,15 +126,7 @@ struct BookDetailsBody: View {
             //                       }
             //                   }
             //        .padding()
-        }
-        .task {
-            do {
-                self.reviews = try await Store.shared.getReviews(for: book.id)
-            } catch {
-                print(error)
-            }
-        }
-        
+        }        
         .popover(isPresented: isReaderBookViewPresented) {
             if !bookText.isEmpty {
                 ReaderBookView(isSheetPresented: isReaderBookViewPresented, book: book, bookText: bookText)
