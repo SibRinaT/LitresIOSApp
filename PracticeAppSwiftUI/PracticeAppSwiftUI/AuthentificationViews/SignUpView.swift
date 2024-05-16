@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SignUpView: View {
     @EnvironmentObject private var appRootManager: AppRootManager
+    @Environment(\.authService) var authService
     
     @State var email = ""
     @State var password = ""
@@ -85,7 +86,7 @@ struct SignUpView: View {
     func signUpWithEmail() {
         Task {
             do {
-                try await AuthService.shared.registerWithEmail(email: email, name: login, password: password, isAdmin: false)
+                try await authService.registerWithEmail(email: email, name: login, password: password, isAdmin: false)
                 appRootManager.currentRoot = .main
             } catch {
                 print(error)

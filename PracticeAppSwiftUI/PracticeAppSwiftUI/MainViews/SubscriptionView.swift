@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SubscriptionView: View {
-    let authService = AuthService.shared
+    @Environment(\.authService) var authService
     @State private var selectedSubscription: SubscriptionType?
     @Binding var isSheetPresented: Bool
 
@@ -82,8 +82,7 @@ struct SubscriptionView: View {
 
                         Task {
                             do {
-                                let enableSubscription = try await authService.enableSubscription()
-                                print("subscription: ", enableSubscription)
+                                try await authService.enableSubscription()
                             } catch {
                                 print(error)
                             }

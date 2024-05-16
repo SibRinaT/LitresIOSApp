@@ -17,7 +17,6 @@ final class AuthService {
     private let db = Firestore.firestore()
     private let userIdKey = "userIdKey"
     private let usersCollection = "users"
-    static let shared = AuthService()
 
     var user: User?
         

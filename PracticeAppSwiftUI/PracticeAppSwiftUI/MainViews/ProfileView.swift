@@ -104,7 +104,7 @@ struct ProfileView: View {
     
     private func logOut() {
         Task {
-            try AuthService.shared.logOut()
+            try authService.logOut()
             appRootManager.currentRoot = .signUp
         }
     }

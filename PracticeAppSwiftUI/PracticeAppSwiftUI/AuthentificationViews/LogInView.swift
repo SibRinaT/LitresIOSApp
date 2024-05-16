@@ -9,6 +9,7 @@ import SwiftUI
 
 struct LogInView: View {
     @EnvironmentObject private var appRootManager: AppRootManager
+    @Environment(\.authService) var authService
     @State private var email = ""
     @State private var password = ""
     
@@ -89,7 +90,7 @@ struct LogInView: View {
     func signInWithEmail() {
         Task {
             do {
-                try await AuthService.shared.signInWithEmail(email: email, password: password)
+                try await authService.signInWithEmail(email: email, password: password)
                 appRootManager.currentRoot = .main
             } catch {
                 print(error)
