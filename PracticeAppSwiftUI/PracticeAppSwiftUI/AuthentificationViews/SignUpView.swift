@@ -16,11 +16,11 @@ struct SignUpView: View {
     @State var login = ""
     @State var isRegistered = false
     @State private var isPasswordHidden = true
-    @State private var showingAlert = false
+    @State private var showingLoading = false
     
     var isRegistrationEnabled: Bool {
         return !login.isEmpty && !password.isEmpty && !email.isEmpty
-       }
+    }
     
     var body: some View {
         NavigationView {
@@ -45,10 +45,9 @@ struct SignUpView: View {
                     }
                     .padding(.bottom)
                     
-
                     VStack {
                         Button(action: {
-                                appRootManager.currentRoot = .signIn
+                            appRootManager.currentRoot = .signIn
                         }) {
                             Text("Уже есть аккаунт?")
                                 .foregroundColor(.white)
@@ -59,20 +58,27 @@ struct SignUpView: View {
                     .padding(10)
                     .font(.custom("AmericanTypewriter", size: 14))
                     .multilineTextAlignment(.center)
-
                     
                     Button(action: { signUpWithEmail()} ) {
-                        Rectangle()
-                            .frame(width: 224, height: 50)
-                            .foregroundColor(isRegistrationEnabled ? Color("MainColor") : Color("InactiveColor").opacity(0.5))
-                            .cornerRadius(16)
-                            .overlay(
-                                Text("Регистрация")
-                                    .foregroundColor(.white)
-                                    .font(.custom("AmericanTypewriter", size: 20))
-                            )
+                        if showingLoading {
+                            Capsule()
+                                .fill(isRegistrationEnabled ? Color("MainColor") : Color("InactiveColor").opacity(0.5))
+                                .frame(width: 224, height: 50)
+                                .overlay {
+                                    ProgressView().progressViewStyle(.circular)
+                                }
+                        } else {
+                            Capsule()
+                                .fill(isRegistrationEnabled ? Color("MainColor") : Color("InactiveColor").opacity(0.5))
+                                .frame(width: 224, height: 50)
+                                .overlay {
+                                    Text("Регистрация")
+                                        .foregroundColor(.white)
+                                        .font(.custom("AmericanTypewriter", size: 20))
+                                }
+                        }
                     }
-                    .disabled(!isRegistrationEnabled)
+                    .disabled(!isRegistrationEnabled || showingLoading)
                 }
                 .foregroundColor(Color("MainColor"))
                 .font(.custom("AmericanTypewriter", size: 36))
@@ -84,14 +90,22 @@ struct SignUpView: View {
         }
     }
     func signUpWithEmail() {
+        showingLoading = true
         Task {
             do {
                 try await authService.registerWithEmail(email: email, name: login, password: password, isAdmin: false)
+                hideLoading()
                 appRootManager.currentRoot = .main
             } catch {
+                hideLoading()
                 print(error)
             }
-
+        }
+    }
+    
+    private func hideLoading() {
+        DispatchQueue.main.async {
+            showingLoading = false
         }
     }
 }
