@@ -12,6 +12,8 @@ struct LogInView: View {
     @Environment(\.authService) var authService
     @State private var email = ""
     @State private var password = ""
+    @State private var showingLoading = false
+
     
     var isLoginEnabled: Bool {
         return (!password.isEmpty && !email.isEmpty)
@@ -71,7 +73,8 @@ struct LogInView: View {
                         Rectangle()
                             .frame(width: 224, height: 50)
                             .cornerRadius(16)
-                            .foregroundColor(isLoginEnabled ? Color("MainColor") : Color("InactiveColor").opacity(0.5))                            .overlay(
+                            .foregroundColor(isLoginEnabled ? Color("MainColor") : Color("InactiveColor").opacity(0.5))                           
+                            .overlay(
                                 Text("Вход")
                                     .foregroundColor(.white)
                                     .font(.custom("AmericanTypewriter", size: 20))
@@ -88,13 +91,22 @@ struct LogInView: View {
     }
     
     func signInWithEmail() {
+        showingLoading = true
         Task {
             do {
                 try await authService.signInWithEmail(email: email, password: password)
                 appRootManager.currentRoot = .main
+                hideLoading()
             } catch {
                 print(error)
+                hideLoading()
             }
+        }
+    }
+    
+    private func hideLoading() {
+        DispatchQueue.main.async {
+            showingLoading = false
         }
     }
 }

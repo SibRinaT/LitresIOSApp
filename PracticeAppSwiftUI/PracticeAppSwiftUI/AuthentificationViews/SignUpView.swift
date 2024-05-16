@@ -90,11 +90,11 @@ struct SignUpView: View {
         Task {
             do {
                 try await authService.registerWithEmail(email: email, name: login, password: password, isAdmin: false)
-                hideLoading()
                 appRootManager.currentRoot = .main
-            } catch {
                 hideLoading()
+            } catch {
                 print(error)
+                hideLoading()
             }
         }
     }
