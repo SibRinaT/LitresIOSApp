@@ -81,6 +81,8 @@ struct ProfileView: View {
                 }
                 .font(.custom("AmericanTypewriter", size: 16))
                 
+                Spacer()
+                
                 Button {
                     logOut()
                 } label: {
@@ -94,7 +96,6 @@ struct ProfileView: View {
                                 .foregroundColor(Color("MainColor"))
                         )
                 }
-                Spacer()
             }
             .popover(isPresented: $presentAdminView) {
                 AdminOptionViews(isSheetPresented: $presentAdminView)
