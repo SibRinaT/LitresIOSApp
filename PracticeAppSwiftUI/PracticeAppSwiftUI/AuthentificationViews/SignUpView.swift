@@ -14,7 +14,6 @@ struct SignUpView: View {
     @State var email = ""
     @State var password = ""
     @State var login = ""
-    @State var isRegistered = false
     @State private var isPasswordHidden = true
     @State private var showingLoading = false
     
@@ -84,9 +83,6 @@ struct SignUpView: View {
                 .font(.custom("AmericanTypewriter", size: 36))
                 .multilineTextAlignment(.center)
             }
-        }
-        .sheet(isPresented: $isRegistered) {
-            MainView()
         }
     }
     func signUpWithEmail() {
