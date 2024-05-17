@@ -46,14 +46,14 @@ struct BookDetailsBody: View {
                                 if bookDataIsLoading {
                                     Capsule()
                                         .fill(Color("InactiveColor").opacity(0.5))
-                                        .frame(width: 100, height: 25)
+                                        .frame(width: 100, height: 35)
                                         .overlay {
                                             ProgressView().progressViewStyle(.circular)
                                         }
                                 } else {
                                     Capsule()
                                         .fill(userCanRead ? Color("MainColor") : Color("SecondaryColor").opacity(0.5))
-                                        .frame(width: 100, height: 25)
+                                        .frame(width: 100, height: 35)
                                         .overlay {
                                             Text("Читать")
                                                 .foregroundColor(.white)
