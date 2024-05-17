@@ -39,9 +39,6 @@ struct BookDetailsHeader: View {
                             Text(String(format: "%.1f", rating))
                                 .font(.custom("AmericanTypewriter", size: 16))
                                 .foregroundColor(Color(.white))
-//                            Text("\(book.reviews.count)")
-//                                .font(.system(size: 14))
-//                                .foregroundColor(Color("MainColor"))
                         }
                         .font(.callout)
                         .foregroundColor(.white)
@@ -51,7 +48,12 @@ struct BookDetailsHeader: View {
                                 .resizable()
                                 .aspectRatio(1, contentMode: .fit)
                                 .frame(height: 200)
-                        } placeholder: {}
+                        } placeholder: {
+                            Image("book")
+                                .resizable()
+                                .aspectRatio(1, contentMode: .fit)
+                                .frame(height: 200)
+                        }
 
                         Button(action: {
                             

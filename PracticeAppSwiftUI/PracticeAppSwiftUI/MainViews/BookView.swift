@@ -20,57 +20,54 @@ struct BookView: View {
                 .foregroundColor(Color(.black).opacity(0.26))
                 .cornerRadius(35)
                 .overlay {
-                    VStack(alignment: .leading) {
+                    VStack {
                         AsyncImage(url: URL(string: book.imageUrl ?? "")) { image in
                             image
                                 .resizable()
                                 .frame(width: 200.0, height: 200.0)
+                                .background(Color.red)
                         } placeholder: {
                             Image("book")
                         }
-//                            .overlay(alignment: .topTrailing) {
-//                                Image(systemName: "heart.circle")
-//                                    .font(.largeTitle)
-//                                    .symbolVariant(book.isLiked ? .fill : .none)
-//                                    .foregroundColor(.white)
-//                                    .padding(15)
-//                            }
-//                            .padding()
-                        Text(book.name)
-                            .foregroundColor(.white)
-                            .font(.title2)
-                            .lineLimit(1)
-                        if let authorName = book.authorName {
-                            Text(authorName)
+                        
+                        VStack(alignment: .leading) {
+                            Text(book.name)
                                 .foregroundColor(.white)
                                 .font(.title2)
                                 .lineLimit(1)
-                        }
-
-                        
-                        HStack {
-                            HStack {
-                                switch BookType(rawValue: book.bookType) {
-                                case .text:
-                                    Image(systemName: "book")
-                                        .foregroundColor(.white)
-                                case .audio:
-                                    Image(systemName: "headphones")
-                                        .foregroundColor(.white)
-                                case .none:
-                                    Color.white
-                                }
-                            }
-                            .padding()
-                            .background(Color.black.opacity(0.5))
-                            .cornerRadius(30.0)
-                            HStack {
-                                Image(systemName: "star.fill")
-                                    .foregroundColor(.orange)
-                                Text(String(format: "%.1f", book.rating))
+                            if let authorName = book.authorName {
+                                Text(authorName)
                                     .foregroundColor(.white)
+                                    .font(.title2)
+                                    .lineLimit(1)
+                            }
+                            
+                            HStack {
+                                HStack {
+                                    switch BookType(rawValue: book.bookType) {
+                                    case .text:
+                                        Image(systemName: "book")
+                                            .foregroundColor(.white)
+                                    case .audio:
+                                        Image(systemName: "headphones")
+                                            .foregroundColor(.white)
+                                    case .none:
+                                        Color.white
+                                    }
+                                }
+                                .padding()
+                                .background(Color.black.opacity(0.5))
+                                .cornerRadius(30.0)
+                                HStack {
+                                    Image(systemName: "star.fill")
+                                        .foregroundColor(.orange)
+                                    Text(String(format: "%.1f", book.rating))
+                                        .foregroundColor(.white)
+                                }
+                                Spacer()
                             }
                         }
+                        .padding()
                     }
                 }
                 .frame(width: 300, height: 400)

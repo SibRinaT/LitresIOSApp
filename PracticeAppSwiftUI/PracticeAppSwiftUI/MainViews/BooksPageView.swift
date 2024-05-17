@@ -24,13 +24,15 @@ struct BooksPageView: View {
                 ScrollView(.vertical, showsIndicators: false) {
                     LazyVStack {
                         ForEach(shelfs, id: \.genre.name) { shelf in
-                            ShelfView(shelfName: shelf.genre.name,
-                                      books: shelf.books)
-                                .scrollTransition { content, phase in
-                                    content
-                                        .scaleEffect(phase.isIdentity ? 1 : 0.8)
-                                        .opacity(phase.isIdentity ? 1 : 0.5)
-                                }
+                            if !shelf.books.isEmpty {
+                                ShelfView(shelfName: shelf.genre.name,
+                                          books: shelf.books)
+                                    .scrollTransition { content, phase in
+                                        content
+                                            .scaleEffect(phase.isIdentity ? 1 : 0.8)
+                                            .opacity(phase.isIdentity ? 1 : 0.5)
+                                    }
+                            }
                         }
                     }
                 }
