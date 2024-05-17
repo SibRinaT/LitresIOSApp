@@ -40,7 +40,7 @@ struct BookDetailsBody: View {
                     VStack(alignment: .leading) {
                         HStack {
                             Spacer()
-                            Button(action: {
+                            Button(action: { // для скачивания
                                 downloadBookButtonPressed()
                             }) {
                                 if bookDataIsLoading {
@@ -52,7 +52,7 @@ struct BookDetailsBody: View {
                                         }
                                 } else {
                                     Capsule()
-                                        .fill(userCanRead ? Color("MainColor") : Color("InactiveColor").opacity(0.5))
+                                        .fill(userCanRead ? Color("MainColor") : Color("SecondaryColor").opacity(0.5))
                                         .frame(width: 100, height: 25)
                                         .overlay {
                                             Text("Читать")
