@@ -21,6 +21,7 @@ struct BookDetailsBody: View {
     
     @State private var isSubscriptionViewPresented = false
     @State private var bookText = ""
+    @State private var showingLoading = false
     
     var isReaderBookViewPresented: Binding<Bool> {
         Binding {
@@ -42,9 +43,19 @@ struct BookDetailsBody: View {
                             Button(action: { // для скачивания
                                 downloadBookButtonPressed()
                             }) {
+                                if showingLoading {
+                                    Capsule()
+                                        .fill(isReaderBookViewPresented ? Color("MainColor") : Color("SecondaryColor").opacity(0.5))
+                                        .frame(width: 224, height: 50)
+                                        .overlay {
+                                            ProgressView().progressViewStyle(.circular)
+                                        }
+                                }
+                                Spacer()
+                            } else {
                                 Rectangle()
                                     .frame(width: 100, height: 25)
-                                    .foregroundColor(userCanRead ? Color("MainColor") : Color("SecondaryColor").opacity(0.5))
+                                    .foregroundColor(isReaderBookViewPresented ? Color("MainColor") : Color("SecondaryColor").opacity(0.5))
                                     .cornerRadius(16)
                                     .overlay(
                                         Text("Читать")
@@ -52,8 +63,8 @@ struct BookDetailsBody: View {
                                             .font(.custom("AmericanTypewriter", size: 20))
                                     )
                             }
-                            Spacer()
                         }
+                        .disabled(!isReaderBookViewPresented)
                        
                         Text(book.bookType)
                             .font(.custom("AmericanTypewriter", size: 16))
@@ -147,6 +158,7 @@ struct BookDetailsBody: View {
     }
     
     private func loadBookAndOpen() {
+        showingLoading = true
         Task {
             do {
                 let fileURL = try await imageStorage.getUrlForFile(name: book.fileName)
@@ -155,6 +167,12 @@ struct BookDetailsBody: View {
             } catch {
                 print("Error:", error)
             }
+        }
+    }
+    
+    private func hideLoading() {
+        DispatchQueue.main.async {
+            showingLoading = false
         }
     }
 }
