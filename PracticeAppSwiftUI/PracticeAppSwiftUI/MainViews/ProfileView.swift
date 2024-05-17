@@ -44,7 +44,7 @@ struct ProfileView: View {
                             HStack {
                                 Text("Почта - ")
                                     .foregroundColor(.white)
-                                Text("No email")
+                                Text("")
                                     .foregroundColor(.white)
                             }
                         )

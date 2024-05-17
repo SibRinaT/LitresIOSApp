@@ -39,12 +39,12 @@ struct BookDetailsBody: View {
                     VStack(alignment: .leading) {
                         HStack {
                             Spacer()
-                            Button(action: {
+                            Button(action: { // для скачивания
                                 downloadBookButtonPressed()
                             }) {
                                 Rectangle()
                                     .frame(width: 100, height: 25)
-                                    .foregroundColor(userCanRead ? Color("MainColor") : Color("InactiveColor").opacity(0.5))
+                                    .foregroundColor(userCanRead ? Color("MainColor") : Color("SecondaryColor").opacity(0.5))
                                     .cornerRadius(16)
                                     .overlay(
                                         Text("Читать")

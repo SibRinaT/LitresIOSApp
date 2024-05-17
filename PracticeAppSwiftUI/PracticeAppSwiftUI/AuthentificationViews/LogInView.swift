@@ -70,15 +70,24 @@ struct LogInView: View {
                     Button(action: {
                         signInWithEmail()
                     }) {
-                        Rectangle()
-                            .frame(width: 224, height: 50)
-                            .cornerRadius(16)
-                            .foregroundColor(isLoginEnabled ? Color("MainColor") : Color("InactiveColor").opacity(0.5))                           
-                            .overlay(
-                                Text("Вход")
-                                    .foregroundColor(.white)
-                                    .font(.custom("AmericanTypewriter", size: 20))
-                            )
+                        if showingLoading {
+                            Capsule()
+                                .fill(isLoginEnabled ? Color("MainColor") : Color("InactiveColor").opacity(0.5))
+                                .frame(width: 224, height: 50)
+                                .overlay {
+                                    ProgressView().progressViewStyle(.circular)
+                                }
+                        } else {
+                            Rectangle()
+                                .frame(width: 224, height: 50)
+                                .cornerRadius(16)
+                                .foregroundColor(isLoginEnabled ? Color("MainColor") : Color("InactiveColor").opacity(0.5))
+                                .overlay(
+                                    Text("Вход")
+                                        .foregroundColor(.white)
+                                        .font(.custom("AmericanTypewriter", size: 20))
+                                )
+                        }
                     }
                     .disabled(!isLoginEnabled)
                     
