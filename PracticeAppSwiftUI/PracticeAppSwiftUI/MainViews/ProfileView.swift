@@ -6,13 +6,17 @@
 //
 
 import SwiftUI
+import FirebaseAuth
+
 
 struct ProfileView: View {
     @EnvironmentObject private var appRootManager: AppRootManager
     @Environment(\.authService) var authService
-    
     @State private var presentAdminView = false
-    @State private var sub: String = "Базовая"
+        @State private var sub =  "Базовая"
+
+//    @State private var sub = Auth.auth().currentUser.subscription  ?? "Базовая"
+    @State private var userEmail = Auth.auth().currentUser?.email ?? "no email"
     
     var body: some View {
         ZStack {
@@ -44,7 +48,7 @@ struct ProfileView: View {
                             HStack {
                                 Text("Почта - ")
                                     .foregroundColor(.white)
-                                Text("")
+                                Text(userEmail)
                                     .foregroundColor(.white)
                             }
                         )

@@ -5,8 +5,6 @@
 //  Created by Ainur on 02.05.2024.
 //
 
-import SwiftUI
-
 import Foundation
 import SwiftUI
 
