@@ -48,8 +48,8 @@ final class AuthService {
         print("Signed out")
     }
     
-    func fetchUserInfo() async throws {
-        if user != nil { return }
+    func fetchUserInfo(force: Bool = false) async throws {
+        if user != nil && !force { return }
         guard let userId = getUserId() else { return }
         let document = try await db.collection(usersCollection).document(userId).getDocument()
         let user = try document.data(as: User.self)
@@ -64,6 +64,7 @@ final class AuthService {
             user.enableSubscription()
             let ref = db.collection(usersCollection).document(user.id)
             try await ref.updateData(user.asDictionary())
+            try await fetchUserInfo(force: true)
         } else {
             try await fetchUserInfo()
             try await enableSubscription()

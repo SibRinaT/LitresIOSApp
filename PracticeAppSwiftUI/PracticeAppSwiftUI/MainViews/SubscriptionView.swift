@@ -9,9 +9,21 @@ import SwiftUI
 
 struct SubscriptionView: View {
     @Environment(\.authService) var authService
-    @State private var selectedSubscription: SubscriptionType?
     @Binding var isSheetPresented: Bool
-
+    @State private var error: UploadError?
+    @State private var isLoading = false
+    
+    var isShowingError: Binding<Bool> {
+        Binding {
+            error != nil
+        } set: { _ in
+            error = nil
+        }
+    }
+    var subEnabled: Bool {
+        authService.user?.isSubscriptionEnabled ?? false
+    }
+    
     var body: some View {
         ZStack {
             Color("BackColor")
@@ -21,103 +33,66 @@ struct SubscriptionView: View {
                     .font(.custom("AmericanTypewriter", size: 48))
                     .foregroundColor(.white)
                 VStack {
-                    Button (action: {
-                        selectedSubscription = .basic
-                    }) {
-                        if selectedSubscription == .basic {
-                            Rectangle()
-                                .frame(width: 280, height: 57)
-                                .cornerRadius(14)
-                                .foregroundColor(Color("MainColor"))
-                                .overlay(
-                                    Text("Базовая")
-                                        .foregroundColor(.white)
-                                )
-                        } else {
-                            Rectangle()
-                                .frame(width: 280, height: 57)
-                                .cornerRadius(14)
-                                .foregroundColor(Color("SecondaryColor"))
-                                .overlay(
-                                    Text("Базовая")
-                                        .foregroundColor(.white)
-                                )
-                        }
-                    }
+                    
+                    Rectangle()
+                        .frame(width: 280, height: 57)
+                        .cornerRadius(14)
+                        .foregroundColor(subEnabled ? Color("SecondaryColor") : Color("MainColor"))
+                        .overlay(
+                            Text("Базовая")
+                                .foregroundColor(.white)
+                        )
                     
                     Button (action: {
-                        selectedSubscription = .month
-                        Task {
-                            do {
-                                let enableSubscription = try await authService.enableSubscription()
-                                print("subscription: ", enableSubscription)
-                            } catch {
-                                print(error)
-                            }
-                        }
+                        enableSub()
                     }) {
-                        if selectedSubscription == .month {
-                            Rectangle()
+                        
+                        if isLoading {
+                            Capsule()
+                                .fill(subEnabled ? Color("MainColor"): Color("SecondaryColor"))
                                 .frame(width: 280, height: 57)
-                                .cornerRadius(14)
-                                .foregroundColor(Color("MainColor"))
-                                .overlay(
-                                        Text("Расширенная на месяц")
-                                            .foregroundColor(.white)
-                                )
+                                .overlay {
+                                    ProgressView().progressViewStyle(.circular)
+                                }
                         } else {
-                            Rectangle()
+                            Capsule()
+                                .fill(subEnabled ? Color("MainColor"): Color("SecondaryColor"))
                                 .frame(width: 280, height: 57)
-                                .cornerRadius(14)
-                                .foregroundColor(Color("SecondaryColor"))
-                                .overlay(
-                                        Text("Расширенная на месяц")
-                                            .foregroundColor(.white)
-                                        )
-                        }
-                    }
-                    
-                    Button (action: {
-                        selectedSubscription = .year
-
-                        Task {
-                            do {
-                                try await authService.enableSubscription()
-                            } catch {
-                                print(error)
-                            }
-                        }
-                    }) {
-                        if selectedSubscription == .year {
-                            Rectangle()
-                                .frame(width: 280, height: 57)
-                                .cornerRadius(14)
-                                .foregroundColor(Color("MainColor"))
-                                .overlay(
-                                    Text("Расширенная на год")
+                                .overlay {
+                                    Text("Расширенная на месяц")
                                         .foregroundColor(.white)
-                                )
-                        } else {
-                            Rectangle()
-                                .frame(width: 280, height: 57)
-                                .cornerRadius(14)
-                                .foregroundColor(Color("SecondaryColor"))
-                                .overlay(
-                                    Text("Расширенная на год")
-                                        .foregroundColor(.white)
-                                )
+                                }
                         }
+     
                     }
+                    .disabled(subEnabled || isLoading)
                 }
             }
         }
+        .alert(isPresented: isShowingError, error: error) { _ in
+        } message: { error in
+            Text(error.errorDescription ?? "")
+        }
     }
-}
-
-enum SubscriptionType {
-    case basic
-    case month
-    case year
+    
+    private func enableSub() {
+        isLoading = true
+        Task {
+            do {
+                try await authService.enableSubscription()
+                hideIndicator()
+            } catch {
+                self.error = UploadError.custom(text: error.localizedDescription)
+                hideIndicator()
+            }
+        }
+    }
+    
+    private func hideIndicator() {
+        DispatchQueue.main.async {
+            isLoading = false
+        }
+    }
 }
 
 #Preview {

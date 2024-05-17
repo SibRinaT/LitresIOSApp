@@ -9,16 +9,6 @@ import SwiftUI
 import PhotosUI
 import UIKit
 
-private enum UploadError: LocalizedError {
-    case custom(text: String)
-    var errorDescription: String? {
-        switch self {
-        case .custom(let text):
-            return text
-        }
-    }
-}
-
 struct AdminEditBookView: View {
     enum ViewType {
         case add
