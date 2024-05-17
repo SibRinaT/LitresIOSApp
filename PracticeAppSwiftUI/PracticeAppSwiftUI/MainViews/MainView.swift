@@ -12,19 +12,19 @@ struct MainView: View {
     var body: some View {
         TabView {
             NavigationView {
-                SubscriptionView(isSheetPresented: .constant(true))
-            }
-            .tabItem {
-                Image(systemName: "trophy.circle.fill")
-                Text("Подписка")
-            }
-            NavigationView {
                 BooksPageView()
             }
             .tabItem {
                 Image(systemName: "book.circle.fill")
                     .foregroundColor(Color("MainColor"))
                 Text("Книги")
+            }
+            NavigationView {
+                SubscriptionView(isSheetPresented: .constant(true))
+            }
+            .tabItem {
+                Image(systemName: "trophy.circle.fill")
+                Text("Подписка")
             }
             NavigationView {
                 ProfileView()
