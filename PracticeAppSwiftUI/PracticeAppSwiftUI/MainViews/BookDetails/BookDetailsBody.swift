@@ -21,6 +21,7 @@ struct BookDetailsBody: View {
     
     @State private var isSubscriptionViewPresented = false
     @State private var bookText = ""
+    @State private var bookDataIsLoading = false
     
     var isReaderBookViewPresented: Binding<Bool> {
         Binding {
@@ -42,46 +43,55 @@ struct BookDetailsBody: View {
                             Button(action: {
                                 downloadBookButtonPressed()
                             }) {
-                                Rectangle()
-                                    .frame(width: 100, height: 25)
-                                    .foregroundColor(userCanRead ? Color("MainColor") : Color("InactiveColor").opacity(0.5))
-                                    .cornerRadius(16)
-                                    .overlay(
-                                        Text("Читать")
-                                            .foregroundColor(.white)
-                                            .font(.custom("AmericanTypewriter", size: 20))
-                                    )
+                                if bookDataIsLoading {
+                                    Capsule()
+                                        .fill(Color("InactiveColor").opacity(0.5))
+                                        .frame(width: 100, height: 25)
+                                        .overlay {
+                                            ProgressView().progressViewStyle(.circular)
+                                        }
+                                } else {
+                                    Capsule()
+                                        .fill(userCanRead ? Color("MainColor") : Color("InactiveColor").opacity(0.5))
+                                        .frame(width: 100, height: 25)
+                                        .overlay {
+                                            Text("Читать")
+                                                .foregroundColor(.white)
+                                                .font(.custom("AmericanTypewriter", size: 20))
+                                        }
+                                }
                             }
+                            .disabled(bookDataIsLoading)
                             Spacer()
                         }
-                       
+                        
                         Text(book.bookType)
                             .font(.custom("AmericanTypewriter", size: 16))
                             .foregroundColor(Color(.white))
                             .padding(.bottom, -20)
                         
-//                        Text("Release date: \(book.year)") // закомитил потому что ошибка, а если запулить то придется скачаивать FB заново))
-//                        switch BookType(rawValue: book.bookType) {
-//                        case .text:
-//                            if let pages = book.textBookDetails?.pages {
-//                                Text("Pages: \(pages)")
-//                            }
-//                        case .audio:
-//                            if let len = book.audioBookDetails?.length {
-//                                Text("Length: \(len)")
-//                            }
-//                        case .none:
-//                            Color.white
-//                        }
+                        //                        Text("Release date: \(book.year)") // закомитил потому что ошибка, а если запулить то придется скачаивать FB заново))
+                        //                        switch BookType(rawValue: book.bookType) {
+                        //                        case .text:
+                        //                            if let pages = book.textBookDetails?.pages {
+                        //                                Text("Pages: \(pages)")
+                        //                            }
+                        //                        case .audio:
+                        //                            if let len = book.audioBookDetails?.length {
+                        //                                Text("Length: \(len)")
+                        //                            }
+                        //                        case .none:
+                        //                            Color.white
+                        //                        }
                         
                     }
                     Spacer()
-//                    if let linkedBook = book.linkedBook {
-//                        SwitchBookTypeView(book: linkedBook)
-//                    }
+                    //                    if let linkedBook = book.linkedBook {
+                    //                        SwitchBookTypeView(book: linkedBook)
+                    //                    }
                 }
                 .padding(.vertical)
-//                TagsView(tags: book.tags)
+                //                TagsView(tags: book.tags)
                 
                 DisclosureGroup(
                     isExpanded: $isExpanded,
@@ -90,9 +100,9 @@ struct BookDetailsBody: View {
                 )
                 .font(.custom("AmericanTypewriter", size: 16))
                 .foregroundColor(Color(.white))
-              
+                
                 //                Text("\nИздатель: \(book.publisher)")
-//                Text("Дата выхода на ЧитайBook: \(book.creatingDate.formatted(date: .long, time: .omitted))")
+                //                Text("Дата выхода на ЧитайBook: \(book.creatingDate.formatted(date: .long, time: .omitted))")
                 Spacer(minLength: 20)
                 if !reviews.isEmpty {
                     Text(reviews.count == 1 ? "Отзыв" : "Отзывы")
@@ -100,7 +110,7 @@ struct BookDetailsBody: View {
                         .font(.custom("AmericanTypewriter", size: 36))
                         .bold()
                 }
-
+                
                 NavigationLink(destination: AddNewFeedbackView(book: book, viewType: .add)) {
                     Rectangle()
                         .foregroundColor(Color("SecondaryColor"))
@@ -111,7 +121,7 @@ struct BookDetailsBody: View {
                                 .padding(.vertical)
                                 .foregroundColor(Color("InactiveColor"))
                                 .font(.custom("AmericanTypewriter", size: 16))
-                    )
+                        )
                 }
                 ForEach(reviews) { review in
                     BookReview(review: review)
@@ -119,14 +129,14 @@ struct BookDetailsBody: View {
                 }
             }
             .padding()
-
+            
             //        NavigationView {
             //                       NavigationLink(destination: PlaysoundView()) {
             //                           Text("Перейти к проигрывателю")
             //                       }
             //                   }
             //        .padding()
-        }        
+        }
         .popover(isPresented: isReaderBookViewPresented) {
             if !bookText.isEmpty {
                 ReaderBookView(isSheetPresented: isReaderBookViewPresented, book: book, bookText: bookText)
@@ -147,14 +157,23 @@ struct BookDetailsBody: View {
     }
     
     private func loadBookAndOpen() {
+        bookDataIsLoading = true
         Task {
             do {
                 let fileURL = try await imageStorage.getUrlForFile(name: book.fileName)
                 let data = try await ImageStorage.shared.loadData(from: fileURL)
                 bookText = String(data: data, encoding: .utf8) ?? ""
+                hideLoadingIndicator()
             } catch {
                 print("Error:", error)
+                hideLoadingIndicator()
             }
+        }
+    }
+    
+    private func hideLoadingIndicator() {
+        DispatchQueue.main.async {
+            bookDataIsLoading = false
         }
     }
 }
