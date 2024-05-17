@@ -17,7 +17,8 @@ struct ReaderBookView: View {
         NavigationStack {
             VStack {
                 ScrollView {
-                    TextEditor (text: $bookText)
+                    Text(bookText)
+                        .padding()
                 }
             }
             .navigationTitle(book.name)

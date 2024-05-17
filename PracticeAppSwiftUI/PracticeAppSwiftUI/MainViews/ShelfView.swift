@@ -36,6 +36,7 @@ struct ShelfView: View {
                 }
             }
         }
+        .padding()
     }
 }
 
