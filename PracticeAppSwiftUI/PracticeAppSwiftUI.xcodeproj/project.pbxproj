@@ -40,6 +40,7 @@
 		2E8A61792BE5F6640013BD1F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2E8A61782BE5F6640013BD1F /* GoogleService-Info.plist */; };
 		2E8A617C2BE5F71E0013BD1F /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8A617B2BE5F71E0013BD1F /* AuthService.swift */; };
 		2E8A61862BE6199E0013BD1F /* LoadinViewFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8A61852BE6199E0013BD1F /* LoadinViewFB.swift */; };
+		2EB214D42BF896990067546B /* PlaysoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB214D32BF896990067546B /* PlaysoundView.swift */; };
 		2ECB52832BE8C0B50088E115 /* OTPModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECB52822BE8C0B50088E115 /* OTPModifier.swift */; };
 		2EFE3B5F2BF3704600A8E8D0 /* ReaderBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EFE3B5E2BF3704600A8E8D0 /* ReaderBookView.swift */; };
 		AC3A85A02BF4DD89003A9101 /* EnvironmentValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3A859F2BF4DD89003A9101 /* EnvironmentValues.swift */; };
@@ -122,6 +123,7 @@
 		2E8A61782BE5F6640013BD1F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2E8A617B2BE5F71E0013BD1F /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		2E8A61852BE6199E0013BD1F /* LoadinViewFB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadinViewFB.swift; sourceTree = "<group>"; };
+		2EB214D32BF896990067546B /* PlaysoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaysoundView.swift; sourceTree = "<group>"; };
 		2ECB52822BE8C0B50088E115 /* OTPModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPModifier.swift; sourceTree = "<group>"; };
 		2EFE3B5E2BF3704600A8E8D0 /* ReaderBookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReaderBookView.swift; sourceTree = "<group>"; };
 		AC3A859F2BF4DD89003A9101 /* EnvironmentValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentValues.swift; sourceTree = "<group>"; };
@@ -266,6 +268,7 @@
 				2E3D19A72BE354A60005CD68 /* SmallViews */,
 				2E3D19B52BE3582D0005CD68 /* Load */,
 				2EFE3B5E2BF3704600A8E8D0 /* ReaderBookView.swift */,
+				2EB214D32BF896990067546B /* PlaysoundView.swift */,
 			);
 			path = MainViews;
 			sourceTree = "<group>";
@@ -479,6 +482,7 @@
 				2E38F2AA2BDE77AE00D76A03 /* SignUpView.swift in Sources */,
 				2ECB52832BE8C0B50088E115 /* OTPModifier.swift in Sources */,
 				2E3D198F2BE26D700005CD68 /* Review.swift in Sources */,
+				2EB214D42BF896990067546B /* PlaysoundView.swift in Sources */,
 				ACB46B792BE8F51B009A7ABA /* ApiError.swift in Sources */,
 				2E3D19A42BE353A60005CD68 /* BookReview.swift in Sources */,
 				2E8A617C2BE5F71E0013BD1F /* AuthService.swift in Sources */,
