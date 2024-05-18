@@ -19,6 +19,7 @@ struct BookDetailsBody: View {
     
     @State private var isSubscriptionViewPresented = false
     @State private var bookText = ""
+    @State private var bookMp3Data: Data?
     @State private var bookDataIsLoading = false
     
     var isReaderBookViewPresented: Binding<Bool> {
@@ -26,6 +27,14 @@ struct BookDetailsBody: View {
             !bookText.isEmpty
         } set: { _ in
             bookText = ""
+        }
+    }
+    
+    var isMp3BookViewPresented: Binding<Bool> {
+        Binding {
+            bookMp3Data != nil
+        } set: { _ in
+            bookMp3Data = nil
         }
     }
     
@@ -140,6 +149,11 @@ struct BookDetailsBody: View {
                 ReaderBookView(isSheetPresented: isReaderBookViewPresented, book: book, bookText: bookText)
             }
         }
+        .popover(isPresented: isMp3BookViewPresented) {
+            if !(bookMp3Data?.isEmpty ?? true) {
+                // MP3 listener here, pass bookMp3Data
+            }
+        }
     }
     
     private func downloadBookButtonPressed() {
@@ -160,7 +174,12 @@ struct BookDetailsBody: View {
             do {
                 let fileURL = try await imageStorage.getUrlForFile(name: book.fileName)
                 let data = try await ImageStorage.shared.loadData(from: fileURL)
-                bookText = String(data: data, encoding: .utf8) ?? ""
+                switch BookType(rawValue: book.bookType)! {
+                case .audio:
+                    bookMp3Data = data
+                case .text:
+                    bookText = String(data: data, encoding: .utf8) ?? ""
+                }
                 hideLoadingIndicator()
             } catch {
                 print("Error:", error)

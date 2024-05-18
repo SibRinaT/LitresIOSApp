@@ -9,8 +9,11 @@ import SwiftUI
 
 struct AdminFileUploadView: View {
     @Binding var fileName: String?
+    @Binding var bookType: BookType
     @State private var isFileImporterPresented = false
+    @State private var isAudioAlertPresented = false
     @State private var isLoading = false
+    @State private var mp3Link = ""
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -33,7 +36,12 @@ struct AdminFileUploadView: View {
                     }
                 } else {
                     Button("Добавить файл") {
-                        isFileImporterPresented = true
+                        switch bookType {
+                        case .text:
+                            isFileImporterPresented = true
+                        case .audio:
+                            isAudioAlertPresented = true
+                        }
                     }
                     .fileImporter(isPresented: $isFileImporterPresented, allowedContentTypes: [.item]) { result in
                         switch result {
@@ -44,6 +52,34 @@ struct AdminFileUploadView: View {
                         }
                     }
                 }
+            }
+        }
+        .alert("Загрузка mp3", isPresented: $isAudioAlertPresented) {
+            TextField("mp3 link", text: $mp3Link)
+                .textInputAutocapitalization(.never)
+            Button("OK", action: downloadMp3)
+            Button("Отмена", role: .cancel) { }
+        } message: {
+            Text("Скопируйте ссылку на mp3 файл")
+        }
+    }
+    
+    private func downloadMp3() {
+        isLoading = true
+        guard let mp3Url = URL(string: mp3Link) else {
+            return
+        }
+        Task {
+            do {
+                let (data, _) = try await URLSession.shared.data(from: mp3Url)
+                let fileName = mp3Url.lastPathComponent
+                try await ImageStorage.shared.upload(data: data, path: "files/\(fileName)")
+                DispatchQueue.main.async {
+                    self.fileName = fileName
+                    self.isLoading = false
+                }
+            } catch {
+                print(error)
             }
         }
     }

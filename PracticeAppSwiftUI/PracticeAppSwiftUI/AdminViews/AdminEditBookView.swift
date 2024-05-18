@@ -81,7 +81,7 @@ struct AdminEditBookView: View {
                     }
                 }
                 Section {
-                    AdminFileUploadView(fileName: $fileName)
+                    AdminFileUploadView(fileName: $fileName, bookType: $selectedBookType)
                 }
                 Section {
                     AdminImageUploadView(imageUrl: $imageUrl)
