@@ -297,13 +297,13 @@
 			isa = PBXGroup;
 			children = (
 				2E38F2A72BDE77AE00D76A03 /* PracticeAppSwiftUIApp.swift */,
+				2E286C602BFB168A00F819C1 /* SubsBuyView.swift */,
 				2E5B192B2BEA436400E205BB /* AddNewFeedbackView.swift */,
 				2E286C5D2BFB15B400F819C1 /* TabBarViews */,
 				2E286C5C2BFB159D00F819C1 /* BookViews */,
 				2E3D199A2BE3515F0005CD68 /* BookDetails */,
 				2E3D19A72BE354A60005CD68 /* SmallViews */,
 				2E3D19B52BE3582D0005CD68 /* Load */,
-				2E286C602BFB168A00F819C1 /* SubsBuyView.swift */,
 			);
 			path = MainViews;
 			sourceTree = "<group>";
