@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct SubsBuyView: View {
-    @Environment(\.authService) var authService
+    @State var showCardView = false
     //    @State private var error: UploadError?
     //    @State private var isLoading = false
     
@@ -98,7 +98,7 @@ struct SubsBuyView: View {
                             }
                             
                             Button (action: {
-                                
+                                showCardView.toggle()
                             }) {
                                 Rectangle()
                                     .fill(Color("InactiveColor"))
@@ -119,6 +119,9 @@ struct SubsBuyView: View {
                     )
             }
             .ignoresSafeArea(edges: .bottom)
+        }
+        .fullScreenCover(isPresented: $showCardView) {
+            AddCardView()
         }
         //        .alert(isPresented: isShowingError, error: error) { _ in
         //        } message: { error in
