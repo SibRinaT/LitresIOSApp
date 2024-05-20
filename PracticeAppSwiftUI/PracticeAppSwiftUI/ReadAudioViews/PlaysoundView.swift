@@ -35,15 +35,16 @@ struct PlaysoundView: View {
     @State var audioPlayer: AVAudioPlayer?
     @State var audioDuration = 0.0
     @State var audioDurationText: String?
-    @State var currentChapterName = ""
+    let data: Data
+//    @State var currentChapterName = ""
     var timer = PlayingTimer()
-    let chapterNames = ["testSound1", "testSound2"]
+//    let chapterNames = ["testSound1", "testSound2"]
         
     var body: some View {
         @State var player : AVAudioPlayer!
         
         VStack {
-            Text(currentChapterName)
+//            Text(currentChapterName)
             
             Slider(value: $sliderValue) {
                 
@@ -58,7 +59,7 @@ struct PlaysoundView: View {
             
             HStack(spacing: UIScreen.main.bounds.width / 7 - 5) {
                 Button(action: {
-                    changeChapterPressed(goForward: false)
+//                    changeChapterPressed(goForward: false)
                 }) {
                     Image(systemName: "backward.end.fill").font(.title)
                 }
@@ -87,7 +88,7 @@ struct PlaysoundView: View {
                     
                 }
                 Button(action: {
-                    changeChapterPressed(goForward: true)
+//                    changeChapterPressed(goForward: true)
                 }) {
                     Image(systemName: "forward.end.fill").font(.title)
                 }
@@ -104,35 +105,36 @@ struct PlaysoundView: View {
         
     }
     
-    private func changeChapterPressed(goForward: Bool) {
-        guard let currentFileName = audioPlayer?.url?.deletingPathExtension().lastPathComponent,
-              let currentIndex = chapterNames.firstIndex(of: currentFileName) else {
-            return
-        }
-        
-        let newIndex: Int
-        if goForward {
-            newIndex = currentIndex + 1
-        } else {
-            newIndex = max(currentIndex - 1, 0)
-        }
-        
-        if chapterNames.count > newIndex {
-            let backAudioName = chapterNames[newIndex]
-            prepare(sound: backAudioName, type: "mp3")
-            playAudio()
-        } else if currentIndex <= 0 {
-            print("already plaing first chapter")
-        }
-    }
+//    private func changeChapterPressed(goForward: Bool) {
+//        guard let currentFileName = audioPlayer?.url?.deletingPathExtension().lastPathComponent,
+//              let currentIndex = chapterNames.firstIndex(of: currentFileName) else {
+//            return
+//        }
+//        
+//        let newIndex: Int
+//        if goForward {
+//            newIndex = currentIndex + 1
+//        } else {
+//            newIndex = max(currentIndex - 1, 0)
+//        }
+//        
+//        if chapterNames.count > newIndex {
+//            let backAudioName = chapterNames[newIndex]
+//            prepare(sound: backAudioName, type: "mp3")
+//            playAudio()
+//        } else if currentIndex <= 0 {
+//            print("already plaing first chapter")
+//        }
+//    }
     
     func prepare(sound: String, type: String) {
-        currentChapterName = sound
+//        currentChapterName = sound
         sliderValue = 0.0
         audioPlayer?.stop()
-        if let path = Bundle.main.path(forResource: sound, ofType: type) {
+//        if let path = Bundle.main.path(forResource: sound, ofType: type) {
             do {
-                audioPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: path))
+                audioPlayer = try AVAudioPlayer(data: data)
+//                audioPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: path))
                 if let audioPlayer = audioPlayer {
                     audioDuration = audioPlayer.duration
                     audioDurationText = secondsToHoursMinutesSeconds(Int(audioPlayer.duration))
@@ -140,7 +142,7 @@ struct PlaysoundView: View {
             } catch {
                 print("error")
             }
-        }
+//        }
     }
     
     private func playAudio() {
@@ -189,5 +191,5 @@ struct PlaysoundView: View {
     
 
 #Preview {
-    PlaysoundView()
+    PlaysoundView(data: Data())
 }

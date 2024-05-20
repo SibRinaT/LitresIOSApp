@@ -60,9 +60,9 @@ struct BookDetailsBody: View {
                                 } else {
                                     Capsule()
                                         .fill(userCanRead ? Color("MainColor") : Color("SecondaryColor").opacity(0.5))
-                                        .frame(width: 100, height: 35)
+                                        .frame(width: 120, height: 35)
                                         .overlay {
-                                            Text("Читать")
+                                            Text(BookType(rawValue: book.bookType) == .text ? "Читать" : "Слушать")
                                                 .foregroundColor(.white)
                                                 .font(.custom("AmericanTypewriter", size: 20))
                                         }
@@ -136,13 +136,6 @@ struct BookDetailsBody: View {
                 }
             }
             .padding()
-            
-            //        NavigationView {
-            //                       NavigationLink(destination: PlaysoundView()) {
-            //                           Text("Перейти к проигрывателю")
-            //                       }
-            //                   }
-            //        .padding()
         }
         .popover(isPresented: isReaderBookViewPresented) {
             if !bookText.isEmpty {
@@ -150,8 +143,8 @@ struct BookDetailsBody: View {
             }
         }
         .popover(isPresented: isMp3BookViewPresented) {
-            if !(bookMp3Data?.isEmpty ?? true) {
-                // MP3 listener here, pass bookMp3Data
+            if let bookMp3Data, !bookMp3Data.isEmpty {
+                PlaysoundView(data: bookMp3Data)
             }
         }
     }
