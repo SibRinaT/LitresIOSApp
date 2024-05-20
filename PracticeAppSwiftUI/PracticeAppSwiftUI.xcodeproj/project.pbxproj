@@ -230,8 +230,6 @@
 		2E286C642BFB39F900F819C1 /* PayViews */ = {
 			isa = PBXGroup;
 			children = (
-				2E286C602BFB168A00F819C1 /* SubsBuyView.swift */,
-				2E286C622BFB25ED00F819C1 /* AddCardView.swift */,
 			);
 			path = PayViews;
 			sourceTree = "<group>";
@@ -308,6 +306,8 @@
 			isa = PBXGroup;
 			children = (
 				2E38F2A72BDE77AE00D76A03 /* PracticeAppSwiftUIApp.swift */,
+				2E286C602BFB168A00F819C1 /* SubsBuyView.swift */,
+				2E286C622BFB25ED00F819C1 /* AddCardView.swift */,
 				2E286C642BFB39F900F819C1 /* PayViews */,
 				2E5B192B2BEA436400E205BB /* AddNewFeedbackView.swift */,
 				2E286C5D2BFB15B400F819C1 /* TabBarViews */,
