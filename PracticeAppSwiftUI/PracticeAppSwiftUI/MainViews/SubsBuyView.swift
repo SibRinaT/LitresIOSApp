@@ -2,7 +2,16 @@ import SwiftUI
 
 struct SubsBuyView: View {
     @State var showCardView = false
-
+    //    @State private var error: UploadError?
+    //    @State private var isLoading = false
+    
+    //    var isShowingError: Binding<Bool> {
+    //        Binding {
+    //            error != nil
+    //        } set: { _ in
+    //            error = nil
+    //        }
+    //    }
     var body: some View {
         NavigationView {
             ZStack {
