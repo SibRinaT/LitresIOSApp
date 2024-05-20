@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2E286C612BFB168A00F819C1 /* SubsBuyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E286C602BFB168A00F819C1 /* SubsBuyView.swift */; };
+		2E286C632BFB25ED00F819C1 /* AddCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E286C622BFB25ED00F819C1 /* AddCardView.swift */; };
 		2E38F2A82BDE77AE00D76A03 /* PracticeAppSwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E38F2A72BDE77AE00D76A03 /* PracticeAppSwiftUIApp.swift */; };
 		2E38F2AA2BDE77AE00D76A03 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E38F2A92BDE77AE00D76A03 /* SignUpView.swift */; };
 		2E38F2AC2BDE77B100D76A03 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E38F2AB2BDE77B100D76A03 /* Assets.xcassets */; };
@@ -90,6 +91,7 @@
 
 /* Begin PBXFileReference section */
 		2E286C602BFB168A00F819C1 /* SubsBuyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubsBuyView.swift; sourceTree = "<group>"; };
+		2E286C622BFB25ED00F819C1 /* AddCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardView.swift; sourceTree = "<group>"; };
 		2E38F2A42BDE77AE00D76A03 /* PracticeAppSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PracticeAppSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E38F2A72BDE77AE00D76A03 /* PracticeAppSwiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeAppSwiftUIApp.swift; sourceTree = "<group>"; };
 		2E38F2A92BDE77AE00D76A03 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
@@ -299,6 +301,7 @@
 				2E38F2A72BDE77AE00D76A03 /* PracticeAppSwiftUIApp.swift */,
 				2E286C602BFB168A00F819C1 /* SubsBuyView.swift */,
 				2E5B192B2BEA436400E205BB /* AddNewFeedbackView.swift */,
+				2E286C622BFB25ED00F819C1 /* AddCardView.swift */,
 				2E286C5D2BFB15B400F819C1 /* TabBarViews */,
 				2E286C5C2BFB159D00F819C1 /* BookViews */,
 				2E3D199A2BE3515F0005CD68 /* BookDetails */,
@@ -541,6 +544,7 @@
 				2E3D19952BE34FA10005CD68 /* BookView.swift in Sources */,
 				2E3D19B72BE36BEA0005CD68 /* Loader.swift in Sources */,
 				ACB46B3E2BE8C53F009A7ABA /* ImageStorage.swift in Sources */,
+				2E286C632BFB25ED00F819C1 /* AddCardView.swift in Sources */,
 				ACB46AC32BE7680B009A7ABA /* ProfileView.swift in Sources */,
 				ACE48A452BF37754007A2F8E /* AdminReviewList.swift in Sources */,
 				2E286C612BFB168A00F819C1 /* SubsBuyView.swift in Sources */,
