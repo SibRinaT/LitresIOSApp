@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E286C612BFB168A00F819C1 /* SubsBuyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E286C602BFB168A00F819C1 /* SubsBuyView.swift */; };
 		2E38F2A82BDE77AE00D76A03 /* PracticeAppSwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E38F2A72BDE77AE00D76A03 /* PracticeAppSwiftUIApp.swift */; };
 		2E38F2AA2BDE77AE00D76A03 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E38F2A92BDE77AE00D76A03 /* SignUpView.swift */; };
 		2E38F2AC2BDE77B100D76A03 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E38F2AB2BDE77B100D76A03 /* Assets.xcassets */; };
@@ -88,6 +89,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2E286C602BFB168A00F819C1 /* SubsBuyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubsBuyView.swift; sourceTree = "<group>"; };
 		2E38F2A42BDE77AE00D76A03 /* PracticeAppSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PracticeAppSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E38F2A72BDE77AE00D76A03 /* PracticeAppSwiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeAppSwiftUIApp.swift; sourceTree = "<group>"; };
 		2E38F2A92BDE77AE00D76A03 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
@@ -301,6 +303,7 @@
 				2E3D199A2BE3515F0005CD68 /* BookDetails */,
 				2E3D19A72BE354A60005CD68 /* SmallViews */,
 				2E3D19B52BE3582D0005CD68 /* Load */,
+				2E286C602BFB168A00F819C1 /* SubsBuyView.swift */,
 			);
 			path = MainViews;
 			sourceTree = "<group>";
@@ -540,6 +543,7 @@
 				ACB46B3E2BE8C53F009A7ABA /* ImageStorage.swift in Sources */,
 				ACB46AC32BE7680B009A7ABA /* ProfileView.swift in Sources */,
 				ACE48A452BF37754007A2F8E /* AdminReviewList.swift in Sources */,
+				2E286C612BFB168A00F819C1 /* SubsBuyView.swift in Sources */,
 				2E3D19B32BE355A20005CD68 /* LoadingErrorView.swift in Sources */,
 				2E3D19B92BE36C140005CD68 /* Types.swift in Sources */,
 				2E3D19A62BE354770005CD68 /* TagsViewModel.swift in Sources */,
