@@ -1,6 +1,19 @@
 import SwiftUI
 
 struct SubsBuyView: View {
+    @State var showCardView = false
+    //    @State private var error: UploadError?
+    //    @State private var isLoading = false
+    
+    //    var isShowingError: Binding<Bool> {
+    //        Binding {
+    //            error != nil
+    //        } set: { _ in
+    //            error = nil
+    //        }
+    //    }
+    
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -69,6 +82,7 @@ struct SubsBuyView: View {
                     
                     Spacer()
                 }
+                .padding()
                 
                 VStack {
                     Spacer()
@@ -88,23 +102,82 @@ struct SubsBuyView: View {
                                 Rectangle()
                                     .cornerRadius(16)
                                     .foregroundColor(Color("InactiveColor"))
-                                    .padding(.horizontal, 20)
-                                    .padding(.vertical, 20)
-                                    .overlay (
-                                        Text("Подключить")
-                                            .foregroundColor(Color(.white))
-                                            .font(.custom("AmericanTypewriter", size: 24))
-                                            .bold()
-                                            .multilineTextAlignment(.center)
-                                    )
+                                
                             }
                                 .padding(.horizontal)
                         )
+                    Spacer()
                 }
-                .ignoresSafeArea(edges: .bottom)
+                .padding(.horizontal)
+                
+                Spacer()
             }
+            
+            VStack {
+                Spacer()
+                Rectangle()
+                    .foregroundColor(Color("SecondaryColor"))
+                    .frame(height: 150)
+                    .ignoresSafeArea(.all)
+                    .overlay(
+                        VStack {
+                            HStack {
+                                Text("Сейчас вы платите - 149руб")
+                                    .foregroundColor(Color(.white))
+                                    .font(.custom("AmericanTypewriter", size: 18))
+                                Spacer()
+                            }
+                            
+                            Button (action: {
+                                showCardView.toggle()
+                            }) {
+                                Rectangle()
+                                    .fill(Color("InactiveColor"))
+                                    .cornerRadius(16)
+                                    .frame(width: 280, height: 57)
+                                    .overlay {
+                                        Text("Подключить")
+                                            .foregroundColor(.white)
+                                            .font(.custom("AmericanTypewriter", size: 24))
+                                            .bold()
+                                            .multilineTextAlignment(.center)
+                                    }
+                                
+                            }
+                            //                            .disabled(isLoading)
+                        }
+                            .padding(.horizontal)
+                    )
+            }
+            .ignoresSafeArea(edges: .bottom)
         }
+        .fullScreenCover(isPresented: $showCardView) {
+            AddCardView()
+        }
+        //        .alert(isPresented: isShowingError, error: error) { _ in
+        //        } message: { error in
+        //            Text(error.errorDescription ?? "")
+        //        }
     }
+    
+    //    private func enableSub() {
+    //        isLoading = true
+    //        Task {
+    //            do {
+    //                try await authService.enableSubscription()
+    //                hideIndicator()
+    //            } catch {
+    //                self.error = UploadError.custom(text: error.localizedDescription)
+    //                hideIndicator()
+    //            }
+    //        }
+    //    }
+    
+    //    private func hideIndicator() {
+    //        DispatchQueue.main.async {
+    //            isLoading = false
+    //        }
+    //    }
 }
 
 #Preview {
