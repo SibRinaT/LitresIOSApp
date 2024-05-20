@@ -10,16 +10,8 @@ import SwiftUI
 struct SubscriptionView: View {
     @Environment(\.authService) var authService
     @Binding var isSheetPresented: Bool
-    @State private var error: UploadError?
-    @State private var isLoading = false
+    @State var showPayView = false
     
-    var isShowingError: Binding<Bool> {
-        Binding {
-            error != nil
-        } set: { _ in
-            error = nil
-        }
-    }
     var subEnabled: Bool {
         authService.user?.isSubscriptionEnabled ?? false
     }
@@ -44,56 +36,26 @@ struct SubscriptionView: View {
                         )
                     
                     Button (action: {
-                        enableSub()
+                        showPayView.toggle()
                     }) {
-                        if isLoading {
-                            Capsule()
-                                .fill(subEnabled ? Color("MainColor"): Color("SecondaryColor"))
-                                .frame(width: 280, height: 57)
-
-                                .overlay {
-                                    ProgressView().progressViewStyle(.circular)
-                                }
-                        } else {
-                            Capsule()
-                                .fill(subEnabled ? Color("MainColor"): Color("SecondaryColor"))
-                                .frame(width: 280, height: 57)
-                                .opacity(0.5)
-                                .overlay {
-                                    Text("Расширенная на месяц")
-                                        .foregroundColor(.white)
-                                }
-                        }
-     
+                        Capsule()
+                            .fill(subEnabled ? Color("MainColor"): Color("SecondaryColor"))
+                            .frame(width: 280, height: 57)
+                            .opacity(0.5)
+                            .overlay {
+                                Text(subEnabled ? "Подписка активирована": "Расширенная на месяц")
+                                    .foregroundColor(.white)
+                            }
                     }
-                    .disabled(subEnabled || isLoading)
+                    .disabled(subEnabled)
                 }
             }
         }
-        .alert(isPresented: isShowingError, error: error) { _ in
-        } message: { error in
-            Text(error.errorDescription ?? "")
+        .fullScreenCover(isPresented: $showPayView) {
+            SubsBuyView()
         }
     }
     
-    private func enableSub() {
-        isLoading = true
-        Task {
-            do {
-                try await authService.enableSubscription()
-                hideIndicator()
-            } catch {
-                self.error = UploadError.custom(text: error.localizedDescription)
-                hideIndicator()
-            }
-        }
-    }
-    
-    private func hideIndicator() {
-        DispatchQueue.main.async {
-            isLoading = false
-        }
-    }
 }
 
 #Preview {
