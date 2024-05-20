@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E098BCB2BFB6987006D1013 /* CardNumbersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E098BCA2BFB6987006D1013 /* CardNumbersView.swift */; };
 		2E286C612BFB168A00F819C1 /* SubsBuyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E286C602BFB168A00F819C1 /* SubsBuyView.swift */; };
 		2E286C632BFB25ED00F819C1 /* AddCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E286C622BFB25ED00F819C1 /* AddCardView.swift */; };
 		2E38F2A82BDE77AE00D76A03 /* PracticeAppSwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E38F2A72BDE77AE00D76A03 /* PracticeAppSwiftUIApp.swift */; };
@@ -90,6 +91,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2E098BCA2BFB6987006D1013 /* CardNumbersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardNumbersView.swift; sourceTree = "<group>"; };
 		2E286C602BFB168A00F819C1 /* SubsBuyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubsBuyView.swift; sourceTree = "<group>"; };
 		2E286C622BFB25ED00F819C1 /* AddCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardView.swift; sourceTree = "<group>"; };
 		2E38F2A42BDE77AE00D76A03 /* PracticeAppSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PracticeAppSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -308,6 +310,7 @@
 				2E38F2A72BDE77AE00D76A03 /* PracticeAppSwiftUIApp.swift */,
 				2E286C602BFB168A00F819C1 /* SubsBuyView.swift */,
 				2E286C622BFB25ED00F819C1 /* AddCardView.swift */,
+				2E098BCA2BFB6987006D1013 /* CardNumbersView.swift */,
 				2E286C642BFB39F900F819C1 /* PayViews */,
 				2E5B192B2BEA436400E205BB /* AddNewFeedbackView.swift */,
 				2E286C5D2BFB15B400F819C1 /* TabBarViews */,
@@ -559,6 +562,7 @@
 				2E3D19B32BE355A20005CD68 /* LoadingErrorView.swift in Sources */,
 				2E3D19B92BE36C140005CD68 /* Types.swift in Sources */,
 				2E3D19A62BE354770005CD68 /* TagsViewModel.swift in Sources */,
+				2E098BCB2BFB6987006D1013 /* CardNumbersView.swift in Sources */,
 				2E5B192A2BEA348500E205BB /* SubscriptionView.swift in Sources */,
 				2E86C87E2BE261510093D70D /* OTPVerificationView.swift in Sources */,
 				2E3D199C2BE3517A0005CD68 /* BookDetails.swift in Sources */,

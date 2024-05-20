@@ -49,25 +49,28 @@ struct AddCardView: View {
                                     )
                                     .padding(.horizontal)
                                 
-                                Rectangle()
-                                    .foregroundColor(Color("SecondaryColor"))
-                                    .frame(height: 80)
-                                    .cornerRadius(16)
-                                    .overlay(
-                                        HStack {
-                                            Image("cardIcon")
-                                                .resizable()
-                                                .frame(width: 50, height: 50)
-                                            Text("Добавить карту")
-                                                .foregroundColor(Color(.white))
-                                                .font(.custom("AmericanTypewriter", size: 16))
-                                                .multilineTextAlignment(.center)
-                                            Spacer()
-                                        }
-                                            .padding(.horizontal)
-                                    )
-                                    .padding(.horizontal)
-                                
+                                Button(action: {
+                                    
+                                }) {
+                                    Rectangle()
+                                        .foregroundColor(Color("SecondaryColor"))
+                                        .frame(height: 80)
+                                        .cornerRadius(16)
+                                        .overlay(
+                                            HStack {
+                                                Image("cardIcon")
+                                                    .resizable()
+                                                    .frame(width: 50, height: 50)
+                                                Text("Добавить карту")
+                                                    .foregroundColor(Color(.white))
+                                                    .font(.custom("AmericanTypewriter", size: 16))
+                                                    .multilineTextAlignment(.center)
+                                                Spacer()
+                                            }
+                                                .padding(.horizontal)
+                                        )
+                                        .padding(.horizontal)
+                                }
                                
                             }
                         )
