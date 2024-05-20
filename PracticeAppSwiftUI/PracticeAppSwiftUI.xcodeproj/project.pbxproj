@@ -181,6 +181,48 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2E286C5C2BFB159D00F819C1 /* BookViews */ = {
+			isa = PBXGroup;
+			children = (
+				2E3D19962BE34FB00005CD68 /* ShelfView.swift */,
+				2E3D19BA2BE36E240005CD68 /* BooksPageView.swift */,
+				2E3D19942BE34FA10005CD68 /* BookView.swift */,
+			);
+			path = BookViews;
+			sourceTree = "<group>";
+		};
+		2E286C5D2BFB15B400F819C1 /* TabBarViews */ = {
+			isa = PBXGroup;
+			children = (
+				2E3D19872BE269430005CD68 /* MainView.swift */,
+				ACB46AC22BE7680B009A7ABA /* ProfileView.swift */,
+				2E5B19292BEA348500E205BB /* SubscriptionView.swift */,
+			);
+			path = TabBarViews;
+			sourceTree = "<group>";
+		};
+		2E286C5E2BFB15F600F819C1 /* ReadAudioViews */ = {
+			isa = PBXGroup;
+			children = (
+				2EFE3B5E2BF3704600A8E8D0 /* ReaderBookView.swift */,
+				2EB214D32BF896990067546B /* PlaysoundView.swift */,
+			);
+			path = ReadAudioViews;
+			sourceTree = "<group>";
+		};
+		2E286C5F2BFB162900F819C1 /* FireBase */ = {
+			isa = PBXGroup;
+			children = (
+				ACB46B3D2BE8C53F009A7ABA /* ImageStorage.swift */,
+				ACB46AC82BE79F55009A7ABA /* FireStore.swift */,
+				ACB46B7A2BE92516009A7ABA /* FileStore+Genre.swift */,
+				AC99B3302BED0ABB00D28199 /* FireStore+Review.swift */,
+				ACB46B782BE8F51B009A7ABA /* ApiError.swift */,
+				AC3A859F2BF4DD89003A9101 /* EnvironmentValues.swift */,
+			);
+			path = FireBase;
+			sourceTree = "<group>";
+		};
 		2E38F29B2BDE77AE00D76A03 = {
 			isa = PBXGroup;
 			children = (
@@ -201,21 +243,17 @@
 		2E38F2A62BDE77AE00D76A03 /* PracticeAppSwiftUI */ = {
 			isa = PBXGroup;
 			children = (
-				ACB46B382BE8BD3C009A7ABA /* AdminViews */,
 				ACB46AC42BE769B1009A7ABA /* AppRootManager.swift */,
+				2E286C5E2BFB15F600F819C1 /* ReadAudioViews */,
+				ACB46B382BE8BD3C009A7ABA /* AdminViews */,
 				2E3D19912BE26E430005CD68 /* MainViews */,
 				2E3D19902BE26DFB0005CD68 /* AuthentificationViews */,
 				2E3D19892BE26C880005CD68 /* Models */,
 				2E6F0EC12BDEC9CE003312F5 /* HelpViews */,
+				2E286C5F2BFB162900F819C1 /* FireBase */,
 				2E38F2B52BDE7ABE00D76A03 /* Info.plist */,
 				2E8A61782BE5F6640013BD1F /* GoogleService-Info.plist */,
 				2E38F2AD2BDE77B100D76A03 /* Preview Content */,
-				ACB46B3D2BE8C53F009A7ABA /* ImageStorage.swift */,
-				ACB46AC82BE79F55009A7ABA /* FireStore.swift */,
-				ACB46B7A2BE92516009A7ABA /* FileStore+Genre.swift */,
-				AC99B3302BED0ABB00D28199 /* FireStore+Review.swift */,
-				ACB46B782BE8F51B009A7ABA /* ApiError.swift */,
-				AC3A859F2BF4DD89003A9101 /* EnvironmentValues.swift */,
 				2E8A616F2BE4DC200013BD1F /* Frameworks */,
 			);
 			path = PracticeAppSwiftUI;
@@ -257,18 +295,12 @@
 			isa = PBXGroup;
 			children = (
 				2E38F2A72BDE77AE00D76A03 /* PracticeAppSwiftUIApp.swift */,
-				2E3D19872BE269430005CD68 /* MainView.swift */,
-				ACB46AC22BE7680B009A7ABA /* ProfileView.swift */,
-				2E3D19942BE34FA10005CD68 /* BookView.swift */,
-				2E3D19962BE34FB00005CD68 /* ShelfView.swift */,
-				2E3D19BA2BE36E240005CD68 /* BooksPageView.swift */,
-				2E5B19292BEA348500E205BB /* SubscriptionView.swift */,
 				2E5B192B2BEA436400E205BB /* AddNewFeedbackView.swift */,
+				2E286C5D2BFB15B400F819C1 /* TabBarViews */,
+				2E286C5C2BFB159D00F819C1 /* BookViews */,
 				2E3D199A2BE3515F0005CD68 /* BookDetails */,
 				2E3D19A72BE354A60005CD68 /* SmallViews */,
 				2E3D19B52BE3582D0005CD68 /* Load */,
-				2EFE3B5E2BF3704600A8E8D0 /* ReaderBookView.swift */,
-				2EB214D32BF896990067546B /* PlaysoundView.swift */,
 			);
 			path = MainViews;
 			sourceTree = "<group>";

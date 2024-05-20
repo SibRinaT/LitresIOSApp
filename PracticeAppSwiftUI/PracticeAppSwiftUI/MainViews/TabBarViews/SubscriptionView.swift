@@ -46,11 +46,11 @@ struct SubscriptionView: View {
                     Button (action: {
                         enableSub()
                     }) {
-                        
                         if isLoading {
                             Capsule()
                                 .fill(subEnabled ? Color("MainColor"): Color("SecondaryColor"))
                                 .frame(width: 280, height: 57)
+
                                 .overlay {
                                     ProgressView().progressViewStyle(.circular)
                                 }
@@ -58,6 +58,7 @@ struct SubscriptionView: View {
                             Capsule()
                                 .fill(subEnabled ? Color("MainColor"): Color("SecondaryColor"))
                                 .frame(width: 280, height: 57)
+                                .opacity(0.5)
                                 .overlay {
                                     Text("Расширенная на месяц")
                                         .foregroundColor(.white)
