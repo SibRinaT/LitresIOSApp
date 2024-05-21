@@ -33,9 +33,6 @@ struct MainView: View {
                 Image(systemName: "person.crop.circle.fill")
                 Text("Профиль")
             }
-            NavigationView {
-                
-            }
         }
     }
 }
