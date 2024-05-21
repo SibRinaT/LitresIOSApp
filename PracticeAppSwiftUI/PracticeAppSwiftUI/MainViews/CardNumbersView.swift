@@ -8,22 +8,39 @@
 import SwiftUI
 
 struct CardNumbersView: View {
+    @State var text: String = ""
+    
     var body: some View {
-        ZStack {
-            Color("BackColor")
-                .ignoresSafeArea(.all)
-            VStack {
-                HStack {
-                    Text("Добавление новой карты")
-                        .font(.custom("AmericanTypewriter", size: 24))
-                        .bold()
-                        .foregroundColor(Color(.white))
-                    Spacer()
-                }
+        VStack (alignment: .leading) {
+            Text("Добавление новой карты")
+                .font(.custom("AmericanTypewriter", size: 28))
+                .bold()
+                .foregroundColor(Color(.white))
+            Spacer()
+            CardFieldView(text: $text)
+            Spacer()
+            
+            Button(action: {
                 
-                
+            }) {
+                Rectangle()
+                    .foregroundColor(Color("InactiveColor"))
+                    .frame(height: 80)
+                    .cornerRadius(16)
+                    .overlay(
+                        HStack {
+                            Text("Оплатить")
+                                .foregroundColor(Color(.white))
+                                .font(.custom("AmericanTypewriter", size: 20))
+                                .multilineTextAlignment(.center)
+                                .bold()
+                        }
+                            .padding(.horizontal)
+                    )
             }
         }
+        .padding(.horizontal)
+        .background(Color("BackColor"))
     }
 }
 

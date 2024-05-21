@@ -34,6 +34,7 @@
 		2E3D19B72BE36BEA0005CD68 /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3D19B62BE36BEA0005CD68 /* Loader.swift */; };
 		2E3D19B92BE36C140005CD68 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3D19B82BE36C140005CD68 /* Types.swift */; };
 		2E3D19BB2BE36E240005CD68 /* BooksPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3D19BA2BE36E240005CD68 /* BooksPageView.swift */; };
+		2E42880C2BFC76F700914C43 /* CardFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E42880B2BFC76F700914C43 /* CardFieldView.swift */; };
 		2E5B192A2BEA348500E205BB /* SubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5B19292BEA348500E205BB /* SubscriptionView.swift */; };
 		2E5B192C2BEA436400E205BB /* AddNewFeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5B192B2BEA436400E205BB /* AddNewFeedbackView.swift */; };
 		2E6F0EC32BDEC9E7003312F5 /* InputFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6F0EC22BDEC9E7003312F5 /* InputFieldView.swift */; };
@@ -121,6 +122,7 @@
 		2E3D19B62BE36BEA0005CD68 /* Loader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
 		2E3D19B82BE36C140005CD68 /* Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
 		2E3D19BA2BE36E240005CD68 /* BooksPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooksPageView.swift; sourceTree = "<group>"; };
+		2E42880B2BFC76F700914C43 /* CardFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFieldView.swift; sourceTree = "<group>"; };
 		2E5B19292BEA348500E205BB /* SubscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionView.swift; sourceTree = "<group>"; };
 		2E5B192B2BEA436400E205BB /* AddNewFeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewFeedbackView.swift; sourceTree = "<group>"; };
 		2E6F0EC22BDEC9E7003312F5 /* InputFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputFieldView.swift; sourceTree = "<group>"; };
@@ -314,8 +316,8 @@
 				2E286C602BFB168A00F819C1 /* SubsBuyView.swift */,
 				2E286C622BFB25ED00F819C1 /* AddCardView.swift */,
 				2E098BCA2BFB6987006D1013 /* CardNumbersView.swift */,
-				2E286C642BFB39F900F819C1 /* PayViews */,
 				2E5B192B2BEA436400E205BB /* AddNewFeedbackView.swift */,
+				2E286C642BFB39F900F819C1 /* PayViews */,
 				2E286C5D2BFB15B400F819C1 /* TabBarViews */,
 				2E286C5C2BFB159D00F819C1 /* BookViews */,
 				2E3D199A2BE3515F0005CD68 /* BookDetails */,
@@ -371,6 +373,7 @@
 			children = (
 				2E6F0EC22BDEC9E7003312F5 /* InputFieldView.swift */,
 				2E77583B2BE03AF10079EFFE /* PasswordFieldView.swift */,
+				2E42880B2BFC76F700914C43 /* CardFieldView.swift */,
 			);
 			path = HelpViews;
 			sourceTree = "<group>";
@@ -575,6 +578,7 @@
 				2E3D19A02BE351950005CD68 /* BookDetailsBody.swift in Sources */,
 				ACB46AC92BE79F55009A7ABA /* FireStore.swift in Sources */,
 				2E8A61862BE6199E0013BD1F /* LoadinViewFB.swift in Sources */,
+				2E42880C2BFC76F700914C43 /* CardFieldView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
