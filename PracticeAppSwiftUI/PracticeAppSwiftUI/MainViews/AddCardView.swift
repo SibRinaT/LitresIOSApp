@@ -24,28 +24,30 @@ struct AddCardView: View {
             
             VStack {
                 VStack {
-                    LazyVStack {
-                        ForEach(cards) { card in
-                            HStack {
-                                Image("cardIcon")
-                                    .resizable()
-                                    .frame(width: 50, height: 50)
-                                Spacer()
-                                Text(card.maskedNumber)
-                                    .foregroundColor(Color(.white))
-                                    .font(.custom("AmericanTypewriter", size: 16))
-                                    .multilineTextAlignment(.center)
+                    ScrollView {
+                        LazyVStack {
+                            ForEach(cards) { card in
+                                HStack {
+                                    Image("cardIcon")
+                                        .resizable()
+                                        .frame(width: 50, height: 50)
+                                    Spacer()
+                                    Text(card.maskedNumber)
+                                        .foregroundColor(Color(.white))
+                                        .font(.custom("AmericanTypewriter", size: 16))
+                                        .multilineTextAlignment(.center)
+                                }
+                                .padding()
+                                .background(Color("SecondaryColor"))
+                                .cornerRadiusWithBorder(radius: 16, borderLineWidth: card == selectedCard ? 2 : 0)
+                                .onTapGesture {
+                                    selectedCard = card
+                                }
                             }
-                            .padding()
-                            .background(Color("SecondaryColor"))
-                            .cornerRadiusWithBorder(radius: 16, borderLineWidth: card == selectedCard ? 2 : 0)
-                            .onTapGesture {
-                                selectedCard = card
-                            }
-                            
                         }
+                        .padding([.top, .leading, .trailing])
                     }
-                    .padding([.top, .leading, .trailing])
+
                     
                     Button(action: {
                         
@@ -79,7 +81,7 @@ struct AddCardView: View {
                     
                 } label: {
                     Rectangle()
-                        .foregroundColor(Color("InactiveColor"))
+                        .foregroundColor(selectedCard == nil ? Color("SecondaryColor") : Color("InactiveColor"))
                         .frame(height: 80)
                         .cornerRadius(16)
                         .overlay(
@@ -108,8 +110,13 @@ struct AddCardView: View {
 
 #Preview {
     AddCardView(cards:
-                    [BankCard(number: "2345678345678", cvv: "123", name: "Jhon Doe", expirationDate: "12/24"),
-                     BankCard(number: "234567845678", cvv: "123", name: "Jhon Doe", expirationDate: "12/24")]
+                    [BankCard(number: "2345678341625", cvv: "123", name: "Jhon Doe", expirationDate: "12/24"),
+                     BankCard(number: "234567845678", cvv: "123", name: "Jhon Doe", expirationDate: "12/24"),
+                     BankCard(number: "234567845674", cvv: "123", name: "Jhon Doe", expirationDate: "12/24"),
+                     BankCard(number: "234567845673", cvv: "123", name: "Jhon Doe", expirationDate: "12/24"),
+                     BankCard(number: "234567845672", cvv: "123", name: "Jhon Doe", expirationDate: "12/24"),
+                     BankCard(number: "234567845671", cvv: "123", name: "Jhon Doe", expirationDate: "12/24"),
+                    ]
     )
 }
 
