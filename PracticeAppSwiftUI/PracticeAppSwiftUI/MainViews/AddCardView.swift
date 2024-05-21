@@ -8,8 +8,22 @@
 import SwiftUI
 
 struct AddCardView: View {
+    @Environment(\.authService) var authService
+    @Environment(\.dismiss) private var dismiss
     @State var cards = BankCardStore.getCards()
     @State var selectedCard: BankCard?
+    @State private var error: UploadError?
+    @State private var isLoading = false
+    @State private var isShowingSuccess = false
+    
+    var isShowingError: Binding<Bool> {
+        Binding {
+            error != nil
+        } set: { _ in
+            error = nil
+        }
+    }
+    
     
     var body: some View {
         VStack {
@@ -24,30 +38,31 @@ struct AddCardView: View {
             
             VStack {
                 VStack {
-                    ScrollView {
-                        LazyVStack {
-                            ForEach(cards) { card in
-                                HStack {
-                                    Image("cardIcon")
-                                        .resizable()
-                                        .frame(width: 50, height: 50)
-                                    Spacer()
-                                    Text(card.maskedNumber)
-                                        .foregroundColor(Color(.white))
-                                        .font(.custom("AmericanTypewriter", size: 16))
-                                        .multilineTextAlignment(.center)
-                                }
-                                .padding()
-                                .background(Color("SecondaryColor"))
-                                .cornerRadiusWithBorder(radius: 16, borderLineWidth: card == selectedCard ? 2 : 0)
-                                .onTapGesture {
-                                    selectedCard = card
-                                }
+                    if !cards.isEmpty {
+                        List(cards) { card in
+                            HStack {
+                                Image("cardIcon")
+                                    .resizable()
+                                    .frame(width: 50, height: 50)
+                                Spacer()
+                                Text(card.maskedNumber)
+                                    .foregroundColor(Color(.white))
+                                    .font(.custom("AmericanTypewriter", size: 16))
+                                    .multilineTextAlignment(.center)
+                            }
+                            .padding()
+                            .listRowBackground(Color.clear)
+                            .listRowSeparator(.hidden)
+                            .background(Color("SecondaryColor"))
+                            .cornerRadiusWithBorder(radius: 16, borderLineWidth: card == selectedCard ? 2 : 0)
+                            .onTapGesture {
+                                selectedCard = card
                             }
                         }
-                        .padding([.top, .leading, .trailing])
+                        .listStyle(.plain)
+                        .scrollContentBackground(.hidden)
                     }
-
+                    
                     
                     Button(action: {
                         
@@ -70,7 +85,7 @@ struct AddCardView: View {
                                     .padding(.horizontal)
                             )
                     }
-                    .padding([.bottom, .leading, .trailing])
+                    .padding()
                 }
                 .background(Color("SecondaryColor").opacity(0.55))
                 .cornerRadius(16)
@@ -78,44 +93,87 @@ struct AddCardView: View {
                 Spacer()
                 
                 Button {
-                    
+                    enableSub()
                 } label: {
-                    Rectangle()
-                        .foregroundColor(selectedCard == nil ? Color("SecondaryColor") : Color("InactiveColor"))
-                        .frame(height: 80)
-                        .cornerRadius(16)
-                        .overlay(
-                            HStack {
-                                Text("Оплатить")
-                                    .foregroundColor(Color(.white))
-                                    .font(.custom("AmericanTypewriter", size: 20))
-                                    .multilineTextAlignment(.center)
-                                    .bold()
-                            }
-                                .padding(.horizontal)
-                        )
+                    if isLoading {
+                        Rectangle()
+                            .foregroundColor(Color("SecondaryColor"))
+                            .frame(height: 80)
+                            .cornerRadius(16)
+                            .overlay(
+                                ProgressView()
+                                    .progressViewStyle(.circular)
+                                    .tint(.white)
+                            )
+                    } else {
+                        Rectangle()
+                            .foregroundColor(selectedCard == nil ? Color("SecondaryColor") : Color("InactiveColor"))
+                            .frame(height: 80)
+                            .cornerRadius(16)
+                            .overlay(
+                                HStack {
+                                    Text("Оплатить")
+                                        .foregroundColor(Color(.white))
+                                        .font(.custom("AmericanTypewriter", size: 20))
+                                        .multilineTextAlignment(.center)
+                                        .bold()
+                                }
+                                    .padding(.horizontal)
+                            )
+                    }
+                
                     
                 }
-                .disabled(selectedCard == nil)
-                .padding(.horizontal)
-                
-                
+//                .disabled(selectedCard == nil || isLoading)
             }
             
         }
         .padding(.horizontal)
         .background(Color("BackColor"))
+        .alert(isPresented: isShowingError, error: error) { _ in
+        } message: { error in
+            Text(error.errorDescription ?? "")
+        }
+        .alert("Успешно!", isPresented: $isShowingSuccess) {
+            Button("Ok") {
+                dismiss()
+            }
+        } message: {
+            Text("Оплата прошла успешно. Ваша подписка активирована")
+        }
+
+    }
+    
+    private func enableSub() {
+        isLoading = true
+        Task {
+            do {
+                try await authService.enableSubscription()
+                hideIndicator()
+                isShowingSuccess = true
+            } catch  {
+                self.error = UploadError.custom(text: error.localizedDescription)
+                hideIndicator()
+            }
+        }
+    }
+    
+    private func hideIndicator() {
+        DispatchQueue.main.async {
+            isLoading = false
+        }
     }
 }
 
 #Preview {
     AddCardView(cards:
-                    [BankCard(number: "2345678341625", cvv: "123", name: "Jhon Doe", expirationDate: "12/24"),
-                     BankCard(number: "234567845678", cvv: "123", name: "Jhon Doe", expirationDate: "12/24"),
-                     BankCard(number: "234567845674", cvv: "123", name: "Jhon Doe", expirationDate: "12/24"),
-                     BankCard(number: "234567845673", cvv: "123", name: "Jhon Doe", expirationDate: "12/24"),
-                     BankCard(number: "234567845672", cvv: "123", name: "Jhon Doe", expirationDate: "12/24"),
-                     BankCard(number: "234567845671", cvv: "123", name: "Jhon Doe", expirationDate: "12/24"),
+                    [
+                        BankCard(number: "2345678341625", cvv: "123", name: "Jhon Doe", expirationDate: "12/24"),
+                        BankCard(number: "234567845678", cvv: "123", name: "Jhon Doe", expirationDate: "12/24"),
+                        BankCard(number: "234567845674", cvv: "123", name: "Jhon Doe", expirationDate: "12/24"),
+                        BankCard(number: "234567845673", cvv: "123", name: "Jhon Doe", expirationDate: "12/24"),
+                        BankCard(number: "234567845672", cvv: "123", name: "Jhon Doe", expirationDate: "12/24"),
+                        BankCard(number: "234567845671", cvv: "123", name: "Jhon Doe", expirationDate: "12/24"),
                     ]
     )
 }
