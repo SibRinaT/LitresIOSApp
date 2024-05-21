@@ -23,17 +23,10 @@ struct CardFieldView: View {
                     .background(Capsule().fill(Color("MainColor")))
                     .frame(height: 50)
                 
-                TextField(placeholder, text: Binding(
-                    get: {
-                        self.text
-                    },
-                    set: { newValue in
-                        let formattedText = self.formatCardNumber(newValue)
-                        if formattedText != self.text {
-                            self.text = formattedText
-                        }
-                    }
-                ))
+                TextField(placeholder, text: $text)
+                    .onChange(of: text, {
+                        text = formatCardNumber(text)
+                    })
                 .multilineTextAlignment(.leading)
                 .foregroundColor(Color.black)
                 .font(.custom("AmericanTypewriter", size: 16))
@@ -54,7 +47,9 @@ struct CardFieldView: View {
             if index != 0 && index % 4 == 0 {
                 result.append(" ")
             }
-            result.append(char)
+            if result.count < 20 {
+                result.append(char)
+            }
         }
         return result
     }
