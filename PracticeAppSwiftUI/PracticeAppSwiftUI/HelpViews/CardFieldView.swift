@@ -4,7 +4,6 @@
 //
 //  Created by Ainur on 21.05.2024.
 //
-
 import SwiftUI
 
 struct CardFieldView: View {
@@ -17,33 +16,31 @@ struct CardFieldView: View {
             Text(title)
                 .foregroundColor(Color.white)
                 .font(.custom("AmericanTypewriter", size: 20))
-            ZStack {
-                Group {
-                    Capsule()
-                        .stroke(Color.white, lineWidth: 1)
-                        .background(Color("MainColor"))
-                        .cornerRadius(16)
-                        .frame(width: 302, height: 40)
-                    TextField(placeholder, text: Binding(
-                        get: {
-                            self.text
-                        },
-                        set: { newValue in
-                            self.text = self.formatCardNumber(newValue)
-                        }
-                    ))
-                    .multilineTextAlignment(.leading)
-                    .foregroundColor(Color.black)
-                    .font(.custom("AmericanTypewriter", size: 16))
-                    .padding(EdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20))
-                    .textFieldStyle(PlainTextFieldStyle())
-                    .autocapitalization(.none)
-                    .keyboardType(.numberPad)
+            
+            ZStack(alignment: .leading) {
+                Capsule()
+                    .stroke(Color.white, lineWidth: 1)
+                    .background(Capsule().fill(Color("MainColor")))
                     .frame(width: 302, height: 40)
-                    .onChange(of: text) { newValue in
-                                                text = formatCardNumber(newValue)
-                                            }
-                }
+                
+                TextField(placeholder, text: Binding(
+                    get: {
+                        self.text
+                    },
+                    set: { newValue in
+                        let formattedText = self.formatCardNumber(newValue)
+                        if formattedText != self.text {
+                            self.text = formattedText
+                        }
+                    }
+                ))
+                .multilineTextAlignment(.leading)
+                .foregroundColor(Color.black)
+                .font(.custom("AmericanTypewriter", size: 16))
+                .padding(EdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20))
+                .autocapitalization(.none)
+                .keyboardType(.numberPad)
+                .frame(width: 302, height: 40)
             }
         }
         .padding(.bottom)
