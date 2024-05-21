@@ -7,8 +7,8 @@
 import SwiftUI
 
 struct CardFieldView: View {
-    let title: String
-    let placeholder: String
+    let title: String = "Номер карты"
+    let placeholder: String = "1234 5678 9012 3456"
     @Binding var text: String
     
     var body: some View {
@@ -21,7 +21,7 @@ struct CardFieldView: View {
                 Capsule()
                     .stroke(Color.white, lineWidth: 1)
                     .background(Capsule().fill(Color("MainColor")))
-                    .frame(width: 302, height: 40)
+                    .frame(height: 50)
                 
                 TextField(placeholder, text: Binding(
                     get: {
@@ -64,7 +64,7 @@ struct CardFieldView_Previews: PreviewProvider {
     @State static var cardNumber = ""
     
     static var previews: some View {
-        CardFieldView(title: "Card Number", placeholder: "1234 5678 9012 3456", text: $cardNumber)
+        CardFieldView(text: $cardNumber)
             .previewLayout(.sizeThatFits)
             .padding()
     }
