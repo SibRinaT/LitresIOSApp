@@ -20,7 +20,7 @@ struct BankCard: Codable, Identifiable, Equatable {
     
     var maskedNumber: String {
         
-            return "*" + number.dropFirst(number.count - 4)
+            return expirationDate + "  " + "***" + number.dropFirst(number.count - 4)
 
     }
 }
