@@ -15,6 +15,8 @@ struct AddCardView: View {
     @State private var error: UploadError?
     @State private var isLoading = false
     @State private var isShowingSuccess = false
+    @State var addCardView = false
+
     
     var isShowingError: Binding<Bool> {
         Binding {
@@ -65,7 +67,7 @@ struct AddCardView: View {
                     
                     
                     Button(action: {
-                        
+                        addCardView.toggle()
                     }) {
                         Rectangle()
                             .foregroundColor(Color("SecondaryColor"))
@@ -141,7 +143,9 @@ struct AddCardView: View {
         } message: {
             Text("Оплата прошла успешно. Ваша подписка активирована")
         }
-
+        .fullScreenCover(isPresented: $addCardView) {
+            CardNumbersView()
+        }
     }
     
     private func enableSub() {

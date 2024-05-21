@@ -29,7 +29,7 @@ struct CardNumbersView: View {
                     .cornerRadius(16)
                     .overlay(
                         HStack {
-                            Text("Оплатить")
+                            Text("Добавить")
                                 .foregroundColor(Color(.white))
                                 .font(.custom("AmericanTypewriter", size: 20))
                                 .multilineTextAlignment(.center)
