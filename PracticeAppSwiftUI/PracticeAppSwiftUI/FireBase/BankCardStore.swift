@@ -7,15 +7,27 @@
 
 import Foundation
 
-struct BankCard: Codable {
+struct BankCard: Codable, Identifiable, Equatable {
+    var id: String {
+        number
+    }
+    
+    
     let number: String
     let cvv: String
     let name: String
     let expirationDate: String
+    
+    var maskedNumber: String {
+        
+            return "*" + number.dropFirst(number.count - 4)
+
+    }
 }
 
 struct BankCardStore {
-    private static  let userDefaults = UserDefaults.standard
+    private static let userDefaults = UserDefaults.standard
+    private static let cardsKey = "cardsKey"
     
     static func saveBank(card: BankCard) {
         var allCards = getCards()
@@ -25,7 +37,7 @@ struct BankCardStore {
     
     static func getCards() -> [BankCard] {
         do {
-            if let data = userDefaults.data(forKey: "cards") {
+            if let data = userDefaults.data(forKey: cardsKey) {
                 return try decodeCards(from: data)
             } else {
                 return []
@@ -45,7 +57,7 @@ struct BankCardStore {
     private static  func save(cards: [BankCard]) {
         do {
             let data = try encode(cards: cards)
-            userDefaults.setValue(data, forKey: "cards")
+            userDefaults.setValue(data, forKey: cardsKey)
         } catch {
             print(error)
         }
