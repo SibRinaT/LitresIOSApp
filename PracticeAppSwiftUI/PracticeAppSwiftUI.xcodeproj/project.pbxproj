@@ -48,6 +48,7 @@
 		2ECB52832BE8C0B50088E115 /* OTPModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECB52822BE8C0B50088E115 /* OTPModifier.swift */; };
 		2EFE3B5F2BF3704600A8E8D0 /* ReaderBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EFE3B5E2BF3704600A8E8D0 /* ReaderBookView.swift */; };
 		AC3A85A02BF4DD89003A9101 /* EnvironmentValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3A859F2BF4DD89003A9101 /* EnvironmentValues.swift */; };
+		AC619D7C2BFC763200B28E16 /* BankCardStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC619D7B2BFC763200B28E16 /* BankCardStore.swift */; };
 		AC99B3312BED0ABB00D28199 /* FireStore+Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC99B3302BED0ABB00D28199 /* FireStore+Review.swift */; };
 		ACAE92522BEB25DE00722E1F /* AdminFileUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAE92512BEB25DE00722E1F /* AdminFileUploadView.swift */; };
 		ACAE92542BEB262D00722E1F /* AdminImageUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAE92532BEB262D00722E1F /* AdminImageUploadView.swift */; };
@@ -135,6 +136,7 @@
 		2ECB52822BE8C0B50088E115 /* OTPModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPModifier.swift; sourceTree = "<group>"; };
 		2EFE3B5E2BF3704600A8E8D0 /* ReaderBookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReaderBookView.swift; sourceTree = "<group>"; };
 		AC3A859F2BF4DD89003A9101 /* EnvironmentValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentValues.swift; sourceTree = "<group>"; };
+		AC619D7B2BFC763200B28E16 /* BankCardStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankCardStore.swift; sourceTree = "<group>"; };
 		AC99B3302BED0ABB00D28199 /* FireStore+Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FireStore+Review.swift"; sourceTree = "<group>"; };
 		ACAE92512BEB25DE00722E1F /* AdminFileUploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminFileUploadView.swift; sourceTree = "<group>"; };
 		ACAE92532BEB262D00722E1F /* AdminImageUploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminImageUploadView.swift; sourceTree = "<group>"; };
@@ -227,6 +229,7 @@
 				AC99B3302BED0ABB00D28199 /* FireStore+Review.swift */,
 				ACB46B782BE8F51B009A7ABA /* ApiError.swift */,
 				AC3A859F2BF4DD89003A9101 /* EnvironmentValues.swift */,
+				AC619D7B2BFC763200B28E16 /* BankCardStore.swift */,
 			);
 			path = FireBase;
 			sourceTree = "<group>";
@@ -568,6 +571,7 @@
 				2E098BCB2BFB6987006D1013 /* CardNumbersView.swift in Sources */,
 				2E5B192A2BEA348500E205BB /* SubscriptionView.swift in Sources */,
 				2E86C87E2BE261510093D70D /* OTPVerificationView.swift in Sources */,
+				AC619D7C2BFC763200B28E16 /* BankCardStore.swift in Sources */,
 				2E3D199C2BE3517A0005CD68 /* BookDetails.swift in Sources */,
 				2E3D19BB2BE36E240005CD68 /* BooksPageView.swift in Sources */,
 				AC3A85A02BF4DD89003A9101 /* EnvironmentValues.swift in Sources */,
