@@ -10,12 +10,18 @@ import SwiftUI
 struct SignUpView: View {
     @EnvironmentObject private var appRootManager: AppRootManager
     @Environment(\.authService) var authService
-    
+    @Environment(\.dismiss) private var dismiss
+
+    @State private var error: UploadError?
     @State var email = ""
     @State var password = ""
     @State var login = ""
     @State private var isPasswordHidden = true
     @State private var showingLoading = false
+    @State private var isShowingSuccess = false
+    @State private var isShowingError = false
+
+
     
     var isRegistrationEnabled: Bool {
         return !login.isEmpty && !password.isEmpty && !email.isEmpty
@@ -61,14 +67,14 @@ struct SignUpView: View {
                     Button(action: { signUpWithEmail()} ) {
                         if showingLoading {
                             Capsule()
-                                .fill(isRegistrationEnabled ? Color("MainColor") : Color("InactiveColor").opacity(0.5))
+                                .fill(isRegistrationEnabled ? Color("InactiveColor") : Color("MainColor").opacity(0.5))
                                 .frame(width: 224, height: 50)
                                 .overlay {
                                     ProgressView().progressViewStyle(.circular)
                                 }
                         } else {
                             Capsule()
-                                .fill(isRegistrationEnabled ? Color("MainColor") : Color("InactiveColor").opacity(0.5))
+                                .fill(isRegistrationEnabled ? Color("InactiveColor") : Color("MainColor").opacity(0.5))
                                 .frame(width: 224, height: 50)
                                 .overlay {
                                     Text("Регистрация")
@@ -76,6 +82,17 @@ struct SignUpView: View {
                                         .font(.custom("AmericanTypewriter", size: 20))
                                 }
                         }
+                    }
+                    .alert(isPresented: $isShowingError, error: error) { _ in
+                    } message: { error in
+                        Text(error.errorDescription ?? "")
+                    }
+                    .alert("Успешно!", isPresented: $isShowingSuccess) {
+                        Button("Ok") {
+                            dismiss()
+                        }
+                    } message: {
+                        Text("Регистрация прошла успешно!")
                     }
                     .disabled(!isRegistrationEnabled || showingLoading)
                 }
