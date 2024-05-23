@@ -10,10 +10,13 @@ import SwiftUI
 struct LogInView: View {
     @EnvironmentObject private var appRootManager: AppRootManager
     @Environment(\.authService) var authService
+    @Environment(\.dismiss) private var dismiss
+
     @State private var email = ""
     @State private var password = ""
     @State private var showingLoading = false
-
+    @State private var isShowingSuccess = false
+    @State private var isShowingError = false
     
     var isLoginEnabled: Bool {
         return (!password.isEmpty && !email.isEmpty)
@@ -89,8 +92,14 @@ struct LogInView: View {
                                 )
                         }
                     }
-                    .disabled(!isLoginEnabled)
-                    
+                    .alert("Успешно!", isPresented: $isShowingSuccess) {
+                        Button("Ok") {
+                            dismiss()
+                        }
+                    } message: {
+                        Text("Регистрация прошла успешно!")
+                    }
+                    .disabled(!isLoginEnabled || showingLoading)
                 }
                 .foregroundColor(Color("MainColor"))
                 .font(.custom("AmericanTypewriter", size: 36))
