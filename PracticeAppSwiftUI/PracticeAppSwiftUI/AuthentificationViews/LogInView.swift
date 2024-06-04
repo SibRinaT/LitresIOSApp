@@ -90,6 +90,14 @@ struct LogInView: View {
                                         .foregroundColor(.white)
                                         .font(.custom("AmericanTypewriter", size: 20))
                                 )
+                                .alert("Неверный логин или пароль", isPresented: $isShowingSuccess) {
+                                    Button("Ok") {
+                                        dismiss()
+                                    }
+                                } message: {
+                                    Text("Ошибка!")
+                                }
+
                         }
                     }
                     .alert("Успешно!", isPresented: $isShowingSuccess) {
