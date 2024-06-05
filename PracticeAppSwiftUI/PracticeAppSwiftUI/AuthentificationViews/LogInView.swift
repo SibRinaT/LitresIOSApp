@@ -102,22 +102,23 @@ struct LogInView: View {
                                 )
                         }
                     }
-                    .alert(isPresented: isShowingError, error: error) { _ in
-                    } message: { error in
-                        Text(error.errorDescription ?? "")
-                    }
-                    .alert("Успешно!", isPresented: $isShowingSuccess) {
-                        Button("Ok") {
-                            dismiss()
-                        }
-                    } message: {
-                        Text("Регистрация прошла успешно!")
-                    }
+                   
                     .disabled(!isLoginEnabled || showingLoading)
                 }
                 .foregroundColor(Color("MainColor"))
                 .font(.custom("AmericanTypewriter", size: 36))
                 .multilineTextAlignment(.center)
+            }
+            .alert(isPresented: isShowingError, error: error) { _ in
+            } message: { error in
+                Text(error.errorDescription ?? "")
+            }
+            .alert("Успешно!", isPresented: $isShowingSuccess) {
+                Button("Ok") {
+                    appRootManager.currentRoot = .main
+                }
+            } message: {
+                Text("Авторизация прошла успешно!")
             }
         }
     }
