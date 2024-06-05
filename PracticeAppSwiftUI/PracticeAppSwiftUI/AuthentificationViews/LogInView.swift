@@ -11,12 +11,22 @@ struct LogInView: View {
     @EnvironmentObject private var appRootManager: AppRootManager
     @Environment(\.authService) var authService
     @Environment(\.dismiss) private var dismiss
+    @State private var error: UploadError?
 
     @State private var email = ""
     @State private var password = ""
     @State private var showingLoading = false
     @State private var isShowingSuccess = false
-    @State private var isShowingError = false
+
+    
+    var isShowingError: Binding<Bool> {
+        Binding {
+            error != nil
+        } set: { _ in
+            error = nil
+        }
+    }
+    
     
     var isLoginEnabled: Bool {
         return (!password.isEmpty && !email.isEmpty)
@@ -90,15 +100,11 @@ struct LogInView: View {
                                         .foregroundColor(.white)
                                         .font(.custom("AmericanTypewriter", size: 20))
                                 )
-                                .alert("Неверный логин или пароль", isPresented: $isShowingSuccess) {
-                                    Button("Ok") {
-                                        dismiss()
-                                    }
-                                } message: {
-                                    Text("Ошибка!")
-                                }
-
                         }
+                    }
+                    .alert(isPresented: isShowingError, error: error) { _ in
+                    } message: { error in
+                        Text(error.errorDescription ?? "")
                     }
                     .alert("Успешно!", isPresented: $isShowingSuccess) {
                         Button("Ok") {
