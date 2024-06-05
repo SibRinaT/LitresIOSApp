@@ -19,9 +19,14 @@ struct SignUpView: View {
     @State private var isPasswordHidden = true
     @State private var showingLoading = false
     @State private var isShowingSuccess = false
-    @State private var isShowingError = false
 
-
+    var isShowingError: Binding<Bool> {
+        Binding {
+            error != nil
+        } set: { _ in
+            error = nil
+        }
+    }
     
     var isRegistrationEnabled: Bool {
         return !login.isEmpty && !password.isEmpty && !email.isEmpty
@@ -83,34 +88,36 @@ struct SignUpView: View {
                                 }
                         }
                     }
-                    .alert(isPresented: $isShowingError, error: error) { _ in
-                    } message: { error in
-                        Text(error.errorDescription ?? "")
-                    }
-                    .alert("Успешно!", isPresented: $isShowingSuccess) {
-                        Button("Ok") {
-                            dismiss()
-                        }
-                    } message: {
-                        Text("Регистрация прошла успешно!")
-                    }
                     .disabled(!isRegistrationEnabled || showingLoading)
+                    
                 }
                 .foregroundColor(Color("MainColor"))
                 .font(.custom("AmericanTypewriter", size: 36))
                 .multilineTextAlignment(.center)
             }
+            .alert(isPresented: isShowingError, error: error) { _ in
+            } message: { error in
+                Text(error.errorDescription ?? "")
+            }
+            .alert("Успешно!", isPresented: $isShowingSuccess) {
+                Button("Ok") {
+                    appRootManager.currentRoot = .main
+                }
+            } message: {
+                Text("Регистрация прошла успешно!")
+            }
         }
     }
+    
     func signUpWithEmail() {
         showingLoading = true
         Task {
             do {
                 try await authService.registerWithEmail(email: email, name: login, password: password, isAdmin: false)
-                appRootManager.currentRoot = .main
+                isShowingSuccess = true
                 hideLoading()
             } catch {
-                print(error)
+                self.error = UploadError.custom(text: error.localizedDescription)
                 hideLoading()
             }
         }
