@@ -102,7 +102,6 @@ struct LogInView: View {
                                 )
                         }
                     }
-                   
                     .disabled(!isLoginEnabled || showingLoading)
                 }
                 .foregroundColor(Color("MainColor"))
