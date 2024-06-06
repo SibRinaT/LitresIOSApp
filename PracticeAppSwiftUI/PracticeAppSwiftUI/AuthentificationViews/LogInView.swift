@@ -12,7 +12,6 @@ struct LogInView: View {
     @Environment(\.authService) var authService
     @Environment(\.dismiss) private var dismiss
     @State private var error: UploadError?
-
     @State private var email = ""
     @State private var password = ""
     @State private var showingLoading = false
@@ -127,10 +126,10 @@ struct LogInView: View {
         Task {
             do {
                 try await authService.signInWithEmail(email: email, password: password)
-                appRootManager.currentRoot = .main
+                isShowingSuccess = true
                 hideLoading()
             } catch {
-                print(error)
+                self.error = UploadError.custom(text: error.localizedDescription)
                 hideLoading()
             }
         }
